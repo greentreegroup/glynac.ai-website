@@ -1,7 +1,8 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { Navbar } from "@/widgets/layout";
 import routes from "@/routes";
-
+import Other from "./pages/other"
+import About from "./pages/about"
 
 function App() {
   const { pathname } = useLocation();
