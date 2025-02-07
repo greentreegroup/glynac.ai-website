@@ -5,8 +5,10 @@ import { Footer } from '@/widgets/layout/Footer';  // Correct path
 export function Home() {
   return (
     <>
-      {/* Hero Section with Left-aligned Text and Right-aligned Image */}
-      <div className="relative flex h-screen items-center justify-between bg-gray-100 px-8">
+
+
+    {/* Hero Section with Left-aligned Text and Right-aligned Image */}
+    <div className="relative flex h-screen items-center justify-between bg-gray-100 px-8">
         <div className="max-w-6xl container mx-auto flex justify-between w-full">
           {/* Hero Text Section */}
           <div className="flex flex-col items-start w-1/2">
@@ -85,7 +87,6 @@ export function Home() {
           </div>
         </div>
       </div>
-
 
     </>
   );
