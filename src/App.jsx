@@ -1,9 +1,6 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { Navbar } from "@/widgets/layout";
 import routes from "@/routes";
-import About from "@/pages/About";  
-import Other from "@/pages/Other";
-
 
 
 function App() {
@@ -24,9 +21,9 @@ function App() {
         )}
         <Route path="/other" element={<Other/>} />
         <Route path="/about" element={<About/>} />
+
         <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>
-
     </>
   );
 }
