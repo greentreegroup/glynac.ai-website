@@ -175,11 +175,13 @@ export function Other() {
         </Typography>
 
         {/* Business Feedback List */}
-        <div className="flex flex-col space-y-8">
+        <div className="flex flex-col space-y-8 items-center w-full">
 
             {/* Salesforce */}
-            <div className="flex items-start space-x-6">
-                <img src="/img/Salesforce-logo.png" alt="Salesforce Logo" className="h-16 w-auto min-w-[160px] flex-shrink-0" />
+            <div className="flex items-center space-x-6 w-full max-w-4xl">
+                <div className="w-[160px] flex-shrink-0 flex justify-center">
+                    <img src="/img/Salesforce-logo.png" alt="Salesforce Logo" className="h-auto max-h-16 w-auto max-w-[160px] flex-shrink-0" />
+                </div>
                 <Typography className="text-lg font-normal text-blue-gray-700">
                     Glynac successfully improved workforce efficiency by an average of 32% across six 
                     major corporations through advanced employee analytics.
@@ -187,8 +189,10 @@ export function Other() {
             </div>
 
         {/* Grammarly*/}
-        <div className="flex items-start space-x-6">
-            <img src="/img/grammarly.png" alt="Grammarly Logo" className="h-16 w-auto min-w-[160px] flex-shrink-0" />
+        <div className="flex items-center space-x-6 w-full max-w-4xl">
+            <div className="w-[160px] flex-shrink-0 flex justify-center">
+                <img src="/img/grammarly.png" alt="Grammarly Logo" className="h-auto max-h-16 w-auto max-w-[160px] flex-shrink-0" />
+            </div>
             <Typography className="text-lg font-normal text-blue-gray-700">
                 By leveraging Glynac’s data-driven insights, grammarly saw a 25% reduction 
                 in employee turnover within the first year.
@@ -196,8 +200,10 @@ export function Other() {
         </div>
 
         {/*Ferguson*/}
-        <div className="flex items-start space-x-6">
-            <img src="/img/Ferguson-Logo.png" alt="Ferguson Logo" className="h-16 w-auto min-w-[160px] flex-shrink-0" />
+        <div className="flex items-center space-x-6 w-full max-w-4xl">
+            <div className="w-[160px] flex-shrink-0 flex justify-center">
+                <img src="/img/Ferguson-Logo.png" alt="Ferguson Logo" className="h-auto max-h-16 w-auto max-w-[160px] flex-shrink-0" />
+            </div>
             <Typography className="text-lg font-normal text-blue-gray-700">
                 Our custom analytics solutions helped teams at Furguson enhance collaboration, 
                 leading to a 40% increase in cross-departmental productivity.
@@ -205,8 +211,10 @@ export function Other() {
         </div>
         
         {/* General Electric */}
-        <div className="flex items-start space-x-6">
-            <img src="/img/general-electric-ge-logo.png" alt="General Electric Logo" className="h-16 w-auto min-w-[160px] flex-shrink-0" />
+        <div className="flex items-center space-x-6 w-full max-w-4xl">
+            <div className="w-[160px] flex-shrink-0 flex justify-center">
+                <img src="/img/general-electric-ge-logo.png" alt="General Electric Logo" className="h-auto max-h-16 w-auto max-w-[160px] flex-shrink-0" />
+            </div>
             <Typography className="text-lg font-normal text-blue-gray-700">
                 Over 90% of managers reported greater confidence in decision-making after implementing Glynac’s 
                 streamlined reporting tools.
@@ -214,21 +222,25 @@ export function Other() {
         </div>
 
         {/* Broadcom */}
-        <div className="flex items-start space-x-6">
-            <img src="/img/broadcom.png" alt="Broadcom Logo" className="h-16 w-auto min-w-[160px] flex-shrink-0" />
-            <Typography className="text-lg font-normal text-blue-gray-700">
-                Within six months, Broadcom experienced an average 18% reduction in operational 
-                costs related to workforce inefficiencies.
-            </Typography>
+        <div className="flex items-center space-x-6 w-full max-w-4xl mx-auto">
+            <div className="w-[160px] flex-shrink-0 flex justify-center">
+                <img src="/img/broadcom.png" alt="Broadcom Logo" className="h-auto max-h-16 w-auto max-w-[160px] flex-shrink-0" />
+            </div>
+                <Typography className="text-lg font-normal text-blue-gray-700">
+                    Within six months, Broadcom experienced an average 18% reduction in operational 
+                    costs related to workforce inefficiencies.
+                </Typography>
         </div>
 
         {/* Loom */}
-        <div className="flex items-start space-x-6">
-            <img src="/img/Loom.png" alt="Loom Logo" className="h-16 w-auto min-w-[160px] flex-shrink-0" />
-            <Typography className="text-lg font-normal text-blue-gray-700">
-                With Glynac’s expertise, loom achieved a 50% improvement 
-                in employee engagement scores, fostering stronger workplace communities.
-            </Typography>
+        <div className="flex items-center space-x-6 w-full max-w-4xl mx-auto">
+            <div className="w-[160px] flex-shrink-0 flex justify-center">
+                <img src="/img/Loom.png" alt="Loom Logo" className="h-auto max-h-16 w-auto max-w-[160px] flex-shrink-0" />
+            </div>
+                <Typography className="text-lg font-normal text-blue-gray-700">
+                    With Glynac’s expertise, loom achieved a 50% improvement 
+                    in employee engagement scores, fostering stronger workplace communities.
+                </Typography>
         </div>
     </div>
     </section>
