@@ -2,15 +2,35 @@ import { Link } from "react-router-dom";
 import { useState } from "react"; // Import useState for controlling the dropdown
 
 export function MenuBar() {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to manage dropdown visibility
+  const [isSoftwareDropdownOpen, setIsSoftwareDropdownOpen] = useState(false); // State for Software dropdown visibility
+  const [isFeaturesDropdownOpen, setIsFeaturesDropdownOpen] = useState(false); // State for Features dropdown visibility
+  const [isAIAnalysisDropdownOpen, setIsAIAnalysisDropdownOpen] = useState(false); // State for AI Analysis dropdown visibility
 
-  // Function to handle mouse enter and mouse leave for the entire dropdown area
-  const handleMouseEnter = () => {
-    setIsDropdownOpen(true);
+  // Function to handle mouse enter and mouse leave for the Software dropdown
+  const handleSoftwareMouseEnter = () => {
+    setIsSoftwareDropdownOpen(true);
   };
 
-  const handleMouseLeave = () => {
-    setIsDropdownOpen(false);
+  const handleSoftwareMouseLeave = () => {
+    setIsSoftwareDropdownOpen(false);
+  };
+
+  // Function to handle mouse enter and mouse leave for the Features dropdown
+  const handleFeaturesMouseEnter = () => {
+    setIsFeaturesDropdownOpen(true);
+  };
+
+  const handleFeaturesMouseLeave = () => {
+    setIsFeaturesDropdownOpen(false);
+  };
+
+  // Function to handle mouse enter and mouse leave for the AI Analysis dropdown
+  const handleAIAnalysisMouseEnter = () => {
+    setIsAIAnalysisDropdownOpen(true);
+  };
+
+  const handleAIAnalysisMouseLeave = () => {
+    setIsAIAnalysisDropdownOpen(false);
   };
 
   return (
@@ -23,17 +43,17 @@ export function MenuBar() {
           {/* Software Link with Dropdown */}
           <div
             className="relative"
-            onMouseEnter={handleMouseEnter} // Show dropdown when mouse enters
+            onMouseEnter={handleSoftwareMouseEnter} // Show dropdown when mouse enters
           >
             <button className="hover:text-blue-200">
               Software
             </button>
 
-            {/* Dropdown Menu */}
-            {isDropdownOpen && (
+            {/* Software Dropdown Menu */}
+            {isSoftwareDropdownOpen && (
               <div
                 className="absolute left-0 mt-2 w-48 bg-white text-black rounded-lg shadow-md"
-                onMouseLeave={handleMouseLeave} // Hide dropdown when cursor leaves both the dropdown and button
+                onMouseLeave={handleSoftwareMouseLeave} // Hide dropdown when cursor leaves both the dropdown and button
               >
                 <Link to="/software" className="block px-4 py-2 hover:bg-blue-200">
                   Software
@@ -48,8 +68,61 @@ export function MenuBar() {
             )}
           </div>
 
-          <Link to="/features" className="hover:text-blue-200">Features</Link>
-          <Link to="/about" className="hover:text-blue-200">About</Link>
+          {/* Features Link with Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={handleFeaturesMouseEnter} // Show dropdown when mouse enters
+          >
+            <button className="hover:text-blue-200">
+              Features
+            </button>
+
+            {/* Features Dropdown Menu */}
+            {isFeaturesDropdownOpen && (
+              <div
+                className="absolute left-0 mt-2 w-48 bg-white text-black rounded-lg shadow-md"
+                onMouseLeave={handleFeaturesMouseLeave} // Hide dropdown when cursor leaves both the dropdown and button
+              >
+                <Link to="/demographic-data" className="block px-4 py-2 hover:bg-blue-200">
+                  Demographic Data
+                </Link>
+                <Link to="/pre-clean-data" className="block px-4 py-2 hover:bg-blue-200">
+                  Pre-cleaned Data
+                </Link>
+                <Link to="/standardized-data" className="block px-4 py-2 hover:bg-blue-200">
+                  Standardized Data
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* AI Analysis Link with Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={handleAIAnalysisMouseEnter} // Show dropdown when mouse enters
+          >
+            <button className="hover:text-blue-200">
+              AI Analysis
+            </button>
+
+            {/* AI Analysis Dropdown Menu */}
+            {isAIAnalysisDropdownOpen && (
+              <div
+                className="absolute left-0 mt-2 w-48 bg-white text-black rounded-lg shadow-md"
+                onMouseLeave={handleAIAnalysisMouseLeave} // Hide dropdown when cursor leaves both the dropdown and button
+              >
+                <Link to="/ai-qualitative" className="block px-4 py-2 hover:bg-blue-200">
+                  AI Qualitative
+                </Link>
+                <Link to="/ai-quantitative" className="block px-4 py-2 hover:bg-blue-200">
+                  AI Quantitative
+                </Link>
+              </div>
+            )}
+          </div>
+
+          <Link to="/pricing" className="hover:text-blue-200">Pricing</Link>
+          <Link to="/security" className="hover:text-blue-200">Security</Link>
           <Link to="/resources" className="hover:text-blue-200">Resources</Link>
         </div>
       </div>
