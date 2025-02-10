@@ -26,6 +26,11 @@ export const routes = [
     path: "/about",
     element: <About />,
   },
+    {
+    name: "Other",
+    path: "/other",
+    element: <Other />,
+  },
   {
     name: "Docs",
     href: "https://www.material-tailwind.com/docs/react/installation",
