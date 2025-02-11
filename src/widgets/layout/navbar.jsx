@@ -69,6 +69,21 @@ export function Navbar({ brandName, routes, action }) {
             {brandName}
           </Typography>
         </Link>
+        <div className="hidden lg:block">{navList}</div>
+        <IconButton
+          variant="text"
+          size="sm"
+          color="white"
+          className="ml-auto text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+          onClick={() => setOpenNav(!openNav)}
+        >
+          {openNav ? (
+            <XMarkIcon strokeWidth={2} className="h-6 w-6" />
+          ) : (
+            <Bars3Icon strokeWidth={2} className="h-6 w-6" />
+          )}
+        </IconButton>
+      </div>
       <MobileNav
         className="rounded-xl bg-white px-4 pt-2 pb-4 text-blue-gray-900"
         open={openNav}
