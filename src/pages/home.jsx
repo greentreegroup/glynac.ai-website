@@ -1,6 +1,19 @@
 import React from "react";
-import { Button, Typography } from "@material-tailwind/react";
-import { Footer } from '@/widgets/layout/Footer';  // Correct path
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Typography,
+  Button,
+  IconButton,
+  Input,
+  Textarea,
+  Checkbox,
+} from "@material-tailwind/react";
+import { FingerPrintIcon, UsersIcon } from "@heroicons/react/24/solid";
+import { PageTitle, Footer } from "@/widgets/layout";
+import { FeatureCard, TeamCard } from "@/widgets/cards";
+import { featuresData, teamData, contactData } from "@/data";
 
 export function Home() {
   return (
