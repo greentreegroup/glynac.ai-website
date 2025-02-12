@@ -103,7 +103,7 @@ export function Home() {
 
             {/* Feature 2: Enhanced Employee Well-Being */}
             <div className="bg-white shadow-lg p-6 rounded-lg">
-              <img src="/img/.png" alt="Well-being Icon" className="mb-4 w-16 mx-auto" />
+              <img src="/img/wellbeing-icon.png" alt="Well-being Icon" className="mb-4 w-16 mx-auto" />
               <Typography variant="h5" color="blue-gray" className="mb-2 font-semibold text-xl">
                 Enhanced Employee Well-Being
               </Typography>
@@ -270,6 +270,174 @@ export function Home() {
           </div>
         </div>
       </section>
+
+      {/* How Does Glynac.ai Work? Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-6xl container mx-auto px-8 text-center">
+          {/* Section Text */}
+          <Typography variant="h2" color="blue-gray" className="text-4xl font-bold mb-8">
+            How Does Glynac.ai Work?
+          </Typography>
+
+          <Typography color="blue-gray" className="text-xl mb-12 max-w-3xl mx-auto">
+            Glynac A.I. is an A.I. application that tracks the performance of employees by collecting data from common work applications such as Outlook, Microsoft Teams, and more. The data is analyzed by A.I. to determine overall productivity and employee attitude.
+          </Typography>
+
+          {/* Image and Arrows Section */}
+          <div className="flex justify-center items-center space-x-8 relative">
+
+            {/* Left Image (Bigger) */}
+            <div className="w-2/5">
+              <img
+                src="/img/left-process.png" 
+                alt="Left Process"
+                className="w-full object-contain rounded-lg shadow-lg"
+              />
+            </div>
+
+            {/* Right Arrow (Smaller) */}
+            <div className="w-1/12">
+              <img
+                src="/img/right-arrow.png" 
+                alt="Right Arrow"
+                className="w-full object-contain rounded-lg shadow-lg"
+              />
+            </div>
+
+            {/* Center Image */}
+            <div className="w-1/5">
+              <img
+                src="/img/center-process.png" 
+                alt="Center Process"
+                className="w-full object-contain rounded-lg shadow-lg"
+              />
+            </div>
+
+            {/* Left Arrow (Smaller) */}
+            <div className="w-1/12">
+              <img
+                src="/img/left-arrow.png" 
+                alt="Left Arrow"
+                className="w-full object-contain rounded-lg shadow-lg"
+              />
+            </div>
+
+            {/* Right Image (Bigger) */}
+            <div className="w-2/5">
+              <img
+                src="/img/right-process.png" 
+                alt="Right Process"
+                className="w-full object-contain rounded-lg shadow-lg"
+              />
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* Steps */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-6xl container mx-auto px-8 text-center">
+          {/* Header */}
+          <Typography color="blue-gray" className="text-3xl font-semibold mb-8">
+            Methodology
+          </Typography>
+
+          {/* Data Extraction Section */}
+          <div className="flex items-center justify-between mb-12">
+            {/* Left Column */}
+            <div className="w-2/3 text-left">
+              <div className="flex items-center mb-4">
+                <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-4">
+                  1
+                </div>
+                <Typography color="blue-gray" className="text-xl font-semibold">
+                  Data Extraction
+                </Typography>
+              </div>
+              <ul className="list-disc pl-8">
+                <li><strong>How it Works:</strong> Data is extracted from various workplace applications such as Outlook, Microsoft Teams, Slack, and other communication tools. The system then filters any irrelevant data and applies initial security measures to ensure privacy and protections.</li>
+                <li><strong>How it’s Useful:</strong> By extracting irrelevant data, Glynac creates a foundation for accurate insights into employee productivity and work efficiency.</li>
+                <li><strong>How it’s Measured:</strong> The system tracks the volume of extracted data, the accuracy of filtered information, and ensures privacy protocols are in place for correct analytics and high-quality data.</li>
+              </ul>
+            </div>
+
+            {/* Right Column (Image) */}
+            <div className="w-1/3">
+              <img
+                src="/img/data-extraction-image.png" // Replace with actual image
+                alt="Data Extraction"
+                className="w-full object-contain rounded-lg shadow-lg"
+              />
+            </div>
+          </div>
+
+          {/* Encryption Section */}
+          <div className="flex items-center justify-between mb-12">
+            {/* Left Column */}
+            <div className="w-2/3 text-left">
+              <div className="flex items-center mb-4">
+                <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-4">
+                  2
+                </div>
+                <Typography color="blue-gray" className="text-xl font-semibold">
+                  Encryption
+                </Typography>
+              </div>
+              <ul className="list-disc pl-8">
+                <li><strong>How it Works:</strong> After the data is extracted, it undergoes encryption before integration into the AI system. This ensures sensitive information is secured and maintains security standards.</li>
+                <li><strong>How it’s Useful:</strong> Encryption protects employee and company data, preventing unauthorized access while adhering to data protection laws.</li>
+                <li><strong>How it’s Measured:</strong> Encryption effectiveness is measured through security audits, checks, and penetration tests to safeguard against data breaches.</li>
+              </ul>
+            </div>
+
+            {/* Right Column (Image) */}
+            <div className="w-1/3">
+              <img
+                src="/img/encryption-image.png" // Replace with actual image
+                alt="Encryption"
+                className="w-full object-contain rounded-lg shadow-lg"
+              />
+            </div>
+          </div>
+
+          {/* Standardization Section */}
+          <div className="flex items-center justify-between mb-12">
+            {/* Left Column */}
+            <div className="w-2/3 text-left">
+              <div className="flex items-center mb-4">
+                <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-4">
+                  3
+                </div>
+                <Typography color="blue-gray" className="text-xl font-semibold">
+                  Standardization
+                </Typography>
+              </div>
+              <ul className="list-disc pl-8">
+                <li><strong>How it Works:</strong> Standardized metrics are applied to extracted data. The AI system organizes it into structured formats such as productivity scores, sentiment analysis, and performance benchmarks.</li>
+                <li><strong>How it’s Useful:</strong> Standardization enables fair compensation across employees and departments. It helps organizations identify trends and predict potential issues.</li>
+                <li><strong>How it’s Measured:</strong> The AI assigns standardized scores using historical performance data, making it easier to analyze workforce efficiency.</li>
+              </ul>
+            </div>
+
+            {/* Right Column (Image) */}
+            <div className="w-1/3">
+              <img
+                src="/img/standardization-image.png" // Replace with actual image
+                alt="Standardization"
+                className="w-full object-contain rounded-lg shadow-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+          
+
+
+
+
+
 
       {/* Footer */}
       <Footer />
