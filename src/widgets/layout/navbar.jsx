@@ -13,6 +13,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export function Navbar({ brandName, routes, action }) {
   const [openNav, setOpenNav] = React.useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
 
   React.useEffect(() => {
     window.addEventListener(
@@ -21,45 +22,64 @@ export function Navbar({ brandName, routes, action }) {
     );
   }, []);
 
-  const navList = (
-    <ul className="mb-4 mt-2 flex flex-col gap-2 text-inherit lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      {routes.map(({ name, path, icon, href, target }) => (
-        <Typography
-          key={name}
-          as="li"
-          variant="small"
-          color="inherit"
-          className="capitalize"
-        >
-          {href ? (
-            <a
-              href={href}
-              target={target}
-              className="flex items-center gap-1 p-1 font-bold"
-            >
-              {icon &&
-                React.createElement(icon, {
-                  className: "w-[18px] h-[18px] opacity-75 mr-1",
-                })}
-              {name}
-            </a>
-          ) : (
-            <Link
-              to={path}
-              target={target}
-              className="flex items-center gap-1 p-1 font-bold"
-            >
-              {icon &&
-                React.createElement(icon, {
-                  className: "w-[18px] h-[18px] opacity-75 mr-1",
-                })}
+const navList = (
+  <ul className="mb-4 mt-2 flex flex-col gap-2 text-inherit lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
+    {routes.map(({ name, path }) => {
+      if (name === "software") {
+        return (
+          <div
+            key={name}
+            className="relative"
+            onMouseEnter={() => setIsDropdownOpen(true)}
+            onMouseLeave={() => setIsDropdownOpen(false)}
+          >
+            <Typography as="li" variant="small" color="inherit" className="capitalize">
+              <span className="flex items-center gap-1 p-1 font-bold cursor-pointer">
+                Software
+              </span>
+            </Typography>
+
+            {isDropdownOpen && (
+              <div className="absolute left-0 mt-2 w-96 bg-white text-gray-800 shadow-lg rounded-lg p-4">
+                <Link to="/software/cloud-vs-on-premise" className="block px-4 py-2 hover:bg-gray-200 rounded-t-lg">
+                  <span className="font-bold">Cloud vs. On-Premise Solution</span>
+                  <p className="text-sm" style={{ color: "#7bae37"}}>
+                    Compare cloud and on-premise software options.</p> 
+                </Link>
+
+                <Link to="/software/integrated-tools" className="block px-4 py-2 hover:bg-gray-200">
+                  <span className="font-bold">Integrated Tools</span>
+                  <p className="text-sm" style={{ color: "#7bae37"}}>
+                    Discover software that integrates with existing systems</p>
+                </Link>
+
+                <Link to="/software/communication-tools" className="block px-4 py-2 hover:bg-gray-200">
+                  <span className="font-bold">Communication Tools</span>
+                  <p className="text-sm" style={{ color: "#7bae37"}}>
+                    Explore software that enhances team collaboration</p>
+                </Link>
+
+                <Link to="/software/email-tools" className="block px-4 py-2 hover:bg-gray-200 rounded-b-lg">
+                  <span className="font-bold">Email Tools</span>
+                  <p className="text-sm" style={{ color: "#7bae37"}}>
+                    Find email solutions for business productivity.</p>
+                </Link>
+              </div>
+            )}
+          </div>
+        );
+      } else {
+        return (
+          <Typography key={name} as="li" variant="small" color="inherit" className="capitalize">
+            <Link to={path} className="flex items-center gap-1 p-1 font-bold">
               {name}
             </Link>
-          )}
-        </Typography>
-      ))}
-    </ul>
-  );
+          </Typography>
+        );
+      }
+    })}
+  </ul>
+);
 
   return (
     <MTNavbar color="transparent" className="p-3">
@@ -84,12 +104,50 @@ export function Navbar({ brandName, routes, action }) {
           )}
         </IconButton>
       </div>
+
       <MobileNav
         className="rounded-xl bg-white px-4 pt-2 pb-4 text-blue-gray-900"
         open={openNav}
       >
         <div className="container mx-auto">
-          {navList}
+          <ul className="flex flex-col gap-2 text-inherit">
+            {routes.map(({ name, path }) => {
+              if (name === "software") {
+                return (
+                  <div key={name} className="relative">
+                    <Typography
+                      as="li"
+                      variant="small"
+                      color="inheret"
+                      className="capitalize"
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    >
+                      <span className="flex items-center gap-1 p-1 font-bold cursor-pointer">
+                        Software
+                      </span>
+                    </Typography>
+
+                    {isDropdownOpen && (
+                      <div className="mt-2 w-full bg-gray-200 rounded-lg">
+                        <Link to="/software/section1" className="block px-4 py-2 hover:bg-gray-300 rounded-t-lg">Section 1</Link>
+                        <Link to="/software/section=2" className="block px-4 py-2 hover:bg-gray-300">Section 2</Link>
+                        <Link to="/software/section3" className="block px-4 py-2 hover:bg-gray-300">Section 3</Link>
+                        <Link to="/software/section4" className="block px-4 py-2 hover:bg-gray-300 rounded-t-lg">Section 4</Link>
+                      </div>
+                    )}
+                  </div>
+                );
+              } else {
+                return (
+                  <Typography key={name} as="li" variant="small" color="inherit" className="capitalize">
+                    <Link to={path} className="flex items-center gap-1 p-1 font-bold">
+                      {name}
+                    </Link>
+                  </Typography>
+                );
+              }
+            })}
+          </ul>
           <a
             href="https://www.material-tailwind.com/blocks/react?ref=mtkr"
             target="_blank"
