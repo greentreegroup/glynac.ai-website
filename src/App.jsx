@@ -1,29 +1,32 @@
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import routes from "@/routes"; // Ensure routes are properly imported
-//import Layout from './widgets/layout/Layout'; // Layout wrapper for consistent layout
-import menu, { MenuBar } from './components/menu.jsx'; 
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Navbar } from "@/widgets/layout";
+import routes from "@/routes";
+import Other from "./pages/other"
+import About from "./pages/about"
 
 function App() {
+  const { pathname } = useLocation();
+
   return (
     <>
-      {/* Menu Bar stays fixed */}
-      <MenuBar />
+      {!(pathname == '/sign-in' || pathname == '/sign-up') && (
+        <div className="container absolute left-2/4 z-10 mx-auto -translate-x-2/4 p-4">
+          <Navbar routes={routes} />
+        </div>
+      )
+      }
+      <Routes>
+        {routes.map(
+          ({ path, element }, key) =>
+            element && <Route key={key} exact path={path} element={element} />
+        )}
+        <Route path="/other" element={<Other/>} />
+        <Route path="/about" element={<About/>} />
 
-      {/* Content Area below the Menu */}
-      <div className="mt-16"> {/* Added margin-top to push content below the fixed menu bar */}
-        <Routes>
-          {routes.map(({ path, element }, key) => (
-            <Route key={key} path={path} element={element} />
-          ))}
-          {/* Default Route */}
-          <Route path="*" element={<Navigate to="/home" replace />} />
-        </Routes>
-      </div>
+        <Route path="*" element={<Navigate to="/home" replace />} />
+      </Routes>
     </>
   );
 }
 
 export default App;
-
-
