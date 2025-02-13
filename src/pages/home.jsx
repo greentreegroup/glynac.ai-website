@@ -441,7 +441,7 @@ export function Home() {
 
       {/* Footer */}
       <Footer />
-    </>
+      </>
   );
 }
 
