@@ -1,6 +1,17 @@
 import React, { useState } from "react";
 import { Button, Typography } from "@material-tailwind/react";
-import { Footer } from "@/widgets/layout/footer"; 
+import { Footer } from "@/widgets/layout/footer";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
 export function Home() {
   const [selectedLogo, setSelectedLogo] = useState(null);
@@ -39,43 +50,66 @@ export function Home() {
   ];
 
   const handleLogoClick = (index) => {
-    setSelectedLogo(index === selectedLogo ? null : index); 
+    setSelectedLogo(index === selectedLogo ? null : index);
   };
 
   return (
     <>
-      {/* Hero Section with Left-aligned Text and Right-aligned Image */}
-      <div className="relative flex h-screen items-center justify-between bg-gray-100 px-8">
-        <div className="max-w-6xl container mx-auto flex justify-between w-full">
+      {/* Hero Section */}
+      <div className="relative flex h-screen items-center justify-between bg-gradient-to-br from-blue-200 to-purple-300 px-8">
+        <motion.div
+          className="max-w-6xl container mx-auto flex justify-between w-full"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           {/* Hero Text Section */}
-          <div className="flex flex-col items-start w-1/2">
-            <Typography variant="h1" color="blue-gray" className="mb-6 font-black text-5xl md:text-7xl">
+          <motion.div
+            className="flex flex-col items-start w-1/2"
+            variants={itemVariants}
+          >
+            <Typography
+              variant="h1"
+              color="white"
+              className="mb-6 font-black text-5xl md:text-7xl text-shadow-lg"
+            >
               Glynac.ai
             </Typography>
-            <Typography variant="h2" color="blue-gray" className="mb-2 font-black text-4xl md:text-6xl">
-              Here to
+            <Typography
+              variant="h2"
+              color="white"
+              className="mb-2 font-black text-4xl md:text-6xl text-shadow-lg"
+            >
+              Connecting you to
             </Typography>
-            <Typography variant="h2" color="blue-gray" className="font-black text-4xl md:text-6xl">
-              connect
+            <Typography
+              variant="h2"
+              color="white"
+              className="font-black text-4xl md:text-6xl text-shadow-lg"
+            >
+              the future of work
             </Typography>
             <Button
               variant="filled"
               size="lg"
-              className="bg-blue-600 text-white px-8 py-3 rounded-lg shadow-md hover:bg-blue-700"
+              className="bg-blue-600 text-white px-8 py-3 rounded-lg shadow-lg mt-6 hover:bg-blue-700 transform transition duration-300 ease-in-out"
             >
-              CONNECT HERE
+              CONNECT NOW
             </Button>
-          </div>
+          </motion.div>
 
           {/* Image Section */}
-          <div className="hidden md:block w-1/2">
+          <motion.div
+            className="hidden md:block w-1/2"
+            variants={itemVariants}
+          >
             <img
-              src="/img/landing_image.PNG" 
+              src="/img/landing_image.PNG"
               alt="Glynac.ai Team"
-              className="w-full h-full object-cover rounded-lg shadow-lg"
+              className="w-full h-full object-cover rounded-lg shadow-2xl transform transition duration-300 ease-in-out hover:scale-105"
             />
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
 
       {/* Features Section */}
@@ -91,7 +125,10 @@ export function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
             {/* Feature 1: Optimizes Workflow Insights */}
-            <div className="bg-white shadow-lg p-6 rounded-lg">
+            <motion.div 
+              className="bg-white shadow-lg p-6 rounded-lg backdrop-filter backdrop-blur-sm bg-opacity-50 hover:bg-opacity-70 cursor-pointer transform transition duration-300 ease-in-out hover:scale-105"
+              variants={itemVariants}
+            >
               <img src="/img/insight-icon.png" alt="Insight Icon" className="mb-4 w-16 mx-auto" />
               <Typography variant="h5" color="blue-gray" className="mb-2 font-semibold text-xl">
                 Optimizes Workflow Insights
@@ -99,10 +136,13 @@ export function Home() {
               <Typography color="blue-gray">
                 Transforms raw data into meaningful analytics for performance improvements.
               </Typography>
-            </div>
+            </motion.div>
 
             {/* Feature 2: Enhanced Employee Well-Being */}
-            <div className="bg-white shadow-lg p-6 rounded-lg">
+            <motion.div 
+              className="bg-white shadow-lg p-6 rounded-lg backdrop-filter backdrop-blur-sm bg-opacity-50 hover:bg-opacity-70 cursor-pointer transform transition duration-300 ease-in-out hover:scale-105"
+              variants={itemVariants}
+            >
               <img src="/img/wellbeing-icon.png" alt="Well-being Icon" className="mb-4 w-16 mx-auto" />
               <Typography variant="h5" color="blue-gray" className="mb-2 font-semibold text-xl">
                 Enhanced Employee Well-Being
@@ -110,10 +150,13 @@ export function Home() {
               <Typography color="blue-gray">
                 Identifies trends in engagement, workload balance, and satisfaction.
               </Typography>
-            </div>
+            </motion.div>
 
             {/* Feature 3: Advanced Security Encryption */}
-            <div className="bg-white shadow-lg p-6 rounded-lg">
+            <motion.div 
+              className="bg-white shadow-lg p-6 rounded-lg backdrop-filter backdrop-blur-sm bg-opacity-50 hover:bg-opacity-70 cursor-pointer transform transition duration-300 ease-in-out hover:scale-105"
+              variants={itemVariants}
+            >
               <img src="/img/security-icon.png" alt="Security Icon" className="mb-4 w-16 mx-auto" />
               <Typography variant="h5" color="blue-gray" className="mb-2 font-semibold text-xl">
                 Advanced Security Encryption
@@ -121,10 +164,13 @@ export function Home() {
               <Typography color="blue-gray">
                 Ensures strict data protection with anonymization and encryption.
               </Typography>
-            </div>
+            </motion.div>
 
             {/* Feature 4: Ethical and Transparent Usage */}
-            <div className="bg-white shadow-lg p-6 rounded-lg">
+            <motion.div 
+              className="bg-white shadow-lg p-6 rounded-lg backdrop-filter backdrop-blur-sm bg-opacity-50 hover:bg-opacity-70 cursor-pointer transform transition duration-300 ease-in-out hover:scale-105"
+              variants={itemVariants}
+            >
               <img src="/img/ethical-icon.png" alt="Ethical Icon" className="mb-4 w-16 mx-auto" />
               <Typography variant="h5" color="blue-gray" className="mb-2 font-semibold text-xl">
                 Ethical and Transparent Usage
@@ -132,7 +178,7 @@ export function Home() {
               <Typography color="blue-gray">
                 Prioritizes fair monitoring, privacy, and actionable insights.
               </Typography>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -150,7 +196,12 @@ export function Home() {
           {/* Company Logos */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
             {logoData.map((logo, index) => (
-              <div key={index} className="flex flex-col items-center">
+              <motion.div 
+                key={index} 
+                className="flex flex-col items-center"
+                variants={itemVariants}
+                whileHover="hover"
+              >
                 <img
                   src={logo.src}
                   alt={logo.alt}
@@ -159,11 +210,17 @@ export function Home() {
                 />
                 {/* Display Info Box under clicked logo */}
                 {selectedLogo === index && (
-                  <div className="bg-white p-4 rounded-lg shadow-lg w-full mt-4">
+                  <motion.div 
+                    className="bg-white p-4 rounded-lg shadow-lg w-full mt-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <Typography color="blue-gray">{logo.info}</Typography>
-                  </div>
+                  </motion.div>
                 )}
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -182,9 +239,17 @@ export function Home() {
 
         <div className="max-w-6xl container mx-auto px-8 flex items-center">
           {/* Left Side: Headers with Text */}
-          <div className="w-1/2 space-y-12">
+          <motion.div 
+            className="w-1/2 space-y-12"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {/* Header 1 */}
-            <div className="flex items-start">
+            <motion.div 
+              className="flex items-start"
+              variants={itemVariants}
+            >
               <img src="/img/ai-icon.png" alt="AI Icon" className="mr-4 w-12 h-12" />
               <div>
                 <Typography variant="h5" color="blue-gray" className="font-semibold text-2xl">
@@ -194,10 +259,13 @@ export function Home() {
                   Leverage AI-driven insights for smarter workforce management.
                 </Typography>
               </div>
-            </div>
+            </motion.div>
 
             {/* Header 2 */}
-            <div className="flex items-start">
+            <motion.div 
+              className="flex items-start"
+              variants={itemVariants}
+            >
               <img src="/img/patterns-icon.png" alt="Patterns Icon" className="mr-4 w-12 h-12" />
               <div>
                 <Typography variant="h5" color="blue-gray" className="font-semibold text-2xl">
@@ -207,10 +275,13 @@ export function Home() {
                   Detect patterns in productivity, engagement, and collaboration.
                 </Typography>
               </div>
-            </div>
+            </motion.div>
 
             {/* Header 3 */}
-            <div className="flex items-start">
+            <motion.div 
+              className="flex items-start"
+              variants={itemVariants}
+            >
               <img src="/img/data-icon.png" alt="Data Icon" className="mr-4 w-12 h-12" />
               <div>
                 <Typography variant="h5" color="blue-gray" className="font-semibold text-2xl">
@@ -220,10 +291,13 @@ export function Home() {
                   Securely analyze data while maintaining employee privacy.
                 </Typography>
               </div>
-            </div>
+            </motion.div>
 
             {/* Header 4 */}
-            <div className="flex items-start">
+            <motion.div 
+              className="flex items-start"
+              variants={itemVariants}
+            >
               <img src="/img/benchmark-icon.png" alt="Benchmark Icon" className="mr-4 w-12 h-12" />
               <div>
                 <Typography variant="h5" color="blue-gray" className="font-semibold text-2xl">
@@ -233,41 +307,52 @@ export function Home() {
                   Benchmark performance with standardized scoring for growth.
                 </Typography>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Right Side: Large Image */}
-          <div className="w-1/2 pl-12">
+          <motion.div 
+            className="w-1/2 pl-12"
+            variants={itemVariants}
+          >
             <img
-              src="/img/large-image-right.png" 
+              src="/img/large-image-right.png"
               alt="Related to workforce"
-              className="w-full h-[400px] object-contain rounded-lg shadow-none" 
+              className="w-full h-[400px] object-contain rounded-lg shadow-none"
             />
-          </div>
-          </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* From Monitoring to Empowerment: Glynac’s Feature Spotlight */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-6xl container mx-auto px-8 flex items-center">
           {/* Left Side: Image */}
-          <div className="w-1/2 pr-12">
+          <motion.div 
+            className="w-1/2 pr-12"
+            variants={itemVariants}
+          >
             <img
-              src="/img/large-image-left.png" 
+              src="/img/large-image-left.png"
               alt="Empowerment"
               className="w-full h-[400px] object-contain rounded-lg shadow-none"
             />
-          </div>
+          </motion.div>
 
           {/* Right Side: Title and Text */}
-          <div className="w-1/2">
+          <motion.div 
+            className="w-1/2"
+            variants={itemVariants}
+          >
             <Typography variant="h3" color="blue-gray" className="font-bold text-3xl mb-6">
               From Monitoring to Empowerment: Glynac’s Feature Spotlight
             </Typography>
             <Typography color="blue-gray" className="text-xl">
-              Glynac isn’t about tracking, it’s about understanding. Gain deep insights to enhance employee well-being, optimize workflows, and foster a data-driven, thriving workplace.
+              Glynac isn’t about tracking, it’s about understanding. Gain deep
+              insights to enhance employee well-being, optimize workflows, and
+              foster a data-driven, thriving workplace.
             </Typography>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -280,58 +365,64 @@ export function Home() {
           </Typography>
 
           <Typography color="blue-gray" className="text-xl mb-12 max-w-3xl mx-auto">
-            Glynac A.I. is an A.I. application that tracks the performance of employees by collecting data from common work applications such as Outlook, Microsoft Teams, and more. The data is analyzed by A.I. to determine overall productivity and employee attitude.
+            Glynac A.I. is an A.I. application that tracks the performance of
+            employees by collecting data from common work applications such as
+            Outlook, Microsoft Teams, and more. The data is analyzed by A.I. to
+            determine overall productivity and employee attitude.
           </Typography>
 
           {/* Image and Arrows Section */}
-          <div className="flex justify-center items-center space-x-8 relative">
-
+          <motion.div
+            className="flex justify-center items-center space-x-8 relative"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {/* Left Image (Bigger) */}
-            <div className="w-2/5">
+            <motion.div className="w-2/5" variants={itemVariants}>
               <img
-                src="/img/left-process.png" 
+                src="/img/left-process.png"
                 alt="Left Process"
                 className="w-full object-contain rounded-lg shadow-lg"
               />
-            </div>
+            </motion.div>
 
             {/* Right Arrow (Smaller) */}
-            <div className="w-1/12">
+            <motion.div className="w-1/12" variants={itemVariants}>
               <img
-                src="/img/right-arrow.png" 
+                src="/img/right-arrow.png"
                 alt="Right Arrow"
                 className="w-full object-contain rounded-lg shadow-lg"
               />
-            </div>
+            </motion.div>
 
             {/* Center Image */}
-            <div className="w-1/5">
+            <motion.div className="w-1/5" variants={itemVariants}>
               <img
-                src="/img/center-process.png" 
+                src="/img/center-process.png"
                 alt="Center Process"
                 className="w-full object-contain rounded-lg shadow-lg"
               />
-            </div>
+            </motion.div>
 
             {/* Left Arrow (Smaller) */}
-            <div className="w-1/12">
+            <motion.div className="w-1/12" variants={itemVariants}>
               <img
-                src="/img/left-arrow.png" 
+                src="/img/left-arrow.png"
                 alt="Left Arrow"
                 className="w-full object-contain rounded-lg shadow-lg"
               />
-            </div>
+            </motion.div>
 
             {/* Right Image (Bigger) */}
-            <div className="w-2/5">
+            <motion.div className="w-2/5" variants={itemVariants}>
               <img
-                src="/img/right-process.png" 
+                src="/img/right-process.png"
                 alt="Right Process"
                 className="w-full object-contain rounded-lg shadow-lg"
               />
-            </div>
-
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -344,9 +435,14 @@ export function Home() {
           </Typography>
 
           {/* Data Extraction Section */}
-          <div className="flex items-center justify-between mb-12">
+          <motion.div
+            className="flex items-center justify-between mb-12"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {/* Left Column */}
-            <div className="w-2/3 text-left">
+            <motion.div className="w-2/3 text-left" variants={itemVariants}>
               <div className="flex items-center mb-4">
                 <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-4">
                   1
@@ -356,26 +452,46 @@ export function Home() {
                 </Typography>
               </div>
               <ul className="list-disc pl-8">
-                <li><strong>How it Works:</strong> Data is extracted from various workplace applications such as Outlook, Microsoft Teams, Slack, and other communication tools. The system then filters any irrelevant data and applies initial security measures to ensure privacy and protections.</li>
-                <li><strong>How it’s Useful:</strong> By extracting irrelevant data, Glynac creates a foundation for accurate insights into employee productivity and work efficiency.</li>
-                <li><strong>How it’s Measured:</strong> The system tracks the volume of extracted data, the accuracy of filtered information, and ensures privacy protocols are in place for correct analytics and high-quality data.</li>
+                <li>
+                  <strong>How it Works:</strong> Data is extracted from various
+                  workplace applications such as Outlook, Microsoft Teams,
+                  Slack, and other communication tools. The system then filters
+                  any irrelevant data and applies initial security measures to
+                  ensure privacy and protections.
+                </li>
+                <li>
+                  <strong>How it’s Useful:</strong> By extracting irrelevant
+                  data, Glynac creates a foundation for accurate insights into
+                  employee productivity and work efficiency.
+                </li>
+                <li>
+                  <strong>How it’s Measured:</strong> The system tracks the
+                  volume of extracted data, the accuracy of filtered
+                  information, and ensures privacy protocols are in place for
+                  correct analytics and high-quality data.
+                </li>
               </ul>
-            </div>
+            </motion.div>
 
             {/* Right Column (Image) */}
-            <div className="w-1/3">
+            <motion.div className="w-1/3" variants={itemVariants}>
               <img
-                src="/img/data-extraction-image.png" 
+                src="/img/data-extraction-image.png"
                 alt="Data Extraction"
                 className="w-full object-contain rounded-lg shadow-lg"
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Encryption Section */}
-          <div className="flex items-center justify-between mb-12">
+          <motion.div
+            className="flex items-center justify-between mb-12"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {/* Left Column */}
-            <div className="w-2/3 text-left">
+            <motion.div className="w-2/3 text-left" variants={itemVariants}>
               <div className="flex items-center mb-4">
                 <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-4">
                   2
@@ -385,26 +501,44 @@ export function Home() {
                 </Typography>
               </div>
               <ul className="list-disc pl-8">
-                <li><strong>How it Works:</strong> After the data is extracted, it undergoes encryption before integration into the AI system. This ensures sensitive information is secured and maintains security standards.</li>
-                <li><strong>How it’s Useful:</strong> Encryption protects employee and company data, preventing unauthorized access while adhering to data protection laws.</li>
-                <li><strong>How it’s Measured:</strong> Encryption effectiveness is measured through security audits, checks, and penetration tests to safeguard against data breaches.</li>
+                <li>
+                  <strong>How it Works:</strong> After the data is extracted, it
+                  undergoes encryption before integration into the AI system. This
+                  ensures sensitive information is secured and maintains security
+                  standards.
+                </li>
+                <li>
+                  <strong>How it’s Useful:</strong> Encryption protects employee
+                  and company data, preventing unauthorized access while adhering
+                  to data protection laws.
+                </li>
+                <li>
+                  <strong>How it’s Measured:</strong> Encryption effectiveness
+                  is measured through security audits, checks, and penetration
+                  tests to safeguard against data breaches.
+                </li>
               </ul>
-            </div>
+            </motion.div>
 
             {/* Right Column (Image) */}
-            <div className="w-1/3">
+            <motion.div className="w-1/3" variants={itemVariants}>
               <img
-                src="/img/encryption-image.png" 
+                src="/img/encryption-image.png"
                 alt="Encryption"
                 className="w-full object-contain rounded-lg shadow-lg"
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Standardization Section */}
-          <div className="flex items-center justify-between mb-12">
+          <motion.div
+            className="flex items-center justify-between mb-12"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {/* Left Column */}
-            <div className="w-2/3 text-left">
+            <motion.div className="w-2/3 text-left" variants={itemVariants}>
               <div className="flex items-center mb-4">
                 <div className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-4">
                   3
@@ -414,21 +548,34 @@ export function Home() {
                 </Typography>
               </div>
               <ul className="list-disc pl-8">
-                <li><strong>How it Works:</strong> Standardized metrics are applied to extracted data. The AI system organizes it into structured formats such as productivity scores, sentiment analysis, and performance benchmarks.</li>
-                <li><strong>How it’s Useful:</strong> Standardization enables fair compensation across employees and departments. It helps organizations identify trends and predict potential issues.</li>
-                <li><strong>How it’s Measured:</strong> The AI assigns standardized scores using historical performance data, making it easier to analyze workforce efficiency.</li>
+                <li>
+                  <strong>How it Works:</strong> Standardized metrics are applied
+                  to extracted data. The AI system organizes it into structured
+                  formats such as productivity scores, sentiment analysis, and
+                  performance benchmarks.
+                </li>
+                <li>
+                  <strong>How it’s Useful:</strong> Standardization enables fair
+                  compensation across employees and departments. It helps
+                  organizations identify trends and predict potential issues.
+                </li>
+                <li>
+                  <strong>How it’s Measured:</strong> The AI assigns
+                  standardized scores using historical performance data, making it
+                  easier to analyze workforce efficiency.
+                </li>
               </ul>
-            </div>
+            </motion.div>
 
             {/* Right Column (Image) */}
-            <div className="w-1/3">
+            <motion.div className="w-1/3" variants={itemVariants}>
               <img
                 src="/img/standardization-image.png"
                 alt="Standardization"
                 className="w-full object-contain rounded-lg shadow-lg"
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -436,6 +583,7 @@ export function Home() {
       <Footer />
     </>
   );
-};
+}
 
 export default Home;
+
