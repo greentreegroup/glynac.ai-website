@@ -1,197 +1,199 @@
 import React from "react";
 import { Typography, Card, CardBody } from "@material-tailwind/react";
 import { Footer } from "@/widgets/layout/footer";
-import { ChatBubbleBottomCenterTextIcon } from "@heroicons/react/24/solid";
-import { PlayCircleIcon } from "@heroicons/react/24/outline";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import { motion } from "framer-motion"; 
+import { FingerPrintIcon } from "@heroicons/react/24/solid";
+import OrganizationalChart from "../OrganizationalChart";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export function About() {
+  const { scrollYProgress } = useScroll();
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+
   return (
     <>
-      {/* Hero Section */}
-      <div className="relative flex min-h-screen items-center justify-center bg-black text-white">
-        <div className="absolute top-0 h-full w-full bg-[url('/img/background-3.png')] bg-cover bg-center opacity-20" />
-        <div className="absolute top-0 h-full w-full backdrop-blur-xl bg-black/40" />
-
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          transition={{ duration: 0.8 }} 
-          className="relative text-center"
-        >
-          <Typography variant="h1" className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-teal-400 font-black text-5xl md:text-7xl">
-            Frequently Asked Questions
+      {/* Background Wrapper */}
+      <motion.div
+        className="relative flex min-h-screen content-center items-center justify-center pt-16 pb-32 overflow-hidden"
+        style={{ scale }}
+      >
+        <video autoPlay muted loop className="absolute top-0 left-0 w-full h-full object-cover z-0"> 
+          <source src="/videos/bg-video.mp4" type="video/mp4" /> 
+          Your browser does not support the video tag.
+        </video>
+        <div className="absolute top-0 h-full w-full bg-gradient-to-b from-transparent to-black opacity-50" />
+        <div className="max-w-8xl container relative mx-auto text-center z-10">
+          <Typography variant="h1" color="white" className="mb-6 font-black text-5xl md:text-7xl lg:text-8xl">
+            About Us
           </Typography>
-        </motion.div>
-      </div>
+          <Typography variant="lead" color="white" className="opacity-80 text-lg md:text-xl lg:text-2xl">
+            At Glynac.ai, we are dedicated to helping businesses navigate the evolving 
+            landscape of hybrid and remote work.
+          </Typography>
+        </div>
+      </motion.div>
 
-      {/* FAQ Section */}
-      <section className="-mt-32 bg-gray-900 px-6 pb-20 pt-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mt-10">
-          {[
-            {
-              question: "How does Glynac.AI ensure security and privacy?",
-              answer: "We use End-to-End Encryption (E2EE) and real-time anonymization, ensuring all data remains protected before AI analysis.",
-            },
-            {
-              question: "How will I know which subscription is right for me?",
-              answer: "We offer customized plans tailored to your needs, making sure you get the most value for your business.",
-            },
-            {
-              question: "Is customer service available 24/7?",
-              answer: "We provide automated replies for general inquiries and a detailed FAQ section for instant support outside business hours.",
-            },
-          ].map((faq, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+      {/* Content Section */}
+      <section className="-mt-32 bg-white px-4 pb-20 pt-4">
+        <div className="container mx-auto max-w-6xl">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="glassmorphism p-4 rounded-lg" 
+          >
+            <Card className="shadow-lg border shadow-gray-500/10 rounded-lg bg-white p-6 transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:rotate-2"> 
+              <CardBody>
+                <Typography variant="h4" className="font-bold text-blue-gray-900 flex items-center gap-2">
+                  <FingerPrintIcon className="h-6 w-6 text-blue-gray-900" />
+                  Our Mission
+                </Typography>
+                <Typography className="mb-8 font-normal text-blue-gray-500">
+                  Traditional monitoring methods no longer provide a complete picture of 
+                  employee engagement and productivity. That’s why we use AI to analyze 
+                  workplace communication—bridging gaps between office and remote teams.
+                </Typography>
+              </CardBody>
+            </Card>
+          </motion.div>
+
+          <div className="flex flex-col md:flex-row max-w-4xl mx-auto mt-10">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
+              className="flex-1 md:pr-8 glassmorphism p-4 rounded-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:-rotate-2" // Added glassmorphism
             >
-              <Card className="bg-white/10 backdrop-blur-lg border border-white/20 p-6 rounded-2xl shadow-xl hover:scale-105 transition-transform">
-                <ChatBubbleBottomCenterTextIcon className="h-12 w-12 text-blue-400" />
-                <Typography variant="h5" className="font-bold text-white mt-4">{faq.question}</Typography>
-                <Typography className="text-gray-300 text-center mt-2">{faq.answer}</Typography>
+                <Typography variant="h2" className="text-3xl font-bold">
+                    Letters To Users
+                </Typography>
+                <Typography variant="body1" className="mb-8 font-normal text-blue-gray-500">
+                    In today’s digital workplace, employees communicate across multiple platforms. These conversations hold productivity, morale, and collaboration.
+                    However, analyzing this vast amount of unstructured data in real time has always been a challenge. With advancements in AI and Large Language Models 
+                    (LLMs), it is now possible to process and interpret massive volumes of communication data. Our AI-driven platform collects and analyzes messages from 
+                    platforms like Slack, Teams, Gmail, and Outlook, transforming raw data into actionable insights.
+                </Typography> 
+            </motion.div>
+            <div className="hidden md:block w-px bg-gradient-to-b from-blue-500 to-purple-500 h-full mx-4 opacity-30" />
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="flex-1 md:pl-8 mt-8 md:mt-0 glassmorphism p-4 rounded-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:rotate-2" // Added glassmorphism
+            >
+                <Typography variant="h2" className="text-3xl font-bold">
+                    Our Solutions
+                </Typography>
+                <Typography variant="body1" className="mb-8 font-normal text-blue-gray-500">
+                    We know that no two companies are the same, which is why we offer customizable services for different businesses.
+                    Whether you need high-level analytics or deep sentiment tracking, Glynac.AI provides scalable solutions that fit your needs.
+                    With AI-driven insights, you can make smarter decisions, enhance employee morale, and create a more connected workforce.
+                </Typography>
+            </motion.div>
+          </div>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto mt-16 px-4 glassmorphism p-8 rounded-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl" // Added glassmorphism
+          >
+            <Typography variant="body1" className="text-3xl font-normal text-center">
+            Welcome to our AI-driven platform that empowers businesses to navigate hybrid and remote work. Our mission is to enhance workplace 
+            experiences and unite teams, no matter their location.
+            <br /><br />
+            We prioritize sustainability, collaboration, diversity, and integrity. Our innovative tools are designed to exceed expectations and 
+            drive meaningful change within your organization.
+            <br /><br />
+            Our AI solutions optimize productivity, improve communication, and support employee well-being. Join us in embracing the evolving work 
+            landscape and explore how we can help your business thrive in a hybrid world.
+            </Typography>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            viewport={{ once: true }}
+            className="glassmorphism p-4 rounded-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl" 
+          >
+            <Card className="shadow-lg border shadow-gray-500/10 rounded-lg bg-white p-6 mt-10 max-w-4xl mx-auto">
+              <CardBody>
+                <Typography variant="h4" className="font-bold text-blue-gray-900 text-center">
+                  Locations
+                  <br /><br />
+                </Typography>
+                <Typography className="mb-8 font-normal text-blue-gray-500 text-center">
+                  Headquarters: Chicago
+                  <br /><br />
+                  Sales and Development Office: India 
+                  <br /><br />
+                  Development Office: Israel 
+                  <br /><br />
+                  Sales Office: Beijing, London
+                </Typography>
+              </CardBody>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+      
+      {/* Organizational Chart */}
+      <section className="bg-white px-4 py-24">
+        <div className="container mx-auto max-w-6xl">
+          <Typography variant="h2" className="text-3xl font-bold text-center text-blue-gray-900 mb-6">
+            Organizational Chart
+          </Typography>
+          <OrganizationalChart />
+        </div>
+      </section>
+
+      {/* Image Section */}
+      <section className="mt-16">
+        <Typography variant="h2" className="text-3xl font-bold text-center text-blue-gray-900 mb-6">
+          Our Leadership
+        </Typography>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {[
+            { src: "/img/leadership1.jpg", name: "Andrew Rosenthal", description: "CEO & Founder with 20 years of experience in AI-driven analytics." },
+            { src: "/img/leadership2.jpg", name: "Bo Shi", description: "CFO with a strong background in financial strategy, risk management, and sustainable growth." },
+            { src: "/img/leadership3.jpg", name: "Tanju Sharma", description: "CTO driving innovation, scalability, and cutting-edge technology solutions." },
+          ].map(({ src, name, description }, index) => (
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 * (index + 1) }}
+              viewport={{ once: true }}
+              key={index} 
+              className="glassmorphism p-4 rounded-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl" // Added glassmorphism 
+            >
+              <Card className="shadow-lg border shadow-gray-500/10 rounded-lg">
+                <img 
+                  src={src} 
+                  alt={name} 
+                  className={`h-56 w-full object-cover rounded-t-lg ${
+                    src === "/img/leadership3.jpg" ? "object-[30%]" : "object-top"
+                  }`}
+                />
+              <CardBody>
+                <Typography variant="h5" className="text-blue-gray-900 font-bold text-center">
+                  {name}
+                </Typography>
+                <Typography className="text-blue-gray-500 text-center mt-2">
+                  {description}
+                </Typography>
+              </CardBody>
               </Card>
             </motion.div>
           ))}
         </div>
       </section>
+
       
-      {/* Client Feedback Section */}
-    <section className="max-w-6xl mx-auto mt-16 px-4">
-        <Typography variant="h2" className="text-4xl font-bold text-blue-gray-900 text-left mb-8">
-            Client Feedback
-        </Typography>
-
-        {/* Business Feedback List */}
-        <div className="flex flex-col space-y-8 items-center w-full">
-
-            {/* Salesforce */}
-            <div className="flex items-center space-x-6 w-full max-w-4xl">
-                <div className="w-[160px] flex-shrink-0 flex justify-center">
-                    <img src="/img/Salesforce-logo.png" alt="Salesforce Logo" className="h-auto max-h-16 w-auto max-w-[160px] flex-shrink-0" />
-                </div>
-                <Typography className="text-lg font-normal text-blue-gray-700">
-                    Glynac successfully improved workforce efficiency by an average of 32% across six 
-                    major corporations through advanced employee analytics.
-                </Typography>
-            </div>
-
-        {/* Grammarly*/}
-        <div className="flex items-center space-x-6 w-full max-w-4xl">
-            <div className="w-[160px] flex-shrink-0 flex justify-center">
-                <img src="/img/grammarly.png" alt="Grammarly Logo" className="h-auto max-h-16 w-auto max-w-[160px] flex-shrink-0" />
-            </div>
-            <Typography className="text-lg font-normal text-blue-gray-700">
-                By leveraging Glynac’s data-driven insights, grammarly saw a 25% reduction 
-                in employee turnover within the first year.
-            </Typography>
-        </div>
-
-        {/*Ferguson*/}
-        <div className="flex items-center space-x-6 w-full max-w-4xl">
-            <div className="w-[160px] flex-shrink-0 flex justify-center">
-                <img src="/img/Ferguson-Logo.png" alt="Ferguson Logo" className="h-auto max-h-16 w-auto max-w-[160px] flex-shrink-0" />
-            </div>
-            <Typography className="text-lg font-normal text-blue-gray-700">
-                Our custom analytics solutions helped teams at Furguson enhance collaboration, 
-                leading to a 40% increase in cross-departmental productivity.
-            </Typography>
-        </div>
-        
-        {/* General Electric */}
-        <div className="flex items-center space-x-6 w-full max-w-4xl">
-            <div className="w-[160px] flex-shrink-0 flex justify-center">
-                <img src="/img/general-electric-ge-logo.png" alt="General Electric Logo" className="h-auto max-h-16 w-auto max-w-[160px] flex-shrink-0" />
-            </div>
-            <Typography className="text-lg font-normal text-blue-gray-700">
-                Over 90% of managers reported greater confidence in decision-making after implementing Glynac’s 
-                streamlined reporting tools.
-            </Typography>
-        </div>
-
-        {/* Broadcom */}
-        <div className="flex items-center space-x-6 w-full max-w-4xl mx-auto">
-            <div className="w-[160px] flex-shrink-0 flex justify-center">
-                <img src="/img/broadcom.png" alt="Broadcom Logo" className="h-auto max-h-16 w-auto max-w-[160px] flex-shrink-0" />
-            </div>
-                <Typography className="text-lg font-normal text-blue-gray-700">
-                    Within six months, Broadcom experienced an average 18% reduction in operational 
-                    costs related to workforce inefficiencies.
-                </Typography>
-        </div>
-
-        {/* Loom */}
-        <div className="flex items-center space-x-6 w-full max-w-4xl mx-auto">
-            <div className="w-[160px] flex-shrink-0 flex justify-center">
-                <img src="/img/Loom.png" alt="Loom Logo" className="h-auto max-h-16 w-auto max-w-[160px] flex-shrink-0" />
-            </div>
-                <Typography className="text-lg font-normal text-blue-gray-700">
-                    With Glynac’s expertise, loom achieved a 50% improvement 
-                    in employee engagement scores, fostering stronger workplace communities.
-                </Typography>
-        </div>
-    </div>
-    </section>
-    
-      {/* Case Study Section */}
-      <section className="max-w-5xl mx-auto mt-20 px-4 text-white text-left">
-        <Typography variant="h2" className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-teal-300">
-          Case Study
-        </Typography>
-        <Typography variant="h3" className="text-2xl text-black font-semibold mt-2">
-          A Major US-headquartered TNC
-        </Typography>
-      </section>
-
-      {/* Summary Section */}
-      <section className="max-w-5xl mx-auto mt-16 text-center text-white">
-        <Typography variant="h3" className="text-2xl font-bold text-black">
-          The below table contains a summary it generated within seconds.
-        </Typography>
-        <div className="flex justify-center mt-4">
-          <PlayCircleIcon className="h-14 w-14 text-blue-400 hover:scale-110 transition-transform" />
-        </div>
-      </section>
-
-      {/* Graph & Insights Section */}
-      <section className="max-w-6xl mx-auto mt-16 px-4 flex flex-col md:flex-row items-center justify-between">
-        <Typography className="text-lg font-semibold text-black max-w-lg">
-            With a strong history of notable corporate clients, Glynac has been trusted by industry leaders to help 
-            analyze and streamline their employee analytics, improving efficiency and helping foster stronger working 
-            communities. 
-        </Typography>
-
-        {/* Line Graph */}
-        <div className="w-full md:w-[50%] h-64 mt-8 md:mt-0">
-            <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={[
-                    { month: "Jan", efficiency: 60 },
-                    { month: "Feb", efficiency: 65 },
-                    { month: "Mar", efficiency: 70 },
-                    { month: "Apr", efficiency: 72 },
-                    { month: "May", efficiency: 75 },
-                    { month: "Jun", efficiency: 78 },
-                    { month: "Jul", efficiency: 80 },
-                    { month: "Aug", efficiency: 83 },
-                    { month: "Sep", efficiency: 85 },
-                    { month: "Oct", efficiency: 88 },
-                    { month: "Nov", efficiency: 90 },
-                    { month: "Dec", efficiency: 92 },
-
-                ]}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="month" padding={{left: 10, right:10}} />
-                    <YAxis domain={[50, 100]} />
-                    <Tooltip formatter={(value) => `${value}%`} />
-                    <Line type="monotone" dataKey="efficiency" stroke="#3b82f6" strokeWidth={3} />
-                </LineChart>
-            </ResponsiveContainer>
-        </div>
-    </section>
+      {/* Footer */}
       <Footer />
     </>
   );
