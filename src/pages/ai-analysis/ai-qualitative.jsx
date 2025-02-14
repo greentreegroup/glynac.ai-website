@@ -1,6 +1,6 @@
 import React from "react";
 import {Typography } from "@material-tailwind/react";
-import { Footer } from '@/widgets/layout/Footer'; // Ensure the path is correct
+import { Footer } from '@/widgets/layout/Footer'; 
 
 export function Qualitative() {
   return (
@@ -11,7 +11,7 @@ export function Qualitative() {
         <div className="pt-16"> {/* Adjusted padding top for the text */}
           <h1 className="text-6xl font-bold mb-6">AI Analysis</h1>
           <p className="text-xl max-w-4xl mx-auto">
-            Our AI-powered analysis provides a comprehensive view of workplace communication by examining both qualitative and quantitative factors. This data-driven approach helps businesses foster a more connected, productive, and positive work environment.
+            Our AI-powered analysis offers an in-depth look at workplace communication by focusing on qualitative factors. This data-driven approach enables businesses to better understand employee sentiment, interaction quality, and collaboration dynamics, ultimately helping create a more connected, productive, and positive work environment.
           </p>
         </div>
       </div>
@@ -172,7 +172,7 @@ export function Qualitative() {
           {/* Left Side: Image */}
           <div className="w-1/2 pr-12">
             <img
-              src="/img/training-image.png" // Replace with relevant image
+              src="/img/training-qual.png" // Replace with relevant image
               alt="Training"
               className="w-full h-[400px] object-contain rounded-lg shadow-none"
             />
@@ -221,3 +221,9 @@ export function Qualitative() {
 }
 
 export default Qualitative;
+
+
+
+
+
+

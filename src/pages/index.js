@@ -15,7 +15,6 @@ export * from "@/pages/pricing"
 
 export * from "@/pages/security"
 
-export * from "@/pages/resources"
 
 
 
