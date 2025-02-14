@@ -5,6 +5,7 @@ export function MenuBar() {
   const [isSoftwareDropdownOpen, setIsSoftwareDropdownOpen] = useState(false); // State for Software dropdown visibility
   const [isFeaturesDropdownOpen, setIsFeaturesDropdownOpen] = useState(false); // State for Features dropdown visibility
   const [isAIAnalysisDropdownOpen, setIsAIAnalysisDropdownOpen] = useState(false); // State for AI Analysis dropdown visibility
+  const [isResourcesDropdownOpen, setIsResourcesDropdownOpen] = useState(false); // State for Resources dropdown visibility
 
   // Function to handle mouse enter and mouse leave for the Software dropdown
   const handleSoftwareMouseEnter = () => {
@@ -31,6 +32,15 @@ export function MenuBar() {
 
   const handleAIAnalysisMouseLeave = () => {
     setIsAIAnalysisDropdownOpen(false);
+  };
+
+  // Function to handle mouse enter and mouse leave for the Resources dropdown
+  const handleResourcesMouseEnter = () => {
+    setIsResourcesDropdownOpen(true);
+  };
+
+  const handleResourcesMouseLeave = () => {
+    setIsResourcesDropdownOpen(false);
   };
 
   return (
@@ -99,7 +109,7 @@ export function MenuBar() {
           {/* AI Analysis Link with Dropdown */}
           <div
             className="relative"
-            onMouseEnter={handleAIAnalysisMouseEnter} // Show dropdown when mouse enters
+            onMouseEnter={handleAIAnalysisMouseEnter}
           >
             <button className="hover:text-blue-200">
               AI Analysis
@@ -120,10 +130,35 @@ export function MenuBar() {
               </div>
             )}
           </div>
-
+          
           <Link to="/pricing" className="hover:text-blue-200">Pricing</Link>
           <Link to="/security" className="hover:text-blue-200">Security</Link>
-          <Link to="/resources" className="hover:text-blue-200">Resources</Link>
+
+          {/* Resources Link with Dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={handleResourcesMouseEnter} // Show dropdown when mouse enters
+          >
+            <button className="hover:text-blue-200">
+              Resources
+            </button>
+
+            {/* Resources Dropdown Menu */}
+            {isResourcesDropdownOpen && (
+              <div
+                className="absolute left-0 mt-2 w-48 bg-white text-black rounded-lg shadow-md"
+                onMouseLeave={handleResourcesMouseLeave} // Hide dropdown when cursor leaves both the dropdown and button
+              >
+                <Link to="/blog" className="block px-4 py-2 hover:bg-blue-200">
+                  Blog
+                </Link>
+                <Link to="/news" className="block px-4 py-2 hover:bg-blue-200">
+                  News
+                </Link>
+              </div>
+            )}
+          </div>
+
         </div>
       </div>
     </div>
