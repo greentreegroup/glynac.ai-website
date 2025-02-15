@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import {
@@ -8,10 +8,11 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 
 export function Navbar({ brandName, routes, action }) {
   const [openNav, setOpenNav] = React.useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   React.useEffect(() => {
     window.addEventListener(
@@ -57,6 +58,7 @@ export function Navbar({ brandName, routes, action }) {
           )}
         </Typography>
       ))}
+
     </ul>
   );
 
