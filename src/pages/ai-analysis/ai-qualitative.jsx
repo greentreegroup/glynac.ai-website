@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography } from "@material-tailwind/react";
-import { Footer } from '@/widgets/layout/Footer';
+import { Footer } from '@/widgets/layout/footer';
 import { motion } from "framer-motion";
 
 export function Qualitative() {
