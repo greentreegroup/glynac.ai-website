@@ -1,4 +1,4 @@
-import { Home, Software, CommunicationTools, EmailTools ,DemographicData,DataSelection, StandardizedData, Qualitative, Quantitative, Pricing, Security, Blog, News} from "@/pages";
+import { Home, Software, CommunicationTools, EmailTools ,DemographicData,DataSelection, StandardizedData, Qualitative, Quantitative, Pricing, Security, Blog, News, Updates} from "@/pages";
 
 export const routes = [
   {
@@ -65,6 +65,11 @@ export const routes = [
     name: "news",
     path: "/news", 
     element: <News />,
+  },
+  {
+    name: "updates",
+    path: "/updates", 
+    element: <Updates />,
   },
 
 

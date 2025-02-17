@@ -17,6 +17,7 @@ export * from "@/pages/security"
 
 export * from "@/pages/resources/blog"
 export * from "@/pages/resources/news"
+export * from "@/pages/resources/updates"
 
 
 

@@ -155,6 +155,9 @@ export function MenuBar() {
                 <Link to="/news" className="block px-4 py-2 hover:bg-blue-200">
                   News
                 </Link>
+                <Link to="/updates" className="block px-4 py-2 hover:bg-blue-200">
+                  Updates
+                </Link>
               </div>
             )}
           </div>
