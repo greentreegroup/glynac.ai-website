@@ -1,4 +1,4 @@
-import { Home, Software, CommunicationTools, EmailTools ,DemographicData,DataSelection, StandardizedData, Qualitative, Quantitative, Pricing, Security, About, Blog, Client_case, Contacts, FAQ, Manual, News, Partner_program, Support, Update} from "@/pages";
+import { Home, Software, CommunicationTools, EmailTools ,DemographicData,DataSelection, StandardizedData, Qualitative, Quantitative, Pricing, Security, About, Blog, Client_case, Contacts, FAQ, Manual, News, Partner_program, Support, Updates} from "@/pages";
 
 export const routes = [
   {
@@ -104,7 +104,7 @@ export const routes = [
   {
     name: "update",
     path: "/update", 
-    element: <Update />,
+    element: <Updates />,
   },
   {
     name: "Docs",
