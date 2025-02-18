@@ -46,6 +46,38 @@ export function MenuBar() {
     setShowBlur(false);
   };
 
+  // Define menu items and their respective links
+  const menuItems = {
+    software: [
+      { to: "/software", label: "Glync AI Software" },
+      { to: "/communication-tools", label: "Communication Tools" },
+      { to: "/email-tools", label: "Email Tools" },
+    ],
+    features: [
+      { to: "/demographic-data", label: "Demographic Data" },
+      { to: "/pre-clean-data", label: "Pre-cleaned Data" },
+      { to: "/standardized-data", label: "Standardized Data" },
+    ],
+    aiAnalysis: [
+      { to: "/ai-qualitative", label: "AI Qualitative" },
+      { to: "/ai-quantitative", label: "AI Quantitative" },
+    ],
+    pricing: [{ to: "/pricing", label: "Pricing" }],
+    security: [{ to: "/security", label: "Security" }],
+    resources: [
+      { to: "/about", label: "About" },
+      { to: "/blog", label: "Blog" },
+      { to: "/client_case", label: "Client Case" },
+      { to: "/contacts", label: "Contacts" },
+      { to: "/faq", label: "FAQ" },
+      { to: "/manual", label: "Manual" },
+      { to: "/news", label: "News" },
+      { to: "/partner_program", label: "Partner Program" },
+      { to: "/support", label: "Support" },
+      { to: "/updates", label: "Updates" },
+    ],
+  };
+
   return (
     <>
       {/* Background Blur */}
@@ -62,68 +94,36 @@ export function MenuBar() {
 
           {/* Desktop Navigation */}
           <ul className="hidden md:flex space-x-6 text-white text-lg">
-
-            {/* Dropdowns */}
-            {["software", "features", "AI Analysis", "pricing", "security", "resources"].map((menu) => (
+            {Object.keys(menuItems).map((menu) => (
               <li
                 key={menu}
                 className="relative group"
                 onMouseEnter={() => setDropdownOpen((prev) => ({ ...prev, [menu]: true }))}
                 onMouseLeave={() => setDropdownOpen((prev) => ({ ...prev, [menu]: false }))}
               >
-                <button className="hover:text-blue-300 transition-all duration-200">
-                  {menu.charAt(0).toUpperCase() + menu.slice(1)}
-                </button>
-                <DropdownMenu isOpen={dropdownOpen[menu]}>
-                  {menu === "software" && (
-                    <>
-                      <DropdownItem to="/software" onClick={closeAllDropdowns}>Glync AI Software</DropdownItem>
-                      <DropdownItem to="/communication-tools" onClick={closeAllDropdowns}>Communication Tools</DropdownItem>
-                      <DropdownItem to="/email-tools" onClick={closeAllDropdowns}>Email Tools</DropdownItem>
-                    </>
-                  )}
-                  {menu === "features" && (
-                    <>
-                      <DropdownItem to="/demographic-data" onClick={closeAllDropdowns}>Demographic Data</DropdownItem>
-                      <DropdownItem to="/pre-clean-data" onClick={closeAllDropdowns}>Pre-cleaned Data</DropdownItem>
-                      <DropdownItem to="/standardized-data" onClick={closeAllDropdowns}>Standardized Data</DropdownItem>
-                    </>
-                  )}
-                  {menu === "AI Analysis" && (
-                    <>
-                      <DropdownItem to="/ai-qualitative" onClick={closeAllDropdowns}>AI Qualitative</DropdownItem>
-                      <DropdownItem to="/ai-quantitative" onClick={closeAllDropdowns}>AI Quantitative</DropdownItem>
-                    </>
-                  )}
-                  {menu === "pricing" && (
-                    <>
-                      <DropdownItem to="/pricing" onClick={closeAllDropdowns}>Pricing</DropdownItem>
-                    </>
-                  )}
-                  {menu === "security" && (
-                    <>
-                      <DropdownItem to="/security" onClick={closeAllDropdowns}>Security</DropdownItem>
-                    </>
-                  )}
-                  {menu === "resources" && (
-                    <>
-                      <DropdownItem to="/about" onClick={closeAllDropdowns}>About</DropdownItem>
-                      <DropdownItem to="/blog" onClick={closeAllDropdowns}>blog</DropdownItem>
-                      <DropdownItem to="/client_case" onClick={closeAllDropdowns}>Client case</DropdownItem>
-                      <DropdownItem to="/contacts" onClick={closeAllDropdowns}>Contacts</DropdownItem>
-                      <DropdownItem to="/faq" onClick={closeAllDropdowns}>FAQ</DropdownItem>
-                      <DropdownItem to="/manual" onClick={closeAllDropdowns}>Manual</DropdownItem>
-                      <DropdownItem to="/news" onClick={closeAllDropdowns}>News</DropdownItem>
-                      <DropdownItem to="/partner_program" onClick={closeAllDropdowns}>Partner program</DropdownItem>
-                      <DropdownItem to="/support" onClick={closeAllDropdowns}>Support</DropdownItem>
-                      <DropdownItem to="/updates" onClick={closeAllDropdowns}>Updates</DropdownItem>
-                    </>
-                  )}
-                </DropdownMenu>
+                {menuItems[menu].length === 1 ? (
+                  <Link
+                    to={menuItems[menu][0].to}
+                    className="hover:text-blue-300 transition-all duration-200"
+                  >
+                    {menu.charAt(0).toUpperCase() + menu.slice(1)}
+                  </Link>
+                ) : (
+                  <>
+                    <button className="hover:text-blue-300 transition-all duration-200">
+                      {menu.charAt(0).toUpperCase() + menu.slice(1)}
+                    </button>
+                    <DropdownMenu isOpen={dropdownOpen[menu]}>
+                      {menuItems[menu].map((item) => (
+                        <DropdownItem key={item.to} to={item.to} onClick={closeAllDropdowns}>
+                          {item.label}
+                        </DropdownItem>
+                      ))}
+                    </DropdownMenu>
+                  </>
+                )}
               </li>
             ))}
-
-            
           </ul>
 
           {/* Mobile Menu Button */}
@@ -139,13 +139,19 @@ export function MenuBar() {
           <div className={`fixed top-0 left-0 w-full h-full bg-white transition-transform duration-300 z-50 transform ${isMobileNavOpen ? "translate-x-0" : "translate-x-full"}`}>
             <div className="p-5 flex flex-col space-y-5">
               <button onClick={closeAllDropdowns} className="text-black text-2xl self-end">✕</button>
-              <DropdownItem to="/home" onClick={closeAllDropdowns}>Home</DropdownItem>
-              <DropdownItem to="/software" onClick={closeAllDropdowns}>Software</DropdownItem>
-              <DropdownItem to="/features" onClick={closeAllDropdowns}>Features</DropdownItem>
-              <DropdownItem to="/ai-analysis" onClick={closeAllDropdowns}>AI Analysis</DropdownItem>
-              <DropdownItem to="/pricing" onClick={closeAllDropdowns}>Pricing</DropdownItem>
-              <DropdownItem to="/security" onClick={closeAllDropdowns}>Security</DropdownItem>
-              <DropdownItem to="/about" onClick={closeAllDropdowns}>Resources</DropdownItem>
+              {Object.keys(menuItems).map((menu) => (
+                menuItems[menu].length === 1 ? (
+                  <DropdownItem key={menuItems[menu][0].to} to={menuItems[menu][0].to} onClick={closeAllDropdowns}>
+                    {menuItems[menu][0].label}
+                  </DropdownItem>
+                ) : (
+                  menuItems[menu].map((item) => (
+                    <DropdownItem key={item.to} to={item.to} onClick={closeAllDropdowns}>
+                      {item.label}
+                    </DropdownItem>
+                  ))
+                )
+              ))}
             </div>
           </div>
         </div>
