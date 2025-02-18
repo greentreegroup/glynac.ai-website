@@ -41,7 +41,7 @@ export function MenuBar() {
   };
 
   const closeAllDropdowns = () => {
-    setDropdownOpen({ software: false, features: false, AIAnalysis: false });
+    setDropdownOpen({ software: false, features: false, aiAnalysis: false });
     setIsMobileNavOpen(false);
     setShowBlur(false);
   };
@@ -78,6 +78,16 @@ export function MenuBar() {
     ],
   };
 
+  // Custom labels for specific menu keys
+  const menuLabels = {
+    software: "Software",
+    features: "Features",
+    aiAnalysis: "AI Analysis", // Updated to "AI Analysis"
+    pricing: "Pricing",
+    security: "Security",
+    resources: "Resources",
+  };
+
   return (
     <>
       {/* Background Blur */}
@@ -106,12 +116,12 @@ export function MenuBar() {
                     to={menuItems[menu][0].to}
                     className="hover:text-blue-300 transition-all duration-200"
                   >
-                    {menu.charAt(0).toUpperCase() + menu.slice(1)}
+                    {menuLabels[menu]} {/* Use custom label */}
                   </Link>
                 ) : (
                   <>
                     <button className="hover:text-blue-300 transition-all duration-200">
-                      {menu.charAt(0).toUpperCase() + menu.slice(1)}
+                      {menuLabels[menu]} {/* Use custom label */}
                     </button>
                     <DropdownMenu isOpen={dropdownOpen[menu]}>
                       {menuItems[menu].map((item) => (
@@ -139,10 +149,10 @@ export function MenuBar() {
           <div className={`fixed top-0 left-0 w-full h-full bg-white transition-transform duration-300 z-50 transform ${isMobileNavOpen ? "translate-x-0" : "translate-x-full"}`}>
             <div className="p-5 flex flex-col space-y-5">
               <button onClick={closeAllDropdowns} className="text-black text-2xl self-end">✕</button>
-              {Object.keys(menuItems).map((menu) => (
+              {Object.keys(menuItems).map((menu) =>
                 menuItems[menu].length === 1 ? (
                   <DropdownItem key={menuItems[menu][0].to} to={menuItems[menu][0].to} onClick={closeAllDropdowns}>
-                    {menuItems[menu][0].label}
+                    {menuLabels[menu]} {/* Use custom label */}
                   </DropdownItem>
                 ) : (
                   menuItems[menu].map((item) => (
@@ -151,7 +161,7 @@ export function MenuBar() {
                     </DropdownItem>
                   ))
                 )
-              ))}
+              )}
             </div>
           </div>
         </div>
