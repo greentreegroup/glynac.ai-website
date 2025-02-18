@@ -129,7 +129,7 @@ export function Security() {
           <p className="text-lg">
             <span className="font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
               Glynac.ai
-            </span> - Certified Secure Platform since 2018
+            </span> - Certified Secure Platform since 2025
           </p>
           <p className="mt-2">Regularly updated to meet evolving security standards</p>
         </motion.div>
