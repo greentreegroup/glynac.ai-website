@@ -41,7 +41,7 @@ export function MenuBar() {
   };
 
   const closeAllDropdowns = () => {
-    setDropdownOpen({ software: false, features: false, AI Analysis: false });
+    setDropdownOpen({ software: false, features: false, AIAnalysis: false });
     setIsMobileNavOpen(false);
     setShowBlur(false);
   };
