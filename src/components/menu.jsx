@@ -78,11 +78,11 @@ export function MenuBar() {
     ],
   };
 
-  // Custom labels for specific menu keys
+  // Custom labels for specific menu name
   const menuLabels = {
     software: "Software",
     features: "Features",
-    aiAnalysis: "AI Analysis", // Updated to "AI Analysis"
+    aiAnalysis: "AI Analysis",
     pricing: "Pricing",
     security: "Security",
     resources: "Resources",
