@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Typography } from '@material-tailwind/react';
 
-export function Update() {
+export function Updates() {
   const changelogData = [
     {
       version: '(Newest Version) Beta 1.0.0',
