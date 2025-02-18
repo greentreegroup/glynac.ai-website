@@ -89,27 +89,27 @@ export function Pricing() {
 
       {/* Pricing Section */}
       <section className="bg-white px-4 py-10">
-      <motion.div
-      className="relative container mx-auto py-10"
-      initial="hidden"
-      animate="visible"
-      variants={{
-        hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
-      }}
-    >
-      <motion.div
-        className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
-        variants={{
-          hidden: { opacity: 0 },
-          visible: { opacity: 1 },
-        }}
-      >
-        {/* Basic Plan */}
-        <motion.div variants={cardVariants}>
-            <Card className="relative shadow-lg border border-gray-300 rounded-2xl p-6 hover:shadow-2xl hover:scale-105 transition-transform duration-300 bg-gradient-to-b from-gray-200 to-white flex flex-col items-center overflow-hidden">
-            <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full"></div>
-            <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full blur-lg"></div> 
+        <motion.div
+          className="relative container mx-auto py-10"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
+          }}
+        >
+          <motion.div
+            className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1 },
+            }}
+          >
+            {/* Basic Plan */}
+            <motion.div variants={cardVariants}>
+              <Card className="relative shadow-lg border border-gray-300 rounded-2xl p-6 hover:shadow-2xl hover:scale-105 transition-transform duration-300 bg-gradient-to-b from-gray-200 to-white flex flex-col items-center overflow-hidden">
+                <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full"></div>
+                <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full blur-lg"></div> 
                 <Typography
                   variant="h3"
                   className="mt-10 mb-4 font-bold text-gray-800 text-center"
@@ -143,16 +143,14 @@ export function Pricing() {
                 >
                   Learn More
                 </Button>
-                </Card>
+              </Card>
             </motion.div>
 
             {/* Starter Plan */}
-            
             <motion.div variants={cardVariants}>
-            <Card className="relative shadow-lg border border-gray-300 rounded-2xl p-6 hover:shadow-2xl hover:scale-105 transition-transform duration-300 bg-gradient-to-b from-gray-200 to-white flex flex-col items-center overflow-hidden">
-            <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full"></div>
-            <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full blur-lg"></div> 
-                {/* Glass effect */}
+              <Card className="relative shadow-lg border border-gray-300 rounded-2xl p-6 hover:shadow-2xl hover:scale-105 transition-transform duration-300 bg-gradient-to-b from-gray-200 to-white flex flex-col items-center overflow-hidden">
+                <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full"></div>
+                <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full blur-lg"></div> 
                 <Typography
                   variant="h3"
                   className="mt-10 mb-4 font-bold text-gray-800 text-center"
@@ -200,10 +198,9 @@ export function Pricing() {
 
             {/* Advanced Plan */}
             <motion.div variants={cardVariants}>
-            <Card className="relative shadow-lg border border-gray-300 rounded-2xl p-6 hover:shadow-2xl hover:scale-105 transition-transform duration-300 bg-gradient-to-b from-gray-200 to-white flex flex-col items-center overflow-hidden">
-            <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full"></div>
-            <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full blur-lg"></div> 
-                {/* Glass effect */}
+              <Card className="relative shadow-lg border border-gray-300 rounded-2xl p-6 hover:shadow-2xl hover:scale-105 transition-transform duration-300 bg-gradient-to-b from-gray-200 to-white flex flex-col items-center overflow-hidden">
+                <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full"></div>
+                <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full blur-lg"></div> 
                 <Typography
                   variant="h3"
                   className="mt-10 mb-4 font-bold text-gray-800 text-center"
@@ -251,10 +248,9 @@ export function Pricing() {
 
             {/* Pro Plan - Dark Themed */}
             <motion.div variants={cardVariants}>
-            <Card className="relative shadow-lg border border-gray-700 shadow-gray-500 rounded-2xl p-6 hover:shadow-2xl hover:scale-105 transition-transform duration-300 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex flex-col items-center overflow-hidden">
+              <Card className="relative shadow-lg border border-gray-700 shadow-gray-500 rounded-2xl p-6 hover:shadow-2xl hover:scale-105 transition-transform duration-300 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex flex-col items-center overflow-hidden">
                 <div className="absolute -top-10 left-0 w-full h-20 bg-gray-700 rounded-b-full"></div>
                 <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full blur-lg"></div> 
-                {/* Glass effect */}
                 <Typography
                   variant="h3"
                   className="mt-10 mb-4 font-bold text-white text-center"
@@ -294,6 +290,51 @@ export function Pricing() {
               </Card>
             </motion.div>
           </motion.div>
+
+          {/* Pricing & Clients Breakdown Table */}
+          <div className="mt-20">
+            <Typography variant="h2" className="text-center mb-8 font-bold text-gray-800">
+              Pricing & Clients Breakdown
+            </Typography>
+            <div className="overflow-x-auto">
+              <table className="min-w-full border-collapse border border-white text-white">
+                <thead>
+                  <tr className="bg-gray-900">
+                    <th className="border border-white px-4 py-2 text-center">Client Size</th>
+                    <th className="border border-white px-4 py-2 text-center">Users</th>
+                    <th className="border border-white px-4 py-2 text-center">Monthly Prize</th>
+                    <th className="border border-white px-4 py-2 text-center">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="bg-gray-800">
+                    <td className="border border-white px-4 py-2 text-center">Small</td>
+                    <td className="border border-white px-4 py-2 text-center">30</td>
+                    <td className="border border-white px-4 py-2 text-center">$500</td>
+                    <td className="border border-white px-4 py-2 text-center">Basic email monitoring for small teams.</td>
+                  </tr>
+                  <tr className="bg-gray-900">
+                    <td className="border border-white px-4 py-2 text-center">Medium</td>
+                    <td className="border border-white px-4 py-2 text-center">100</td>
+                    <td className="border border-white px-4 py-2 text-center">$1,000</td>
+                    <td className="border border-white px-4 py-2 text-center">Starter feature for small to medium teams.</td>
+                  </tr>
+                  <tr className="bg-gray-800">
+                    <td className="border border-white px-4 py-2 text-center">Large</td>
+                    <td className="border border-white px-4 py-2 text-center">1,000</td>
+                    <td className="border border-white px-4 py-2 text-center">$2,000</td>
+                    <td className="border border-white px-4 py-2 text-center">Advanced features for medium to large teams.</td>
+                  </tr>
+                  <tr className="bg-gray-900">
+                    <td className="border border-white px-4 py-2 text-center">Huge</td>
+                    <td className="border border-white px-4 py-2 text-center">50,000</td>
+                    <td className="border border-white px-4 py-2 text-center">$2,000+</td>
+                    <td className="border border-white px-4 py-2 text-center">API and consulting solutions for huge enterprises.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </motion.div>
       </section>
 
@@ -301,6 +342,4 @@ export function Pricing() {
       <Footer />
     </>
   );
-}
-
-export default Pricing;
+} export default Pricing;
