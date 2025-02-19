@@ -10,6 +10,7 @@ export function Updates() {
         { type: 'New', text: 'Novel blog page launched, allowing users to freely share their posts.' },
         { type: 'Add', text: 'Potential login page needed to identify users and obtain user info.' },
         { type: 'Add', text: 'Need to implement method to filter out unhinged/disruptive posts.' },
+        { type: 'Fix', text: 'Comment section should indefinitely nest and should not stop after the first reply.' },
       ],
     },
     {
