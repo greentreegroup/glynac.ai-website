@@ -10,7 +10,7 @@ export function About() {
       {/* Background Wrapper */}
       <div className="relative flex min-h-screen content-center items-center justify-center pt-16 pb-32">
         <div className="absolute top-0 h-full w-full bg-[url('/img/background-3.png')] bg-cover bg-center" />
-        <div className="absolute top-0 h-full w-full bg-black/60 bg-cover bg-center" />
+        <div className="absolute top-0 h-full w-full bg-black bg-cover bg-center" />
         <div className="max-w-8xl container relative mx-auto text-center">
           <Typography variant="h1" color="white" className="mb-6 font-black">
             About Us

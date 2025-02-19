@@ -12,7 +12,7 @@ export function Other() {
       {/* Background Wrapper */}
       <div className="relative flex min-h-screen content-center items-center justify-center pt-16 pb-32">
         <div className="absolute top-0 h-full w-full bg-[url('/img/background-3.png')] bg-cover bg-center" />
-        <div className="absolute top-0 h-full w-full bg-black/60 bg-cover bg-center" />
+        <div className="absolute top-0 h-full w-full bg-black bg-cover bg-center" />
         <div className="max-w-8xl container relative mx-auto text-center">
         <Typography variant="h1" color="white" className="mb-6 font-black">
             Other
@@ -130,7 +130,7 @@ export function Other() {
             <table className="min-w-full border border-gray-300 bg-white shadow-md rounded-lg">
                 {/* Table Header */}
                 <thead>
-                    <tr className="bg-blue-200 text-blue-gray-900">
+                    <tr className="bg-[#93DEFF] text-blue-gray-900">
                         <th className="py-3 px-6 text-left font-bold">Category</th>
                         <th className="py-3 px-6 text-left font-bold">Score</th>
                         <th className="py-3 px-6 text-left font-bold">Key Metric</th>
