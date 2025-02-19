@@ -4,15 +4,25 @@ import { Typography } from '@material-tailwind/react';
 export function Updates() {
   const changelogData = [
     {
-      version: '(Newest Version) Beta 1.0.0',
+      version: '(Newest Version) 1.1.0-beta',
+      date: 'February 19, 2025',
+      changes: [
+        { type: 'New', text: 'Novel blog page launched, allowing users to freely share their posts.' },
+        { type: 'Add', text: 'Potential login page needed to identify users and obtain user info.' },
+        { type: 'Add', text: 'Need to implement method to filter out unhinged/disruptive posts.' },
+      ],
+    },
+    {
+      version: '1.0.0-beta',
       date: 'February 17, 2025',
       changes: [
         { type: 'New', text: 'Software includes communication and email tools.' },
-        { type: 'New', text: 'AI-analysis provides qualitative and quantitative analysis of workplace data, providing valuable insights that foster efficiency and colloboration.' },
+        { type: 'New', text: 'AI-analysis provides qualitative and quantitative analysis of workplace data, providing valuable insights that foster efficiency and collaboration.' },
         { type: 'Improvement', text: 'AI now optimizes workflow insights, generating better extrapolations of the data.' },
         { type: 'Improvement', text: 'AI developed more advanced security encryption, making the data more secure.' },
       ],
     },
+    
   ];
 
   const [feedback, setFeedback] = useState({
@@ -50,7 +60,7 @@ export function Updates() {
             {versionData.changes.map((change, idx) => (
               <div key={idx} className="ml-4 flex items-center mb-4">
                 {/* Bubble for the type */}
-                <span className={`inline-block px-3 py-1 rounded-full text-white text-sm mr-4 my-2 ${change.type === 'New' ? 'bg-green-500' : change.type === 'Improvement' ? 'bg-blue-500' : 'bg-red-500'}`}>
+                <span className={`inline-block px-3 py-1 rounded-full text-white text-sm mr-4 my-2 ${change.type === 'New' ? 'bg-green-500' : change.type === 'Improvement' ? 'bg-blue-500' : change.type === 'Add' ? 'bg-gray-500' : 'bg-red-500'}`}>
                   {change.type}
                 </span>
                 {/* Change text */}
