@@ -82,15 +82,26 @@ const Manual = () => {
             <div
               className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center"
               style={{
+<<<<<<< Updated upstream
                 height: "450px", 
                 border: "1px solid #e5e7eb", 
+=======
+                height: "450px", // Increased height for the PDF frame
+                border: "1px solid #e5e7eb", // Optional border for separation
+>>>>>>> Stashed changes
               }}
             >
               
               <div
+<<<<<<< Updated upstream
                 className="w-full h-36 bg-gray-200 mb-4" 
                 style={{
                   backgroundImage: `url(/img/Guide.jpg)`, 
+=======
+                className="w-full h-36 bg-gray-200 mb-4" // Increased the height of the image frame here
+                style={{
+                  backgroundImage: `url(/img/Guide.jpg)`, // Set background image here
+>>>>>>> Stashed changes
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
@@ -117,15 +128,26 @@ const Manual = () => {
             <div
               className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center"
               style={{
+<<<<<<< Updated upstream
                 height: "450px", 
                 border: "1px solid #e5e7eb", 
+=======
+                height: "450px", // Increased height for the Glossary frame
+                border: "1px solid #e5e7eb", // Optional border for separation
+>>>>>>> Stashed changes
               }}
             >
               
               <div
+<<<<<<< Updated upstream
                 className="w-full h-36 bg-gray-200 mb-4" 
                 style={{
                   backgroundImage: `url(/img/Glossary.png)`, 
+=======
+                className="w-full h-36 bg-gray-200 mb-4" // Increased the height of the image frame here
+                style={{
+                  backgroundImage: `url(/img/Glossary.png)`, // Set background image here
+>>>>>>> Stashed changes
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}

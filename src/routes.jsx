@@ -23,7 +23,10 @@ export const routes = [
   },
   {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
     name: " ",
     path: "/contacts",
     element: <Contacts />,
