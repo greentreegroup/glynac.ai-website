@@ -22,6 +22,24 @@ export const routes = [
     element: <SignUp />,
   },
   {
+<<<<<<< Updated upstream
+=======
+    name: " ",
+    path: "/contacts",
+    element: <Contacts />,
+  },
+  {
+    name: " ",
+    path: "/support",
+    element: <Support />,
+  },
+  {
+    name: "Manual",
+    path: "/manual",
+    element: <Manual />,
+  },
+  {
+>>>>>>> Stashed changes
     name: "Docs",
     href: "https://www.material-tailwind.com/docs/react/installation",
     target: "_blank",
