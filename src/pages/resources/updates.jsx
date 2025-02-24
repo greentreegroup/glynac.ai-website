@@ -11,6 +11,8 @@ export function Updates() {
         { type: 'Add', text: 'Potential login page needed to identify users and obtain user info.' },
         { type: 'Add', text: 'Need to implement method to filter out unhinged/disruptive posts.' },
         { type: 'Fix', text: 'Comment section should indefinitely nest and should not stop after the first reply.' },
+        { type: 'Fix', text: 'Localstorage and routing errors, refreshes may disconfigure posts or images.' },
+        { type: 'Fix', text: 'Likes and comments section updates could be incorrect.' },
       ],
     },
     {

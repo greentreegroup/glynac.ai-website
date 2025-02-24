@@ -73,6 +73,17 @@ export function Blog() {
     navigate(`/post/${postId}`); // Redirect to post page where comments are
   };
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewPost({ ...newPost, image: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen py-16">
       <div className="container mx-auto px-4 space-y-10">
@@ -122,10 +133,7 @@ export function Blog() {
                 <label className="block text-gray-700">Image</label>
                 <input
                   type="file"
-                  onChange={(e) => {
-                    const imageUrl = URL.createObjectURL(e.target.files[0]);
-                    setNewPost({ ...newPost, image: imageUrl });
-                  }}
+                  onChange={handleImageUpload}
                   className="w-full p-3 mt-2 border border-gray-300 rounded-lg"
                   accept="image/*"
                 />
