@@ -1,0 +1,10 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/ai-analysis/ai-quantitative/page": "app/ai-analysis/ai-quantitative/page.js",
+  "/pricing/page": "app/pricing/page.js",
+  "/software/Glynac-software/page": "app/software/Glynac-software/page.js",
+  "/security/page": "app/security/page.js",
+  "/resources/about/page": "app/resources/about/page.js",
+  "/resources/contacts/page": "app/resources/contacts/page.js",
+  "/resources/updates/page": "app/resources/updates/page.js"
+}
