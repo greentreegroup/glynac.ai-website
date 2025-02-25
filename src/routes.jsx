@@ -1,4 +1,4 @@
-import { Home, Profile, SignIn, SignUp, Contacts, Support, Manual} from "@/pages";
+import { Home, Profile, SignIn, SignUp, News, Contacts, Support, Manual} from "@/pages";
 
 
 
@@ -24,22 +24,27 @@ export const routes = [
     element: <SignUp />,
   },
   {
-    name: "Contacts",
+    name: "News",
+    path: "/news",
+    element: <News />,
+  },
+  {
+    name: " ",
     path: "/contacts",
     element: <Contacts />,
   },
   {
-    name: "Support",
+    name: " ",
     path: "/support",
     element: <Support />,
   },
   {
-    name: "Manual",
+    name: " ",
     path: "/manual",
     element: <Manual />,
   },
   {
-    name: "Docs",
+    name: " ",
     href: "https://www.material-tailwind.com/docs/react/installation",
     target: "_blank",
     element: "",
