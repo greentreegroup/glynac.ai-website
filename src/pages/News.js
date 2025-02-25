@@ -198,7 +198,7 @@ export function News() {
         </div>
 
         
-        <div className="absolute top-[0.6cm] left-[1.9cm] grid grid-cols-4 gap-x-6 gap-y-[1.5cm] text-white text-lg">
+        <div className="absolute top-[0.5cm] left-[1.9cm] grid grid-cols-4 gap-x-6 gap-y-[1.5cm] text-white text-lg">
           <Link to="/home" className="hover:underline">Home</Link>
           <Link to="/software" className="hover:underline">Software</Link>
           <Link to="/features" className="hover:underline">Features</Link>
