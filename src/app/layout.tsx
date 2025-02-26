@@ -32,10 +32,7 @@ export default function RootLayout({
       
             {children}
       
-            <Footer
-              title="Glynac.AI"
-              description="Glynac.AI"
-            />  
+            <Footer/>  
           </body>
         </html>
   );

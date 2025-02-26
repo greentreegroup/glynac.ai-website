@@ -12,6 +12,32 @@ interface LogoItem {
   info: string;
 }
 
+interface FeatureCardProps {
+  icon: string;
+  title: string;
+  desc: string;
+}
+
+type VariantType = React.ComponentProps<typeof Typography>["variant"];
+
+interface MyTypographyProps {
+  children: React.ReactNode;
+  variant?: VariantType;
+  className?: string;
+}
+
+const MyTypography = ({ children, variant, className }: MyTypographyProps) => (
+  <Typography
+    variant={variant}
+    className={className}
+    placeholder={undefined}
+    onPointerEnterCapture={undefined}
+    onPointerLeaveCapture={undefined}
+  >
+    {children}
+  </Typography>
+);
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
@@ -22,8 +48,7 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
-// Memoized Feature Card Component
-const FeatureCard = React.memo(({ icon, title, desc }) => (
+const FeatureCard = React.memo(({ icon, title, desc }: FeatureCardProps) => (
   <motion.div
     className="bg-white shadow-xl p-6 rounded-xl backdrop-filter backdrop-blur-lg bg-opacity-80 hover:bg-opacity-100 cursor-pointer transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-2xl border border-[#87CEEB]/20"
     variants={itemVariants}
@@ -37,10 +62,10 @@ const FeatureCard = React.memo(({ icon, title, desc }) => (
       sizes="64px"
       className="mb-4 w-16 mx-auto"
     />
-    <Typography variant="h5" className="mb-2 font-bold text-2xl text-[#1E90FF]">
+    <MyTypography variant="h5" className="mb-2 font-bold text-2xl text-[#1E90FF]">
       {title}
-    </Typography>
-    <Typography className="text-gray-600">{desc}</Typography>
+    </MyTypography>
+    <MyTypography className="text-gray-600">{desc}</MyTypography>
   </motion.div>
 ));
 
@@ -86,7 +111,7 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero Section */}
+      {/* Hero Section - Updated with MyTypography */}
       <div className="relative flex h-screen items-center justify-center bg-gradient-to-br from-[#87CEEB] to-[#1E90FF] px-8 overflow-hidden">
         <motion.div
           className="max-w-6xl container mx-auto flex justify-between w-full"
@@ -98,28 +123,31 @@ export default function Home() {
             className="flex flex-col items-start w-1/2 relative z-10"
             variants={itemVariants}
           >
-            <Typography
+            <MyTypography
               variant="h1"
               className="mb-6 font-black text-6xl md:text-8xl text-white drop-shadow-lg"
             >
               Glynac.ai
-            </Typography>
-            <Typography
+            </MyTypography>
+            <MyTypography
               variant="h2"
               className="mb-2 font-black text-5xl md:text-7xl text-white drop-shadow-lg"
             >
               Connecting you to
-            </Typography>
-            <Typography
+            </MyTypography>
+            <MyTypography
               variant="h2"
               className="font-black text-5xl md:text-7xl text-white drop-shadow-lg"
             >
               the future of work
-            </Typography>
+            </MyTypography>
             <Button
               variant="filled"
               size="lg"
               className="bg-gradient-to-r from-[#87CEEB] to-[#1E90FF] text-white px-10 py-4 rounded-full shadow-lg mt-8 hover:from-[#1E90FF] hover:to-[#87CEEB] transform transition-all duration-300 ease-in-out hover:scale-105"
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
             >
               CONNECT NOW
             </Button>
@@ -146,18 +174,18 @@ export default function Home() {
       {/* Features Section */}
       <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-6xl container mx-auto px-8 text-center">
-          <Typography
+          <MyTypography
             variant="h2"
             className="text-5xl font-extrabold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#87CEEB] to-[#1E90FF]"
           >
             Glynac – AI-Powered Employee Monitoring Software
-          </Typography>
-          <Typography
+          </MyTypography>
+          <MyTypography
             variant="h3"
             className="text-3xl font-semibold mb-6 text-gray-800"
           >
             Overview
-          </Typography>
+          </MyTypography>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
             {[
               {
@@ -195,15 +223,15 @@ export default function Home() {
       {/* Trusted by 10,000 Customers Section */}
       <section className="py-16 bg-white">
         <div className="max-w-6xl container mx-auto px-8 text-center">
-          <Typography
+          <MyTypography
             variant="h3"
             className="text-4xl font-bold mb-4 text-[#1E90FF]"
           >
             Trusted by 10,000 customers all over the world
-          </Typography>
-          <Typography className="text-xl mb-8 text-gray-600">
+          </MyTypography>
+          <MyTypography className="text-xl mb-8 text-gray-600">
             Click logo to see more info
-          </Typography>
+          </MyTypography>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
             {logoData.map((logo, index) => (
               <motion.div
@@ -230,9 +258,9 @@ export default function Home() {
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <Typography className="text-sm font-medium">
+                    <MyTypography className="text-sm font-medium">
                       {logo.info}
-                    </Typography>
+                    </MyTypography>
                   </motion.div>
                 )}
               </motion.div>
@@ -243,13 +271,13 @@ export default function Home() {
 
       {/* Workforce Potential Section */}
       <section className="py-16 bg-gray-50">
-        <Typography
+        <MyTypography
           variant="h3"
           className="text-center max-w-3xl mx-auto mb-12 text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#87CEEB] to-[#1E90FF]"
         >
           Ready to unlock the full potential of your workforce? Glynac helps
           you:
-        </Typography>
+        </MyTypography>
         <div className="max-w-6xl container mx-auto px-8 flex items-center">
           <motion.div
             className="w-1/2 space-y-12"
@@ -293,15 +321,15 @@ export default function Home() {
                   className="mr-4 w-12 h-12"
                 />
                 <div>
-                  <Typography
+                  <MyTypography
                     variant="h5"
                     className="font-bold text-2xl text-[#1E90FF] group-hover:text-[#87CEEB] transition-colors duration-300"
                   >
                     {item.title}
-                  </Typography>
-                  <Typography className="mt-2 text-gray-700">
+                  </MyTypography>
+                  <MyTypography className="mt-2 text-gray-700">
                     {item.desc}
-                  </Typography>
+                  </MyTypography>
                   <motion.div
                     className="h-1 w-0 bg-gradient-to-r from-[#87CEEB] to-[#1E90FF] mt-2"
                     whileHover={{ width: "100%" }}
@@ -350,12 +378,12 @@ export default function Home() {
             />
           </motion.div>
           <motion.div className="w-1/2" variants={itemVariants}>
-            <Typography
+            <MyTypography
               variant="h3"
               className="font-extrabold text-4xl mb-6 text-transparent bg-clip-text bg-gradient-to-r from-[#87CEEB] to-[#1E90FF] drop-shadow-lg"
             >
               From Monitoring to Empowerment: Glynac’s Feature Spotlight
-            </Typography>
+            </MyTypography>
             <motion.p
               className="text-xl text-gray-700 leading-relaxed"
               initial={{ opacity: 0 }}
@@ -373,18 +401,18 @@ export default function Home() {
       {/* How It Works Section */}
       <section className="py-16 bg-white">
         <div className="max-w-6xl container mx-auto px-8 text-center">
-          <Typography
+          <MyTypography
             variant="h2"
             className="text-5xl font-extrabold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#87CEEB] to-[#1E90FF]"
           >
             How Does Glynac.ai Work?
-          </Typography>
-          <Typography className="text-xl mb-12 max-w-3xl mx-auto text-gray-600">
+          </MyTypography>
+          <MyTypography className="text-xl mb-12 max-w-3xl mx-auto text-gray-600">
             Glynac A.I. is an A.I. application that tracks the performance of
             employees by collecting data from common work applications such as
             Outlook, Microsoft Teams, and more. The data is analyzed by A.I. to
             determine overall productivity and employee attitude.
-          </Typography>
+          </MyTypography>
           <motion.div
             className="flex justify-center items-center space-x-8 relative"
             variants={containerVariants}
@@ -423,11 +451,11 @@ export default function Home() {
       {/* Methodology Section */}
       <section className="py-16 bg-gradient-to-b from-gray-100 to-white">
         <div className="max-w-6xl container mx-auto px-8 text-center">
-          <Typography
+          <MyTypography
             className="text-4xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-[#87CEEB] to-[#1E90FF]"
           >
             Methodology
-          </Typography>
+          </MyTypography>
           {[
             {
               step: 1,
@@ -473,9 +501,9 @@ export default function Home() {
                   <div className="w-12 h-12 bg-gradient-to-r from-[#87CEEB] to-[#1E90FF] text-white rounded-full flex items-center justify-center mr-4 text-2xl font-bold">
                     {method.step}
                   </div>
-                  <Typography className="text-3xl font-bold text-[#1E90FF]">
+                  <MyTypography className="text-3xl font-bold text-[#1E90FF]">
                     {method.title}
-                  </Typography>
+                  </MyTypography>
                 </div>
                 <ul className="list-disc pl-8 space-y-2 text-gray-700">
                   {method.desc.map((item, idx) => (
