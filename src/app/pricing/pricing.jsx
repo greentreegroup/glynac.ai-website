@@ -2,7 +2,7 @@
 
 import { Typography, Button, Card } from "@material-tailwind/react";
 import { motion } from "framer-motion";
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from "react";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -10,7 +10,7 @@ const cardVariants = {
   hover: {
     scale: 1.05,
     transition: { duration: 0.3 },
-    boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.3)", 
+    boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.3)",
   },
 };
 
@@ -19,39 +19,49 @@ export function Pricing() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
 
-    const width = canvas.width = window.innerWidth;
-    const height = canvas.height = window.innerHeight;
-
-    // Particle settings
     const numParticles = 100;
     const particles = [];
 
-    for (let i = 0; i < numParticles; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        radius: Math.random() * 4 + 2,
-        speedX: (Math.random() - 0.5) * 1.5,
-        speedY: (Math.random() - 0.5) * 1.5,
-        color: `hsla(${Math.random() * 360}, 100%, 100%, 1)`,
-      });
-    }
+    // Resize canvas to match its container
+    const resizeCanvas = () => {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
 
+      // Recreate particles for new dimensions
+      particles.length = 0;
+      for (let i = 0; i < numParticles; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 4 + 2,
+          speedX: (Math.random() - 0.5) * 1.5,
+          speedY: (Math.random() - 0.5) * 1.5,
+          color: `hsla(${Math.random() * 360}, 100%, 100%, 1)`,
+        });
+      }
+    };
+
+    // Set initial size and listen for resize
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    // Animation loop
+    let animationFrameId;
     const animate = () => {
-      ctx.clearRect(0, 0, width, height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((particle) => {
-        // Update particle position
         particle.x += particle.speedX;
         particle.y += particle.speedY;
 
-        // Wrap particles around the edges
-        if (particle.x > width) particle.x = 0;
-        if (particle.x < 0) particle.x = width;
-        if (particle.y > height) particle.y = 0;
-        if (particle.y < 0) particle.y = height;
+        // Wrap particles around edges
+        if (particle.x > canvas.width) particle.x = 0;
+        if (particle.x < 0) particle.x = canvas.width;
+        if (particle.y > canvas.height) particle.y = 0;
+        if (particle.y < 0) particle.y = canvas.height;
 
         // Draw glowing particles
         ctx.beginPath();
@@ -62,12 +72,16 @@ export function Pricing() {
         ctx.fill();
       });
 
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     };
 
     animate();
 
-    return () => cancelAnimationFrame(animate);
+    // Cleanup resources
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   return (
@@ -75,14 +89,9 @@ export function Pricing() {
       {/* Hero Section */}
       <div className="relative flex h-72 content-center items-center justify-center overflow-hidden bg-gray-900">
         <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full z-0" />
-
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/20 to-pink-500/10 backdrop-blur-xl"></div>
-
         <div className="container mx-auto text-center z-10 relative">
-          <Typography
-            variant="h1"
-            className="mb-4 font-black text-5xl text-white drop-shadow-lg"
-          >
+          <Typography variant="h1" className="mb-4 font-black text-5xl text-white drop-shadow-lg">
             Plan & Package
           </Typography>
         </div>
@@ -90,37 +99,31 @@ export function Pricing() {
 
       {/* Pricing Section */}
       <section className="bg-white px-4 py-10">
-      <motion.div
-      className="relative container mx-auto py-10"
-      initial="hidden"
-      animate="visible"
-      variants={{
-        hidden: { opacity: 0 },
-        visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
-      }}
-    >
-      <motion.div
-        className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
-        variants={{
-          hidden: { opacity: 0 },
-          visible: { opacity: 1 },
-        }}
-      >
-        {/* Basic Plan */}
-        <motion.div variants={cardVariants}>
-            <Card className="relative shadow-lg border border-gray-300 rounded-2xl p-6 hover:shadow-2xl hover:scale-105 transition-transform duration-300 bg-gradient-to-b from-gray-200 to-white flex flex-col items-center overflow-hidden">
-            <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full"></div>
-            <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full blur-lg"></div> 
-                <Typography
-                  variant="h3"
-                  className="mt-10 mb-4 font-bold text-gray-800 text-center"
-                >
+        <motion.div
+          className="relative container mx-auto py-10"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
+          }}
+        >
+          <motion.div
+            className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1 },
+            }}
+          >
+            {/* Basic Plan */}
+            <motion.div variants={cardVariants}>
+              <Card className="relative shadow-lg border border-gray-300 rounded-2xl p-6 hover:shadow-2xl hover:scale-105 transition-transform duration-300 bg-gradient-to-b from-gray-200 to-white flex flex-col items-center overflow-hidden">
+                <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full"></div>
+                <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full blur-lg"></div>
+                <Typography variant="h3" className="mt-10 mb-4 font-bold text-gray-800 text-center">
                   BASIC
                 </Typography>
-                <Typography
-                  variant="h4"
-                  className="mb-6 text-center font-extrabold text-3xl text-blue-600"
-                >
+                <Typography variant="h4" className="mb-6 text-center font-extrabold text-3xl text-blue-600">
                   Free
                 </Typography>
                 <ul className="list-none text-center space-y-3 mb-6 text-sm">
@@ -144,26 +147,18 @@ export function Pricing() {
                 >
                   Learn More
                 </Button>
-                </Card>
+              </Card>
             </motion.div>
 
             {/* Starter Plan */}
-            
             <motion.div variants={cardVariants}>
-            <Card className="relative shadow-lg border border-gray-300 rounded-2xl p-6 hover:shadow-2xl hover:scale-105 transition-transform duration-300 bg-gradient-to-b from-gray-200 to-white flex flex-col items-center overflow-hidden">
-            <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full"></div>
-            <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full blur-lg"></div> 
-                {/* Glass effect */}
-                <Typography
-                  variant="h3"
-                  className="mt-10 mb-4 font-bold text-gray-800 text-center"
-                >
+              <Card className="relative shadow-lg border border-gray-300 rounded-2xl p-6 hover:shadow-2xl hover:scale-105 transition-transform duration-300 bg-gradient-to-b from-gray-200 to-white flex flex-col items-center overflow-hidden">
+                <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full"></div>
+                <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full blur-lg"></div>
+                <Typography variant="h3" className="mt-10 mb-4 font-bold text-gray-800 text-center">
                   STARTER
                 </Typography>
-                <Typography
-                  variant="h4"
-                  className="mb-6 text-center font-extrabold text-3xl text-blue-600"
-                >
+                <Typography variant="h4" className="mb-6 text-center font-extrabold text-3xl text-blue-600">
                   $100/Month
                 </Typography>
                 <ul className="list-none text-center space-y-3 mb-6 text-sm">
@@ -201,20 +196,13 @@ export function Pricing() {
 
             {/* Advanced Plan */}
             <motion.div variants={cardVariants}>
-            <Card className="relative shadow-lg border border-gray-300 rounded-2xl p-6 hover:shadow-2xl hover:scale-105 transition-transform duration-300 bg-gradient-to-b from-gray-200 to-white flex flex-col items-center overflow-hidden">
-            <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full"></div>
-            <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full blur-lg"></div> 
-                {/* Glass effect */}
-                <Typography
-                  variant="h3"
-                  className="mt-10 mb-4 font-bold text-gray-800 text-center"
-                >
+              <Card className="relative shadow-lg border border-gray-300 rounded-2xl p-6 hover:shadow-2xl hover:scale-105 transition-transform duration-300 bg-gradient-to-b from-gray-200 to-white flex flex-col items-center overflow-hidden">
+                <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full"></div>
+                <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full blur-lg"></div>
+                <Typography variant="h3" className="mt-10 mb-4 font-bold text-gray-800 text-center">
                   ADVANCED
                 </Typography>
-                <Typography
-                  variant="h4"
-                  className="mb-6 text-center font-extrabold text-3xl text-blue-600"
-                >
+                <Typography variant="h4" className="mb-6 text-center font-extrabold text-3xl text-blue-600">
                   $200/Month
                 </Typography>
                 <ul className="list-none text-center space-y-3 mb-6 text-sm">
@@ -252,14 +240,10 @@ export function Pricing() {
 
             {/* Pro Plan - Dark Themed */}
             <motion.div variants={cardVariants}>
-            <Card className="relative shadow-lg border border-gray-700 shadow-gray-500 rounded-2xl p-6 hover:shadow-2xl hover:scale-105 transition-transform duration-300 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex flex-col items-center overflow-hidden">
+              <Card className="relative shadow-lg border border-gray-700 shadow-gray-500 rounded-2xl p-6 hover:shadow-2xl hover:scale-105 transition-transform duration-300 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex flex-col items-center overflow-hidden">
                 <div className="absolute -top-10 left-0 w-full h-20 bg-gray-700 rounded-b-full"></div>
-                <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full blur-lg"></div> 
-                {/* Glass effect */}
-                <Typography
-                  variant="h3"
-                  className="mt-10 mb-4 font-bold text-white text-center"
-                >
+                <div className="absolute -top-10 left-0 w-full h-20 bg-gray-300 rounded-b-full blur-lg"></div>
+                <Typography variant="h3" className="mt-10 mb-4 font-bold text-white text-center">
                   PRO
                 </Typography>
                 <Typography variant="h4" className="mb-6 text-center font-extrabold text-4xl">
@@ -297,7 +281,6 @@ export function Pricing() {
           </motion.div>
         </motion.div>
       </section>
-
     </>
   );
 }

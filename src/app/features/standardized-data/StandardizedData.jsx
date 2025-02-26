@@ -1,107 +1,103 @@
 "use client";
 
 import { motion } from "framer-motion";
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import { Typography, Card, CardBody, Button } from "@material-tailwind/react";
+import dynamic from "next/dynamic";
+import { ChartBarIcon, ShieldCheckIcon, CpuChipIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
-export function StandardizedData() {
+const ActivityChart = dynamic(() => import("./ActivityChart"), { ssr: false });
+
+const StarryBackground = ({ particleColor = "white", blurAmount = 10, opacity = 1 }) => {
   const canvasRef = useRef(null);
-  const emailCanvasRef = useRef(null);
-  const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
 
-    const width = canvas.width = window.innerWidth;
-    const height = canvas.height = window.innerHeight;
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
 
     const numParticles = 100;
-    const particles = [];
+    const particles = Array.from({ length: numParticles }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 4 + 2,
+      speedX: (Math.random() - 0.5) * 1.5,
+      speedY: (Math.random() - 0.5) * 1.5,
+      color: `hsla(${Math.random() * 360}, 100%, 50%, ${opacity})`,
+    }));
 
-    for (let i = 0; i < numParticles; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        radius: Math.random() * 4 + 2,
-        speedX: (Math.random() - 0.5) * 1.5,
-        speedY: (Math.random() - 0.5) * 1.5,
-        color: `hsla(${Math.random() * 360}, 100%, 100%, 1)`,
-      });
-    }
-
+    let animationFrameId;
     const animate = () => {
-      ctx.clearRect(0, 0, width, height);
-
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach((particle) => {
         particle.x += particle.speedX;
         particle.y += particle.speedY;
 
-        if (particle.x > width) particle.x = 0;
-        if (particle.x < 0) particle.x = width;
-        if (particle.y > height) particle.y = 0;
-        if (particle.y < 0) particle.y = height;
+        if (particle.x > canvas.width) particle.x = 0;
+        if (particle.x < 0) particle.x = canvas.width;
+        if (particle.y > canvas.height) particle.y = 0;
+        if (particle.y < 0) particle.y = canvas.height;
 
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
         ctx.fillStyle = particle.color;
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = particle.color;
+        ctx.shadowBlur = blurAmount;
+        ctx.shadowColor = particleColor;
         ctx.fill();
       });
-
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
     };
 
     animate();
-
-    return () => cancelAnimationFrame(animate);
-  }, []);
-
-  useEffect(() => {
-    const emailCanvas = emailCanvasRef.current;
-    const ctx = emailCanvas.getContext('2d');
-
-    const width = emailCanvas.width = emailCanvas.clientWidth;
-    const height = emailCanvas.height = emailCanvas.clientHeight;
-
-    const numSymbols = 50;
-    const symbols = ['📧', '💡', '🤖', '📊', '✉️'];
-    const particles = [];
-
-    for (let i = 0; i < numSymbols; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        speedX: (Math.random() - 0.5) * 1,
-        speedY: (Math.random() - 0.5) * 1,
-        symbol: symbols[Math.floor(Math.random() * symbols.length)],
-      });
-    }
-
-    const animate = () => {
-      ctx.clearRect(0, 0, width, height);
-      ctx.font = '20px Arial';
-      ctx.fillStyle = 'rgba(230, 217, 217, 0.8)';
-
-      particles.forEach((particle) => {
-        particle.x += particle.speedX;
-        particle.y += particle.speedY;
-
-        if (particle.x > width) particle.x = 0;
-        if (particle.x < 0) particle.x = width;
-        if (particle.y > height) particle.y = 0;
-        if (particle.y < 0) particle.y = height;
-
-        ctx.fillText(particle.symbol, particle.x, particle.y);
-      });
-
-      requestAnimationFrame(animate);
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+      cancelAnimationFrame(animationFrameId);
     };
+  }, [blurAmount, opacity, particleColor]);
 
-    animate();
-    return () => cancelAnimationFrame(animate);
-  }, []);
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute top-0 left-0 w-full h-full z-0"
+      style={{ opacity }}
+      aria-hidden="true"
+    />
+  );
+};
+
+const FeatureCard = ({ title, description, icon }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5 }}
+    whileHover={{ scale: 1.05 }}
+    className="shadow-lg hover:shadow-xl transition-shadow"
+  >
+    <Card>
+      <CardBody className="text-center">
+        {icon}
+        <Typography variant="h5" className="text-gray-900 font-bold mb-2">
+          {title}
+        </Typography>
+        <Typography variant="paragraph" className="text-gray-800">
+          {description}
+        </Typography>
+      </CardBody>
+    </Card>
+  </motion.div>
+);
+
+export function StandardizedData() {
+  const [activeTab, setActiveTab] = useState(0);
 
   const tabs = [
     { title: "Responsiveness", content: "Diana’s consistent communication and reminders suggest that she is proactive and responsive." },
@@ -113,320 +109,174 @@ export function StandardizedData() {
     {
       title: "Key Themes and Topics",
       content: (
-        <ul className="list-none pl-5">
-          <li><i className="fas fa-check-circle mr-2"></i><strong>Facilitating Meetings (30%)</strong> – Organizing and coordinating meetings, particularly for Chicago-based clients, ensuring smooth communication and alignment.</li>
-          <li><i className="fas fa-check-circle mr-2"></i><strong>Presentation Preparation (20%)</strong> – Emails related to preparing and refining presentations, including gathering materials, structuring content, and finalizing key talking points.</li>
-          <li><i className="fas fa-check-circle mr-2"></i><strong>Sales Pricing Discussions (20%)</strong> – Discussions surrounding sales pricing, including negotiations, adjustments, and client queries.</li>
-          <li><i className="fas fa-check-circle mr-2"></i><strong>Scheduling Internal Meetings (15%)</strong> – Coordinating internal team meetings, ensuring all necessary participants are available, and setting clear agendas for discussions.</li>
-          <li><i className="fas fa-check-circle mr-2"></i><strong>General Team Communication (15%)</strong> – Covering a range of topics such as project updates, task assignments, and reminders, maintaining consistent and structured communication.</li>
-        </ul>
+        <div className="pl-5">
+          <ul className="list-disc text-white">
+            <li><strong>Facilitating Meetings (30%)</strong> – Organizing and coordinating meetings, particularly for Chicago-based clients.</li>
+            <li><strong>Presentation Preparation (20%)</strong> – Preparing and refining presentations with key materials.</li>
+            <li><strong>Sales Pricing Discussions (20%)</strong> – Handling sales pricing negotiations and client queries.</li>
+            <li><strong>Scheduling Internal Meetings (15%)</strong> – Coordinating team meetings with clear agendas.</li>
+            <li><strong>General Team Communication (15%)</strong> – Project updates, task assignments, and reminders.</li>
+          </ul>
+        </div>
       ),
-    }
+    },
+  ];
+
+  const features = [
+    {
+      title: "Data Filtering",
+      description: "Filters out irrelevant data to focus on meaningful insights.",
+      icon: <ChartBarIcon className="h-10 w-10 text-red-500" />,
+    },
+    {
+      title: "Privacy Protection",
+      description: "Maintains privacy by removing personally identifiable information.",
+      icon: <ShieldCheckIcon className="h-10 w-10 text-blue-500" />,
+    },
+    {
+      title: "AI Integration",
+      description: "Prepares structured data sets for AI-driven analysis.",
+      icon: <CpuChipIcon className="h-10 w-10 text-blue-500" />,
+    },
   ];
 
   return (
     <div className="font-sans">
-      <div className="relative flex h-72 content-center items-center justify-center overflow-hidden bg-gray-900">
-        <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full z-0" />
+      {/* Hero Section */}
+      <section className="relative flex h-72 items-center justify-center overflow-hidden bg-gray-900">
+        <StarryBackground particleColor="rgba(96, 165, 250, 0.8)" blurAmount={15} opacity={0.9} />
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/20 to-pink-500/10 backdrop-blur-xl"></div>
         <div className="container mx-auto text-center z-10 relative">
-          <Typography variant="h1" className="mb-4 font-black text-5xl text-white drop-shadow-lg">
+          <Typography variant="h1" className="mb-4 font-black text-5xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 drop-shadow-lg">
             Standardized Data Analysis
           </Typography>
           <Typography variant="lead" className="text-xl text-white mb-8">
             Unlock meaningful insights with our AI-powered data standardization tools.
           </Typography>
         </div>
-      </div>
+      </section>
 
-      <div className="container mx-auto px-8 py-16">
+      {/* Features Section */}
+      <section className="container mx-auto px-8 py-16">
         <Typography variant="h2" className="text-3xl font-bold text-center mb-12 text-gray-700">
           Key Features
         </Typography>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <Card className="shadow-lg hover:shadow-xl transition-shadow">
-            <CardBody className="text-center">
-              <div className="text-red-500 text-4xl mb-4">📊</div>
-              <Typography variant="h5" className="text-gray-900 font-bold mb-2">
-                Data Filtering
-              </Typography>
-              <Typography variant="paragraph" className="text-gray-800">
-                Filters out irrelevant data to focus on meaningful insights.
-              </Typography>
-            </CardBody>
-          </Card>
-          <Card className="shadow-lg hover:shadow-xl transition-shadow">
-            <CardBody className="text-center">
-              <div className="text-blue-500 text-4xl mb-4">🔒</div>
-              <Typography variant="h5" className="text-gray-900 font-bold mb-2">
-                Privacy Protection
-              </Typography>
-              <Typography variant="paragraph" className="text-gray-800">
-                Maintains privacy by removing personally identifiable information.
-              </Typography>
-            </CardBody>
-          </Card>
-          <Card className="shadow-lg hover:shadow-xl transition-shadow">
-            <CardBody className="text-center">
-              <div className="text-blue-500 text-4xl mb-4">🤖</div>
-              <Typography variant="h5" className="text-gray-900 font-bold mb-2">
-                AI Integration
-              </Typography>
-              <Typography variant="paragraph" className="text-gray-800">
-                Prepares structured data sets for AI-driven analysis.
-              </Typography>
-            </CardBody>
-          </Card>
+          {features.map((feature, index) => (
+            <FeatureCard key={index} {...feature} />
+          ))}
         </div>
+      </section>
 
-        <div className="mt-16 relative overflow-hidden rounded-lg bg-gray-900 p-8">
-          <canvas ref={emailCanvasRef} className="absolute top-0 left-0 w-full h-full z-0 opacity-50"></canvas>
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-pink-900/20 backdrop-blur-sm"></div>
-          <div className="relative z-10">
-            <Typography variant="h2" className="text-3xl font-bold text-center mb-12 text-white">
-              Summary of Emails Sent by Diana Prince
-            </Typography>
-            <div className="flex flex-wrap gap-4 mb-8">
-              {tabs.map((tab, index) => (
-                <Button
-                  key={index}
-                  color={activeTab === index ? "blue" : "grey"}
-                  className={`w-35 h-12 text-xs p-2 transition-all ${
-                    activeTab === index ? "bg-blue-900" : "bg-gray-800"
-                  }`}
-                  onClick={() => setActiveTab(index)}
-                >
-                  {tab.title}
-                </Button>
-              ))}
-            </div>
+      {/* Email Summary Section */}
+      <section className="mt-16 relative overflow-hidden rounded-lg bg-gray-900 p-8 mx-8">
+        <StarryBackground particleColor="rgba(255, 255, 255, 0.97)" blurAmount={8} opacity={1} />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-pink-900/20 backdrop-blur-sm"></div>
+        <div className="relative z-10">
+          <Typography variant="h2" className="text-3xl font-bold text-center mb-12 text-white">
+            Summary of Emails Sent by Diana Prince
+          </Typography>
+          <div className="flex flex-wrap gap-4 mb-8 justify-center">
+            {tabs.map((tab, index) => (
+              <Button
+                key={index}
+                color={activeTab === index ? "blue" : "gray"}
+                className={`w-36 h-12 text-sm p-2 transition-all rounded-full ${activeTab === index ? "bg-blue-900 shadow-lg" : "bg-gray-800"}`}
+                onClick={() => setActiveTab(index)}
+              >
+                {tab.title}
+              </Button>
+            ))}
+          </div>
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3 }}
+          >
             <Card className="shadow-lg bg-white/10 backdrop-blur-sm">
               <CardBody>
-                <Typography variant="paragraph" className="text-white">
+                <div className="text-white">
                   {tabs[activeTab].content}
-                </Typography>
+                </div>
               </CardBody>
             </Card>
-          </div>
+          </motion.div>
         </div>
+      </section>
 
-        <div className="container mx-auto px-8 py-16">
-          <div className="flex items-center justify-between mb-16">
-            <div className="w-full md:w-1/2 text-left mr-20">
-              <Typography variant="h2" className="text-3xl font-bold text-gray-900 mb-9">
-                Standardization
-              </Typography>
-              <Typography variant="paragraph" className="text-gray-800 mb-4">
-                Our patented analysis formulas synthesize key categories and data into standardized scores on a scale of 1 to 100. Standardization allows an employee to be compared to other employees in the department with similar demographic data to find:
-              </Typography>
-              <ul className="text-gray-800 pl-5">
-                <li>1) Untapped potential</li>
-                <li>2) Retention concerns</li>
-                <li>3) Performance challenges</li>
+      {/* Standardization Section */}
+      <section className="container mx-auto px-8 py-16">
+        <div className="flex flex-col md:flex-row items-center justify-between mb-16">
+          <div className="w-full md:w-1/2 text-left md:pr-10">
+            <Typography variant="h2" className="text-3xl font-bold text-gray-900 mb-6">
+              Standardization
+            </Typography>
+            <div className="text-gray-800 mb-4">
+              Our patented analysis formulas synthesize key categories and data into standardized scores on a scale of 1 to 100. Standardization allows an employee to be compared to peers with similar demographic data to find:
+              <ul className="list-disc pl-5 mt-2">
+                <li>Untapped potential</li>
+                <li>Retention concerns</li>
+                <li>Performance challenges</li>
               </ul>
             </div>
-            <div className="w-full md:w-1/2">
-              <img src="/img/standarization1.png" alt="Standardization Illustration" className="w-70 h-auto rounded-lg" />
-            </div>
+          </div>
+          <div className="w-full md:w-1/2 mt-8 md:mt-0">
+            <Image
+              src="/img/standarization1.png"
+              alt="Illustration of data standardization process"
+              width={500}
+              height={300}
+              layout="responsive"
+              className="rounded-lg"
+            />
           </div>
         </div>
+      </section>
 
-        <div className="bg-gray-100 w-full px-8 py-16">
-          <div className="text-center mb-16">
-            <Typography variant="h1" className="text-4xl font-bold text-gray-900 mb-4">
-              Client’s Cases: Visualized Reports
-            </Typography>
-            <Typography variant="paragraph" className="text-lg text-gray-700">
-              The AI Platform generates detailed reports to analyze communication patterns across various dimensions. Key examples from client cases include:
-            </Typography>
-          </div>
-
-          <div className="flex items-center space-x-4 mb-16">
-            <div className="text-4xl text-gray-500">📊</div>
-            <Typography variant="h2" className="text-2xl font-semibold text-gray-800">
-              Employee Reports
-            </Typography>
-          </div>
-
-          <div className="space-y-16">
-            <div>
-              <Typography variant="h5" className="text-xl font-semibold text-gray-800">
-                Activity Volume Report
-              </Typography>
-              <Typography variant="paragraph" className="text-gray-700 mb-4">
-                Purpose: Show activity levels by time block and day.
-              </Typography>
-              <Typography variant="paragraph" className="text-gray-700 mb-4">
-                Visualization: Via bar graph.
-              </Typography>
-              <Typography variant="paragraph" className="text-gray-700 mb-4">
-                Insights:
-                <ul className="list-disc pl-5 mt-2">
-                  <li>Identify the time blocks with the least activity (inactivity) and those with the most activity.</li>
-                  <li>Compare these periods to the overall average activity to determine if they are significantly lower or higher.</li>
-                </ul>
-              </Typography>
-            </div>
-
-            <div>
-              <Typography variant="h5" className="text-xl font-semibold text-gray-800">
-                Inactivity Benchmarking Report
-              </Typography>
-              <Typography variant="paragraph" className="text-gray-700 mb-4">
-                Purpose: Compare individual or team inactivity periods to peer or organizational benchmarks.
-              </Typography>
-              <Typography variant="paragraph" className="text-gray-700 mb-4">
-                Visualization: Bar chart showing inactivity (lowest activity time blocks) vs. peer averages.
-              </Typography>
-              <Typography variant="paragraph" className="text-gray-700 mb-4">
-                Insights:
-                <ul className="list-disc pl-5 mt-2">
-                  <li>Determine if inactivity periods are normal or outliers compared to peers.</li>
-                  <li>Identify if certain individuals or teams have unusual inactivity patterns.</li>
-                </ul>
-              </Typography>
-            </div>
-
-            <div>
-              <Typography variant="h5" className="text-xl font-semibold text-gray-800">
-                Activity-Inactivity Trend Report
-              </Typography>
-              <Typography variant="paragraph" className="text-gray-700 mb-4">
-                Purpose: Analyze trends in activity and inactivity over time (e.g., weeks or months).
-              </Typography>
-              <Typography variant="paragraph" className="text-gray-700 mb-4">
-                Visualization: Time-series graphs showing activity trends. Highlight recurring inactivity periods and any changes over time.
-              </Typography>
-            </div>
-
-            <div className="flex items-center space-x-4 mb-16">
-              <div className="text-4xl text-gray-500">👩‍🦱</div>
-              <Typography variant="h2" className="text-2xl font-semibold text-gray-800">
-                Demographic Report
-              </Typography>
-            </div>
-
-            <div>
-              <Typography variant="h5" className="text-xl font-semibold text-gray-800">
-                Female vs. Male
-              </Typography>
-              <Typography variant="paragraph" className="text-gray-700 mb-4">
-                Purpose: Compares response volume and pay-related communication trends.
-              </Typography>
-            </div>
-
-            <div className="flex items-center space-x-4 mb-16">
-              <div className="text-4xl text-gray-500">👨‍💼</div>
-              <Typography variant="h2" className="text-2xl font-semibold text-gray-800">
-                Manager Performance Report
-              </Typography>
-            </div>
-
-            <div className="flex items-center space-x-4 mb-16">
-              <div className="text-4xl text-gray-500">🔧</div>
-              <Typography variant="h2" className="text-2xl font-semibold text-gray-800">
-                Tool and Integration Report
-              </Typography>
-            </div>
-          </div>
+      {/* Client Cases Section */}
+      <section className="bg-gray-100 w-full px-8 py-16">
+        <div className="text-center mb-16">
+          <Typography variant="h1" className="text-4xl font-bold text-gray-900 mb-4">
+            Client’s Cases: Visualized Reports
+          </Typography>
+          <Typography variant="paragraph" className="text-lg text-gray-700">
+            The AI Platform generates detailed reports to analyze communication patterns across various dimensions.
+          </Typography>
         </div>
 
-        <div className="bg-white w-full px-8 py-16">
-          <div className="text-center mb-16">
-            <Typography variant="h1" className="text-4xl font-bold text-gray-900 mb-4">
-              Areas of Opportunity
-            </Typography>
-            <Typography variant="paragraph" className="text-lg text-gray-700">
-              Unlocking potential through data-driven insights into Retention, Untapped Talent, and Performance.
-            </Typography>
-          </div>
-
-          <div className="mb-12">
-            <Typography variant="h2" className="text-3xl font-bold text-gray-900 mb-6">
-              1) Retention
-            </Typography>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <Typography variant="h4" className="text-2xl font-semibold text-gray-800 mb-4">
-                  Glynac in Numbers
-                </Typography>
-                <ul className="list-disc pl-5">
-                  <li>Employee Turnover Trends</li>
-                  <li>Key Factors Influencing Retention</li>
-                  <li>Predictive AI Models</li>
-                </ul>
-              </div>
-              <div>
-                <Typography variant="h4" className="text-2xl font-semibold text-gray-800 mb-4">
-                  Charts & Insights
-                </Typography>
-                <ul className="list-disc pl-5">
-                  <li>Shows historical trends in employee departures</li>
-                  <li>Categorize employees leaving by length of employment</li>
-                  <li>Identify common themes behind resignation</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div className="mb-12">
-            <Typography variant="h2" className="text-3xl font-bold text-gray-900 mb-6">
-              2) Untapped Talent
-            </Typography>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <Typography variant="h4" className="text-2xl font-semibold text-gray-800 mb-4">
-                  Glynac in Numbers
-                </Typography>
-                <ul className="list-disc pl-5">
-                  <li>Pay Disparities & Underutilized Employees</li>
-                  <li>Potential for Promotion</li>
-                  <li>Skill Alignment vs. Job Role</li>
-                </ul>
-              </div>
-              <div>
-                <Typography variant="h4" className="text-2xl font-semibold text-gray-800 mb-4">
-                  Charts & Insights
-                </Typography>
-                <ul className="list-disc pl-5">
-                  <li>Correlate pay levels with performance ratings</li>
-                  <li>Analyze whether higher-paid employees are delivering expected output</li>
-                  <li>Flag employees who should be upskilled for better roles</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <Typography variant="h2" className="text-3xl font-bold text-gray-900 mb-6">
-              3) Performance Drags
-            </Typography>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <Typography variant="h4" className="text-2xl font-semibold text-gray-800 mb-4">
-                  Glynac in Numbers
-                </Typography>
-                <ul className="list-disc pl-5">
-                  <li>Identifying Underperforming Teams & Individuals</li>
-                  <li>Correlation Between Training & Performance</li>
-                  <li>Actionable Steps to Improve Workforce Efficiency</li>
-                </ul>
-              </div>
-              <div>
-                <Typography variant="h4" className="text-2xl font-semibold text-gray-800 mb-4">
-                  Charts & Insights
-                </Typography>
-                <ul className="list-disc pl-5">
-                  <li>Flag employees consistently underperforming</li>
-                  <li>Compare training participation with measurable performance improvements</li>
-                  <li>Analyze work habits and inefficiencies</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+        <div className="flex items-center space-x-4 mb-16">
+          <div className="text-4xl text-gray-500">📊</div>
+          <Typography variant="h2" className="text-2xl font-semibold text-gray-800">
+            Employee Reports
+          </Typography>
         </div>
-      </div>
 
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <Typography variant="h5" className="text-xl font-semibold text-gray-800 mb-4">
+            Activity Volume Report
+          </Typography>
+          <ActivityChart />
+          <div className="text-gray-700 mb-4">
+            <strong>Purpose</strong>: Show activity levels by time block and day.
+          </div>
+          <div className="text-gray-700 mb-4">
+            <strong>Visualization</strong>: Via bar graph.
+          </div>
+          <div className="text-gray-700 mb-4">
+            <strong>Insights</strong>:
+            <ul className="list-disc pl-5 mt-2">
+              <li>Identify time blocks with the least and most activity.</li>
+              <li>Compare these periods to the overall average activity.</li>
+            </ul>
+          </div>
+        </motion.div>
+      </section>
     </div>
   );
 }

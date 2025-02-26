@@ -1,24 +1,40 @@
 "use client";
 
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "next/navigation";
 import { Typography } from "@material-tailwind/react";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import Head from "next/head";
 
+// Color palette
+const colors = {
+  primary: "#1E3A8A",
+  secondary: "#3B82F6",
+  accent: "#60A5FA",
+  text: "#64748B",
+  white: "#FFFFFF",
+  lightGray: "#F7FAFC",
+  softBlue: "#E0F2FE",
+  darkPrimary: "#0F1C4D", 
+};
+
+// Software content
 const softwareContent = {
   "cloud-vs-on-premise": {
     title: "Cloud vs. On-Premise Solutions",
-    description: "Choosing between cloud-based and on-premise solutions depends on your business needs. Below is a comparison to help you decide:",
+    description:
+      "Choosing between cloud-based and on-premise solutions depends on your business needs. Below is a comparison to help you decide:",
     image: "/img/data-image.jpg",
     details: [
       {
         heading: "What is Cloud Computing",
-        text: "Cloud computing delivers computing services—such as storage, databases, networking, and software—over the internet, allowing businesses to scale quickly without maintaining physical infrastructure."
+        text: "Cloud computing delivers computing services—such as storage, databases, networking, and software—over the internet, allowing businesses to scale quickly without maintaining physical infrastructure.",
       },
       {
         heading: "What is On-Premise Computing?",
-        text: "On-premise solutions require businesses to host software and infrastructure on their own servers, giving them full control over security, compliance, and performance."
-      }
+        text: "On-premise solutions require businesses to host software and infrastructure on their own servers, giving them full control over security, compliance, and performance.",
+      },
     ],
     prosAndCons: {
       cloud: {
@@ -27,13 +43,13 @@ const softwareContent = {
           "Lower upfront costs (subscription-based pricing).",
           "Scalable resources that grow with your business.",
           "Remote accessibility from any location.",
-          "Automatic updates and maintenance handled by providers."
+          "Automatic updates and maintenance handled by providers.",
         ],
         cons: [
           "Requires an internet connection to access services.",
           "Data security is managed by a third party.",
-          "Subscription costs may add up over time."
-        ]
+          "Subscription costs may add up over time.",
+        ],
       },
       onPremise: {
         title: "Advantages of On-Premise Solutions",
@@ -41,14 +57,14 @@ const softwareContent = {
           "Greater control over security and compliance.",
           "One-time investment with no recurring subscription fees.",
           "Better performance for high-demand local applications.",
-          "No reliance on internet connectivity for operation."
+          "No reliance on internet connectivity for operation.",
         ],
         cons: [
           "Higher upfront hardware and maintenance costs.",
           "Requires in-house IT expertise.",
-          "Limited scalability compared to cloud solutions."
-        ]
-      }
+          "Limited scalability compared to cloud solutions.",
+        ],
+      },
     },
     comparisonTable: {
       headers: ["Feature", "Cloud-Based", "On-Premise"],
@@ -57,8 +73,8 @@ const softwareContent = {
         ["Scalability", "Highly Scalable", "Limited by Hardware"],
         ["Maintenance", "Managed by Provider", "Managed by IT Team"],
         ["Security", "Provider-Managed", "Fully Controlled by Business"],
-        ["Internet Dependency", "Required", "Not Required"]
-      ]
+        ["Internet Dependency", "Required", "Not Required"],
+      ],
     },
     useCases: [
       {
@@ -66,18 +82,18 @@ const softwareContent = {
         points: [
           "Startups and small businesses needing cost-effective solutions.",
           "Companies with remote teams requiring access from anywhere.",
-          "Organizations that want automatic software updates."
-        ]
+          "Organizations that want automatic software updates.",
+        ],
       },
       {
         title: "When to Choose On-Premise",
         points: [
           "Businesses with strict data security and compliance needs.",
           "Companies requiring full control over IT infrastructure.",
-          "Organizations handling sensitive or confidential information."
-        ]
-      }
-    ]
+          "Organizations handling sensitive or confidential information.",
+        ],
+      },
+    ],
   },
   "integrated-tools": {
     title: "Integrated Tools",
@@ -86,44 +102,26 @@ const softwareContent = {
     details: [
       {
         heading: "What Are Integrated Tools?",
-        text: "Integrated tools are software solutions designed to work seamlessly with your existing business applications, ensuring smooth workflow automation and improved efficiency."
+        text: "Integrated tools are software solutions designed to work seamlessly with your existing business applications, ensuring smooth workflow automation and improved efficiency.",
       },
       {
         heading: "Why Use Integrated Tools?",
-        text: "Using integrated tools reduces manual data entry, enhances communication between departments, and allows businesses to scale more effectively."
-      }
+        text: "Using integrated tools reduces manual data entry, enhances communication between departments, and allows businesses to scale more effectively.",
+      },
     ],
     prosAndCons: {
       pros: [
         "Improves workflow efficiency by automating tasks.",
         "Reduces errors caused by manual data entry.",
         "Enhances collaboration between different software tools.",
-        "Allows businesses to scale without major system overhauls."
+        "Allows businesses to scale without major system overhauls.",
       ],
       cons: [
         "Some integrations require additional setup and maintenance.",
         "Not all software supports seamless integration.",
-        "Security concerns when connecting third-party applications."
-      ]
+        "Security concerns when connecting third-party applications.",
+      ],
     },
-    commonExamples: [
-      {
-        category: "Customer Relationship Management (CRM)",
-        description: "Tools like Salesforce and HubSpot integrate with email, calendars, and marketing automation."
-      },
-      {
-        category: "Enterprise Resource Planning (ERP)",
-        description: "Software like SAP and Oracle integrates finance, HR, and operations into one system."
-      },
-      {
-        category: "Communication Platforms",
-        description: "Slack, Microsoft Teams, and Zoom integrate with project management and file-sharing tools."
-      },
-      {
-        category: "E-Commerce Platforms",
-        description: "Shopify and WooCommerce integrate with inventory management and payment gateways."
-      }
-    ],
     comparisonTable: {
       headers: ["Feature", "Integrated Tools", "Standalone Software"],
       rows: [
@@ -131,8 +129,8 @@ const softwareContent = {
         ["Data Sync Across Apps", "Yes", "No"],
         ["Scalability", "High", "Moderate"],
         ["Collaboration Features", "Yes", "Basic"],
-        ["Custom Integrations", "Available", "Rare"]
-      ]
+        ["Custom Integrations", "Available", "Rare"],
+      ],
     },
     useCases: [
       {
@@ -140,18 +138,18 @@ const softwareContent = {
         points: [
           "When managing multiple applications that need to share data.",
           "For businesses looking to improve automation and reduce manual tasks.",
-          "When teams need seamless communication between different software tools."
-        ]
+          "When teams need seamless communication between different software tools.",
+        ],
       },
       {
         title: "When to Avoid Integrated Tools?",
         points: [
           "If your business operates independently with minimal software dependencies.",
           "If security and data privacy concerns prevent third-party integration.",
-          "When cost of integration outweighs the benefits for small operations."
-        ]
-      }
-    ]
+          "When cost of integration outweighs the benefits for small operations.",
+        ],
+      },
+    ],
   },
   "communication-tools": {
     title: "Communication Tools",
@@ -160,40 +158,22 @@ const softwareContent = {
     details: [
       {
         heading: "What Are Communication Tools?",
-        text: "Communication tools enable teams to collaborate efficiently, share information in real-time, and streamline workflow through various digital channels."
-      }
+        text: "Communication tools enable teams to collaborate efficiently, share information in real-time, and streamline workflow through various digital channels.",
+      },
     ],
     prosAndCons: {
       pros: [
         "Enhance team collaboration and productivity.",
         "Allows for real-time communication regardless of location.",
         "Reduces email clutter by offering instant messaging alternatives.",
-        "Supports video conferencing and file sharing."
+        "Supports video conferencing and file sharing.",
       ],
       cons: [
         "Some tools require training for effective use.",
         "Security concerns when sharing sensitive information.",
-        "Can lead to communication overload if not managed properly."
-      ]
+        "Can lead to communication overload if not managed properly.",
+      ],
     },
-    commonExamples: [
-      {
-        category: "Instant Messaging",
-        description: "Platforms like Slack, Microsoft Teams, and Discord provide real-time chat capabilities for teams."
-      },
-      {
-        category: "Video Conferencing",
-        description: "Zoom, Google Meet, and Microsoft Teams allow face-to-face virtual meetings for remote teams."
-      },
-      {
-        category: "Project Collaboration",
-        description: "Tools like Asana, Trello, and Monday.com integrate communication with task management."
-      },
-      {
-        category: "Email and Business Communication",
-        description: "Gmail, Outlook, and ProtonMail provide secure business communication."
-      }
-    ],
     comparisonTable: {
       headers: ["Feature", "Slack", "Zoom", "Google Meet"],
       rows: [
@@ -201,8 +181,8 @@ const softwareContent = {
         ["Video Conferencing", "No", "Yes", "Yes"],
         ["File Sharing", "Yes", "Yes", "Yes"],
         ["Screen Sharing", "Yes", "Yes", "Yes"],
-        ["Integration with Other Apps", "Extensive", "Moderate", "Limited"]
-      ]
+        ["Integration with Other Apps", "Extensive", "Moderate", "Limited"],
+      ],
     },
     useCases: [
       {
@@ -211,8 +191,8 @@ const softwareContent = {
           "For remote teams needing seamless real-time collaboration.",
           "To reduce reliance on email for quick updates and discussions.",
           "For hosting virtual meetings and screen-sharing sessions.",
-          "When managing projects across different teams and departments."
-        ]
+          "When managing projects across different teams and departments.",
+        ],
       },
       {
         title: "Best Practices for Using Communication Tools",
@@ -220,10 +200,10 @@ const softwareContent = {
           "Set clear communication guidelines to avoid overload.",
           "Use appropriate channels for different types of communication.",
           "Leverage integrations to enhance productivity.",
-          "Ensure data security and encryption when using communication tools."
-        ]
-      }
-    ]
+          "Ensure data security and encryption when using communication tools.",
+        ],
+      },
+    ],
   },
   "email-tools": {
     title: "Email Tools",
@@ -232,44 +212,26 @@ const softwareContent = {
     details: [
       {
         heading: "What Are Email Tools?",
-        text: "Email tools help businesses and individuals manage their emails efficiently by organizing messages, automating tasks, and enhancing communication security."
+        text: "Email tools help businesses and individuals manage their emails efficiently by organizing messages, automating tasks, and enhancing communication security.",
       },
       {
         heading: "Why Are Email Tools Important?",
-        text: "With the overwhelming amount of emails professionals receive daily, email tools streamline inbox organization, improve response times, and reduce clutter."
-      }
+        text: "With the overwhelming amount of emails professionals receive daily, email tools streamline inbox organization, improve response times, and reduce clutter.",
+      },
     ],
     prosAndCons: {
       pros: [
         "Automates email sorting and prioritization.",
         "Enhances security with encryption and spam filtering.",
         "Integrates with calendars and task management apps.",
-        "Improves productivity with scheduling and templates."
+        "Improves productivity with scheduling and templates.",
       ],
       cons: [
         "Some tools require a learning curve to set up effectively.",
         "Premium features may come with additional costs.",
-        "Email automation may sometimes misclassify important messages."
-      ]
+        "Email automation may sometimes misclassify important messages.",
+      ],
     },
-    commonExamples: [
-      {
-        category: "Email Clients",
-        description: "Popular options like Gmail, Outlook, and Thunderbird provide efficient email management and integration with other tools."
-      },
-      {
-        category: "Email Marketing Platforms",
-        description: "Tools like Mailchimp, HubSpot, and Constant Contact help businesses automate and track email campaigns."
-      },
-      {
-        category: "Security & Encryption",
-        description: "Services like ProtonMail, Tutanota, and Zoho Mail offer encrypted email solutions for privacy-conscious users."
-      },
-      {
-        category: "Inbox Organization & Productivity",
-        description: "Apps like Superhuman, SaneBox, and Boomerang help users manage their email workflow and reduce inbox overload."
-      }
-    ],
     comparisonTable: {
       headers: ["Features", "Gmail", "Outlook", "ProtonMail"],
       rows: [
@@ -277,8 +239,8 @@ const softwareContent = {
         ["End-to-End Encryption", "No", "No", "Yes"],
         ["Integrated Calendar", "Yes", "Yes", "No"],
         ["Custom Email Template", "Limited", "Yes", "No"],
-        ["Advanced Spam Filtering", "Yes", "Yes", "Yes"]
-      ]
+        ["Advanced Spam Filtering", "Yes", "Yes", "Yes"],
+      ],
     },
     useCases: [
       {
@@ -287,8 +249,8 @@ const softwareContent = {
           "For managing high volumes of daily emails efficiently.",
           "To automate email marketing campaigns and follow-ups.",
           "For businesses needing secure, encrypted email communication.",
-          "To reduce spam and improve inbox organization."
-        ]
+          "To reduce spam and improve inbox organization.",
+        ],
       },
       {
         title: "Best Practices for Using Email Tools",
@@ -296,12 +258,34 @@ const softwareContent = {
           "Use filters and labels to automatically categorize emails.",
           "Enable two-factor authentication for email security.",
           "Regularly clean up your inbox to maintain efficiency.",
-          "Schedule emails for better time management."
-        ]
-      }
-    ]
-  }
+          "Schedule emails for better time management.",
+        ],
+      },
+    ],
+  },
 };
+
+// Memoized Icon Component
+const IconComponent = React.memo(({ img, text }) => (
+  <motion.div
+    variants={{
+      hidden: { opacity: 0, y: 50, scale: 0.9 },
+      visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: "easeOut" } },
+    }}
+    whileHover={{ scale: 1.2, rotate: 360 }}
+    transition={{ duration: 0.6, type: "spring", stiffness: 120 }}
+    className="flex flex-col items-center w-1/2 sm:w-1/3 md:w-1/5 min-w-[160px]"
+  >
+    <Image
+      src={img}
+      alt={text}
+      width={96}
+      height={96}
+      className="mb-4 rounded-full shadow-xl border border-[colors.secondary]/50 bg-[colors.white] p-3"
+    />
+    <Typography className="text-lg font-bold text-[colors.primary]">{text}</Typography>
+  </motion.div>
+));
 
 export function Software() {
   const { category = "cloud-vs-on-premise" } = useParams();
@@ -310,243 +294,339 @@ export function Software() {
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.25, delayChildren: 0.2 } },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2, delayChildren: 0.3 },
+    },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.95 },
-    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.8, ease: "easeOut" } },
+    hidden: { opacity: 0, y: 50, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.8, ease: "easeOut", type: "spring", stiffness: 100 },
+    },
   };
 
   const hoverEffect = {
     scale: 1.05,
-    transition: { duration: 0.4, ease: "easeInOut" },
+    rotate: 2,
+    transition: { duration: 0.5, type: "spring", stiffness: 150 },
+  };
+
+  const fadeIn = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 1.5, ease: "easeInOut" } },
   };
 
   return (
-    <div className="bg-gradient-to-b from-[#1E3A8A] to-[#E0F2FE] min-h-screen">
-      {/* Hero Section */}
-      <motion.div
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2, ease: "easeOut" }}
-        className="min-h-screen flex flex-col items-center justify-center text-center text-white pt-24 px-6 bg-[#1E3A8A]/90 backdrop-blur-lg"
-      >
-        <Typography
-          variant="h1"
-          className="mb-6 font-extrabold text-5xl md:text-7xl lg:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-[#3B82F6] to-[#60A5FA] tracking-wide uppercase drop-shadow-lg"
-        >
-          Software Solutions
-        </Typography>
-        <Typography
-          variant="lead"
-          className="max-w-3xl text-lg md:text-xl lg:text-2xl text-white font-light tracking-wider opacity-90"
-        >
-          Discover cutting-edge software tools that enhance efficiency, collaboration, and productivity for modern businesses.
-        </Typography>
-      </motion.div>
-
-      {/* Dynamic Content Section */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="container mx-auto flex flex-col lg:flex-row items-center gap-12 p-8 -mt-20"
-      >
-        {/* Left Side - Text Content */}
-        <motion.div variants={itemVariants} className="w-full lg:w-1/2 text-left">
-          <Typography
-            variant="h2"
-            className="text-4xl md:text-5xl font-bold mb-6 text-[#1E3A8A] tracking-tight"
-          >
-            {content.title || "No Title Available"}
-          </Typography>
-          <Typography className="text-lg md:text-xl text-[#64748B] leading-relaxed">
-            {content.description || "No description available"}
-          </Typography>
-        </motion.div>
-
-        {/* Right Side - Image */}
+    <>
+      <Head>
+        <title>{content.title} | Your Company Name</title>
+        <meta name="description" content={content.description} />
+      </Head>
+      <div className="bg-gradient-to-br from-[colors.softBlue] via-[colors.white] to-[colors.softBlue] min-h-screen overflow-x-hidden">
+        {/* Hero Section */}
         <motion.div
-          variants={itemVariants}
-          className="w-full lg:w-1/2 flex justify-center"
-          whileHover={hoverEffect}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2 }}
+          className="relative min-h-screen flex flex-col items-center justify-center text-center text-[colors.white] pt-32 pb-16 px-6 bg-[colors.primary]/95 backdrop-blur-2xl overflow-hidden"
         >
-          {content?.image && (
-            <motion.img
-              src={content.image}
-              alt="Software Visual"
-              className="w-full h-auto rounded-xl shadow-2xl border border-[#3B82F6]/30 transform transition-all duration-500 hover:shadow-[0_0_30px_rgba(59,130,246,0.5)]"
-            />
-          )}
-        </motion.div>
-      </motion.div>
-
-      {/* Additional Content */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="container mx-auto p-8 flex flex-col items-center text-center"
-      >
-        {content && (
-          <>
-            {/* Icons and Labels Section */}
-            <motion.div
-              variants={containerVariants}
-              className="flex flex-wrap justify-center gap-12 py-12"
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-[colors.secondary]/30 to-[colors.accent]/30"
+            initial={{ y: -200 }}
+            animate={{ y: 200 }}
+            transition={{ repeat: Infinity, repeatType: "reverse", duration: 15, ease: "linear" }}
+          />
+          <Typography
+            variant="h1"
+            className="relative z-10 mb-8 font-extrabold text-5xl sm:text-6xl md:text-8xl lg:text-9xl text-grey-900 bg-clip-text bg-gradient-to-r from-[colors.secondary] via-[colors.accent] to-[colors.white] tracking-widest uppercase drop-shadow-2xl"
+          >
+            {content.title.split(" ").map((word, index) => (
+              <motion.span
+                key={index}
+                initial={{ opacity: 0, y: 60 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2, duration: 0.8, ease: "easeOut" }}
+                className="inline-block mr-3"
+              >
+                {word}
+              </motion.span>
+            ))}
+          </Typography>
+          <motion.div variants={fadeIn} initial="hidden" animate="visible" className="relative z-10 max-w-4xl">
+            <Typography
+              variant="lead"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light tracking-wider opacity-90 text-[colors.white]"
             >
-              {[
-                { img: "/img/i'm_watching_you.png", text: "Employee Monitoring" },
-                { img: "/img/timer_icon.png", text: "Work Time Tracking" },
-                { img: "/img/stats_icon.png", text: "Remote Access & Stats" },
-                { img: "/img/list_icon.png", text: "Monitoring Guide" },
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  variants={itemVariants}
-                  className="flex flex-col items-center w-1/5 min-w-[150px]"
-                  whileHover={{ scale: 1.1, rotate: 2 }}
-                >
-                  <motion.img
-                    src={item.img}
-                    alt={item.text}
-                    className="w-20 h-20 mb-4 rounded-full shadow-lg border border-[#3B82F6]/40"
-                  />
-                  <Typography className="text-lg font-bold text-[#1E3A8A]">{item.text}</Typography>
-                </motion.div>
-              ))}
-            </motion.div>
+              {content.description}
+            </Typography>
+          </motion.div>
+        </motion.div>
 
-            {/* Details Section */}
-            {content.details && (
-              <motion.div variants={itemVariants} className="mt-12 max-w-4xl">
-                {content.details.map((section, index) => (
-                  <motion.div key={index} variants={itemVariants} className="mb-8">
-                    <Typography variant="h3" className="text-3xl font-bold text-[#1E3A8A] mb-4">
-                      {section.heading}
-                    </Typography>
-                    <Typography className="text-lg text-[#64748B] leading-loose">
-                      {section.text}
-                    </Typography>
-                  </motion.div>
+        {/* Dynamic Content Section */}
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="container mx-auto -mt-28 px-6 py-20"
+        >
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            <motion.div variants={itemVariants} className="w-full lg:w-1/2 text-left">
+              <Typography
+                variant="h2"
+                className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[${colors.darkPrimary}] tracking-tight leading-tight`}
+              >
+                {content.title}
+              </Typography>
+              <Typography className="text-lg md:text-xl text-[colors.text] leading-relaxed">
+                {content.description}
+              </Typography>
+            </motion.div>
+            <motion.div
+              variants={itemVariants}
+              whileHover={hoverEffect}
+              className="w-full lg:w-1/2 flex justify-center"
+            >
+              <Image
+                src={content.image}
+                alt="Software Visual"
+                width={600}
+                height={400}
+                className="w-full max-w-md h-auto rounded-2xl shadow-2xl border border-[colors.secondary]/20 transform transition-all duration-700 hover:shadow-[0_0_50px_rgba(59,130,246,0.7)]"
+              />
+            </motion.div>
+          </div>
+        </motion.section>
+
+        {/* Additional Content */}
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="container mx-auto px-6 py-20 flex flex-col items-center text-center"
+        >
+          {content && (
+            <>
+              {/* Icons Section */}
+              <motion.div variants={containerVariants} className="flex flex-wrap justify-center gap-12 py-16">
+                {[
+                  { img: "/img/i'm_watching_you.png", text: "Employee Monitoring" },
+                  { img: "/img/timer_icon.png", text: "Work Time Tracking" },
+                  { img: "/img/stats_icon.png", text: "Remote Access & Stats" },
+                  { img: "/img/list_icon.png", text: "Monitoring Guide" },
+                ].map((item, index) => (
+                  <IconComponent key={index} img={item.img} text={item.text} />
                 ))}
               </motion.div>
-            )}
 
-            {/* Pros and Cons Section */}
-            {content.prosAndCons && (
-              <motion.div variants={itemVariants} className="mt-12 max-w-5xl">
-                {content.prosAndCons.cloud && (
-                  <div className="mb-10">
-                    <Typography variant="h3" className="text-3xl font-bold text-[#1E3A8A] mb-4">
-                      {content.prosAndCons.cloud.title}
-                    </Typography>
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-[#64748B] text-lg">
-                      {content.prosAndCons.cloud.pros.map((pro, index) => (
-                        <li key={index} className="flex items-start gap-2">
-                          <span className="text-[#3B82F6]">✔</span> {pro}
-                        </li>
-                      ))}
-                      {content.prosAndCons.cloud.cons.map((con, index) => (
-                        <li key={index} className="flex items-start gap-2">
-                          <span className="text-red-500">✘</span> {con}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                {content.prosAndCons.onPremise && (
-                  <div>
-                    <Typography variant="h3" className="text-3xl font-bold text-[#1E3A8A] mb-4">
-                      {content.prosAndCons.onPremise.title}
-                    </Typography>
-                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 text-[#64748B] text-lg">
-                      {content.prosAndCons.onPremise.pros.map((pro, index) => (
-                        <li key={index} className="flex items-start gap-2">
-                          <span className="text-[#3B82F6]">✔</span> {pro}
-                        </li>
-                      ))}
-                      {content.prosAndCons.onPremise.cons.map((con, index) => (
-                        <li key={index} className="flex items-start gap-2">
-                          <span className="text-red-500">✘</span> {con}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </motion.div>
-            )}
+              {/* Details Section */}
+              {content.details && (
+                <motion.div variants={itemVariants} className="mt-16 max-w-4xl">
+                  {content.details.map((section, index) => (
+                    <motion.div
+                      key={index}
+                      variants={itemVariants}
+                      className="mb-10 bg-[colors.white] p-8 rounded-2xl shadow-lg"
+                    >
+                      <Typography
+                        variant="h3"
+                        className="text-3xl md:text-4xl font-bold text-[colors.primary] mb-4"
+                      >
+                        {section.heading}
+                      </Typography>
+                      <Typography className="text-lg text-[colors.text] leading-loose">
+                        {section.text}
+                      </Typography>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              )}
 
-            {/* Comparison Table */}
-            {content.comparisonTable && (
-              <motion.div variants={itemVariants} className="mt-12 max-w-5xl w-full">
-                <Typography variant="h3" className="text-3xl font-bold text-[#1E3A8A] mb-6 text-center">
-                  Feature Comparison
-                </Typography>
-                <div className="shadow-lg rounded-lg overflow-hidden">
-                  <table className="w-full text-left border-collapse">
-                    <thead>
-                      <tr className="bg-[#1E3A8A] text-white">
-                        {content.comparisonTable.headers.map((header, index) => (
-                          <th
+              {/* Pros and Cons Section */}
+              {content.prosAndCons && (
+                <motion.div variants={itemVariants} className="mt-16 max-w-5xl">
+                  {content.prosAndCons.cloud && (
+                    <div className="mb-12">
+                      <Typography
+                        variant="h3"
+                        className="text-3xl md:text-4xl font-bold text-[colors.primary] mb-6"
+                      >
+                        {content.prosAndCons.cloud.title}
+                      </Typography>
+                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 text-[colors.text] text-lg">
+                        {content.prosAndCons.cloud.pros.map((pro, index) => (
+                          <motion.li
                             key={index}
-                            className="px-6 py-4 font-semibold text-base uppercase tracking-wider border-b border-[#3B82F6]/50"
+                            variants={itemVariants}
+                            className="flex items-start gap-3 bg-[colors.lightGray] p-4 rounded-lg shadow-md"
                           >
-                            {header}
-                          </th>
+                            <span className="text-[colors.secondary] text-2xl">✔</span> {pro}
+                          </motion.li>
                         ))}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {content.comparisonTable.rows.map((row, rowIndex) => (
-                        <tr
-                          key={rowIndex}
-                          className={`${
-                            rowIndex % 2 === 0 ? "bg-white" : "bg-[#F7FAFC]"
-                          } hover:bg-[#3B82F6]/10 transition-colors`}
-                        >
-                          {row.map((cell, cellIndex) => (
-                            <td
-                              key={cellIndex}
-                              className="px-6 py-4 text-[#64748B] text-base border-b border-[#E5E7EB]"
+                        {content.prosAndCons.cloud.cons.map((con, index) => (
+                          <motion.li
+                            key={index}
+                            variants={itemVariants}
+                            className="flex items-start gap-3 bg-[colors.lightGray] p-4 rounded-lg shadow-md"
+                          >
+                            <span className="text-red-500 text-2xl">✘</span> {con}
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {content.prosAndCons.onPremise && (
+                    <div>
+                      <Typography
+                        variant="h3"
+                        className="text-3xl md:text-4xl font-bold text-[colors.primary] mb-6"
+                      >
+                        {content.prosAndCons.onPremise.title}
+                      </Typography>
+                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 text-[colors.text] text-lg">
+                        {content.prosAndCons.onPremise.pros.map((pro, index) => (
+                          <motion.li
+                            key={index}
+                            variants={itemVariants}
+                            className="flex items-start gap-3 bg-[colors.lightGray] p-4 rounded-lg shadow-md"
+                          >
+                            <span className="text-[colors.secondary] text-2xl">✔</span> {pro}
+                          </motion.li>
+                        ))}
+                        {content.prosAndCons.onPremise.cons.map((con, index) => (
+                          <motion.li
+                            key={index}
+                            variants={itemVariants}
+                            className="flex items-start gap-3 bg-[colors.lightGray] p-4 rounded-lg shadow-md"
+                          >
+                            <span className="text-red-500 text-2xl">✘</span> {con}
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {content.prosAndCons.pros && (
+                    <div>
+                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 text-[colors.text] text-lg">
+                        {content.prosAndCons.pros.map((pro, index) => (
+                          <motion.li
+                            key={index}
+                            variants={itemVariants}
+                            className="flex items-start gap-3 bg-[colors.lightGray] p-4 rounded-lg shadow-md"
+                          >
+                            <span className="text-[colors.secondary] text-2xl">✔</span> {pro}
+                          </motion.li>
+                        ))}
+                        {content.prosAndCons.cons.map((con, index) => (
+                          <motion.li
+                            key={index}
+                            variants={itemVariants}
+                            className="flex items-start gap-3 bg-[colors.lightGray] p-4 rounded-lg shadow-md"
+                          >
+                            <span className="text-red-500 text-2xl">✘</span> {con}
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </motion.div>
+              )}
+
+              {/* Comparison Table */}
+              {content.comparisonTable && (
+                <motion.div variants={itemVariants} className="mt-16 max-w-5xl w-full">
+                  <Typography
+                    variant="h3"
+                    className="text-3xl md:text-4xl font-bold text-[colors.primary] mb-8 text-center"
+                  >
+                    Feature Comparison
+                  </Typography>
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                    className="shadow-2xl rounded-xl overflow-hidden bg-[colors.white]"
+                  >
+                    <table className="w-full text-left border-collapse">
+                      <thead>
+                        <tr className="bg-[colors.primary] text-[colors.white]">
+                          {content.comparisonTable.headers.map((header, index) => (
+                            <th
+                              key={index}
+                              className="px-6 py-4 font-semibold text-base uppercase tracking-wider border-b border-[colors.secondary]/50"
                             >
-                              {cell}
-                            </td>
+                              {header}
+                            </th>
                           ))}
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </motion.div>
-            )}
-
-            {/* Use Cases Section */}
-            {content.useCases && (
-              <motion.div variants={itemVariants} className="mt-12 max-w-4xl">
-                {content.useCases.map((useCase, index) => (
-                  <motion.div key={index} variants={itemVariants} className="mb-10">
-                    <Typography variant="h3" className="text-3xl font-bold text-[#1E3A8A] mb-4">
-                      {useCase.title}
-                    </Typography>
-                    <ul className="list-none text-lg text-[#64748B] space-y-3">
-                      {useCase.points.map((point, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                          <span className="text-[#3B82F6] font-bold">→</span> {point}
-                        </li>
-                      ))}
-                    </ul>
+                      </thead>
+                      <tbody>
+                        {content.comparisonTable.rows.map((row, rowIndex) => (
+                          <motion.tr
+                            key={rowIndex}
+                            initial={{ opacity: 0, x: -30 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: rowIndex * 0.1, duration: 0.6 }}
+                            className={`${
+                              rowIndex % 2 === 0 ? "bg-[colors.white]" : "bg-[colors.lightGray]"
+                            } hover:bg-[colors.secondary]/10 transition-colors`}
+                          >
+                            {row.map((cell, cellIndex) => (
+                              <td
+                                key={cellIndex}
+                                className="px-6 py-4 text-[colors.text] text-base border-b border-[colors.secondary]/20"
+                              >
+                                {cell}
+                              </td>
+                            ))}
+                          </motion.tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </motion.div>
-                ))}
-              </motion.div>
-            )}
-          </>
-        )}
-      </motion.div>
-    </div>
+                </motion.div>
+              )}
+
+              {/* Use Cases Section */}
+              {content.useCases && (
+                <motion.div variants={itemVariants} className="mt-16 max-w-4xl">
+                  {content.useCases.map((useCase, index) => (
+                    <motion.div
+                      key={index}
+                      variants={itemVariants}
+                      className="mb-12 bg-[colors.white] p-8 rounded-2xl shadow-lg"
+                    >
+                      <Typography
+                        variant="h3"
+                        className="text-3xl md:text-4xl font-bold text-[colors.primary] mb-4"
+                      >
+                        {useCase.title}
+                      </Typography>
+                      <ul className="list-none text-lg text-[colors.text] space-y-4">
+                        {useCase.points.map((point, i) => (
+                          <motion.li
+                            key={i}
+                            variants={itemVariants}
+                            className="flex items-start gap-3"
+                          >
+                            <span className="text-[colors.secondary] font-bold text-2xl">→</span> {point}
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              )}
+            </>
+          )}
+        </motion.section>
+      </div>
+    </>
   );
 }
 

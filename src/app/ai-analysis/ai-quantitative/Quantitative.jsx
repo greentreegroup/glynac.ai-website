@@ -3,13 +3,38 @@
 import React from "react";
 import { Typography } from "@material-tailwind/react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export function Quantitative() {
+  const sections = [
+    {
+      title: "Volume of Communication",
+      image: "/img/communication-volume.png",
+      description: "Our AI measures total words and characters exchanged across communication channels to assess engagement and workload distribution.",
+      benefits: "Optimizing communication volume helps businesses ensure even workload distribution and improve team efficiency.",
+      measure: "Measured by counting the total words and characters exchanged per employee across various platforms.",
+    },
+    {
+      title: "Responsiveness",
+      image: "/img/responsiveness-volume.png",
+      description: "We analyze response times to understand how quickly employees engage in conversations, ensuring timely collaboration.",
+      benefits: "Tracking response rates helps businesses reduce delays and foster a more agile work environment.",
+      measure: "Measured by calculating the average time taken to reply to a message.",
+    },
+    {
+      title: "Inactivity",
+      image: "/img/inactivity-volume.png",
+      description: "Tracks periods of inactivity in 15-minute intervals to identify engagement patterns and workflow inefficiencies.",
+      benefits: "Identifying inactivity trends helps optimize meeting schedules, enhance productivity, and rebalance workloads.",
+      measure: "Measured by tracking no communication or user activity in 15-minute intervals over a 40-hour workweek.",
+    },
+  ];
+
   return (
-    <>
+    <div>
       {/* Hero Section */}
       <div className="h-[60vh] flex flex-col justify-center items-center text-center bg-gradient-to-r from-blue-500 to-purple-500 text-white p-10 shadow-lg rounded-lg">
-        <motion.h1 
+        <motion.h1
           className="text-6xl font-extrabold mb-4"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -17,7 +42,7 @@ export function Quantitative() {
         >
           AI Quantitative Analysis
         </motion.h1>
-        <motion.p 
+        <motion.p
           className="text-xl max-w-3xl"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -30,32 +55,9 @@ export function Quantitative() {
       {/* Analysis Categories */}
       <div className="py-16 px-8">
         <h2 className="text-4xl font-bold text-center mb-12">Quantitative Analysis Category</h2>
-
-        {[ 
-          {
-            title: "Volume of Communication",
-            image: "/img/communication-volume.png",
-            description: "Our AI measures total words and characters exchanged across communication channels to assess engagement and workload distribution.",
-            benefits: "Optimizing communication volume helps businesses ensure even workload distribution and improve team efficiency.",
-            measure: "Measured by counting the total words and characters exchanged per employee across various platforms."
-          },
-          {
-            title: "Responsiveness",
-            image: "/img/responsiveness-volume.png",
-            description: "We analyze response times to understand how quickly employees engage in conversations, ensuring timely collaboration.",
-            benefits: "Tracking response rates helps businesses reduce delays and foster a more agile work environment.",
-            measure: "Measured by calculating the average time taken to reply to a message."
-          },
-          {
-            title: "Inactivity",
-            image: "/img/inactivity-volume.png",
-            description: "Tracks periods of inactivity in 15-minute intervals to identify engagement patterns and workflow inefficiencies.",
-            benefits: "Identifying inactivity trends helps optimize meeting schedules, enhance productivity, and rebalance workloads.",
-            measure: "Measured by tracking no communication or user activity in 15-minute intervals over a 40-hour workweek."
-          }
-        ].map((item, index) => (
-          <motion.div 
-            key={index} 
+        {sections.map((item, index) => (
+          <motion.div
+            key={index}
             className="flex flex-wrap justify-center items-center mb-16 bg-white p-8 shadow-lg rounded-lg"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -70,12 +72,16 @@ export function Quantitative() {
               <p>{item.measure}</p>
             </div>
             <div className="w-full md:w-1/3 flex justify-center">
-              <motion.img 
-                src={item.image} 
-                alt={item.title} 
-                className="w-full h-[300px] object-contain rounded-lg"
-                whileHover={{ scale: 1.05 }}
-              />
+              <motion.div whileHover={{ scale: 1.05 }}>
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={600}
+                  height={400}
+                  className="rounded-lg"
+                  layout="responsive"
+                />
+              </motion.div>
             </div>
           </motion.div>
         ))}
@@ -85,12 +91,16 @@ export function Quantitative() {
       <section className="py-16 bg-gray-100">
         <div className="max-w-6xl mx-auto px-8 flex flex-wrap items-center">
           <div className="w-full md:w-1/2 pr-12">
-            <motion.img
-              src="/img/training-quan.png"
-              alt="Training"
-              className="w-full h-[400px] object-contain rounded-lg shadow-lg"
-              whileHover={{ scale: 1.05 }}
-            />
+            <motion.div whileHover={{ scale: 1.05 }}>
+              <Image
+                src="/img/training-quan.png"
+                alt="Training"
+                width={800}
+                height={600}
+                className="rounded-lg shadow-lg"
+                layout="responsive"
+              />
+            </motion.div>
           </div>
           <div className="w-full md:w-1/2">
             <Typography variant="h3" className="font-bold text-3xl mb-6">
@@ -112,16 +122,19 @@ export function Quantitative() {
           <Typography className="text-xl mb-12 max-w-3xl mx-auto">
             Understanding communication behaviors through data-driven insights is essential for optimizing efficiency and collaboration. AI-powered quantitative analysis allows businesses to enhance performance and create a more connected, responsive workplace.
           </Typography>
-          <motion.img
-            src="/img/efficiency.png"
-            alt="Efficiency"
-            className="w-1/2 object-contain rounded-lg shadow-lg mx-auto"
-            whileHover={{ scale: 1.05 }}
-          />
+          <motion.div whileHover={{ scale: 1.05 }}>
+            <Image
+              src="/img/efficiency.png"
+              alt="Efficiency"
+              width={800}
+              height={600}
+              className="rounded-lg shadow-lg mx-auto"
+              layout="responsive"
+            />
+          </motion.div>
         </div>
       </section>
-
-    </>
+    </div>
   );
 }
 

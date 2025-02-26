@@ -4,6 +4,7 @@ import React from "react";
 import { Typography, Card, CardBody } from "@material-tailwind/react";
 import { FingerPrintIcon } from "@heroicons/react/24/solid";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 
 export function About() {
   const { scrollYProgress } = useScroll();
@@ -170,12 +171,15 @@ export function About() {
               className="glassmorphism-extreme bg-[#1E3A8A]/10 backdrop-blur-md p-6 rounded-xl border border-[#3B82F6]/40 transition-all duration-500 hover:scale-110 hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] hover:rotate-3"
             >
               <Card className="shadow-2xl bg-white/95 rounded-xl overflow-hidden">
-                <motion.img
-                  src={src}
-                  alt={name}
-                  className="h-64 w-full object-cover rounded-t-xl transition-transform duration-500 hover:scale-125"
-                  whileHover={{ scale: 1.25 }}
-                />
+                <motion.div whileHover={{ scale: 1.25 }}>
+                  <Image
+                    src={src}
+                    alt={name}
+                    width={400}
+                    height={300}
+                    className="h-64 w-full object-cover rounded-t-xl transition-transform duration-500"
+                  />
+                </motion.div>
                 <CardBody className="text-center">
                   <Typography variant="h5" className="text-[#1E3A8A] font-bold text-xl tracking-wide">
                     {name}

@@ -145,7 +145,7 @@ export function MenuBar() {
       { href: "/resources/faq", label: "FAQ" },
       { href: "/resources/manual", label: "Manual" },
       { href: "/resources/news", label: "News" },
-      { href: "/resources/partner_program", label: "Partner Program" },
+      { href: "/resources/partner-program", label: "Partner Program" },
       { href: "/resources/support", label: "Support" },
       { href: "/resources/updates", label: "Updates" },
     ],
