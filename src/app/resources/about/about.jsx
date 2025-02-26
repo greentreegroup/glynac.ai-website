@@ -13,7 +13,7 @@ export function About() {
 
   return (
     <>
-      {/* Background Wrapper with Extreme Animation */}
+      {/* Background Wrapper */}
       <motion.div
         className="relative flex min-h-screen content-center items-center justify-center pt-16 pb-32 overflow-hidden bg-gradient-to-br from-[#1E3A8A] to-[#3B82F6]"
         style={{ scale, opacity }}
@@ -53,7 +53,7 @@ export function About() {
         </div>
       </motion.div>
 
-      {/* Content Section with Extreme Effects */}
+      {/* Content Section */}
       <section className="-mt-32 bg-[#F1F5F9] px-4 pb-20 pt-4">
         <div className="container mx-auto max-w-6xl">
           <motion.div
@@ -151,16 +151,16 @@ export function About() {
         </div>
       </section>
 
-      {/* Leadership Section with Extreme Design */}
+      {/* Leadership Section */}
       <section className="mt-20 bg-gradient-to-b from-[#F1F5F9] to-[#E0F2FE] py-24">
         <Typography variant="h2" className="text-5xl font-extrabold text-[#1E3A8A] text-center mb-12 tracking-wider uppercase">
           Our Leadership
         </Typography>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
           {[
-            { src: "/img/leadership1.jpg", name: "Andrew Rosenthal", description: "CEO & Founder with 20+ years in AI analytics." },
-            { src: "/img/leadership2.jpg", name: "Bo Shi", description: "CFO mastering financial strategy and growth." },
-            { src: "/img/leadership3.jpg", name: "Tanju Sharma", description: "CTO pioneering scalable tech innovations." },
+            { src: "/img/leadership1.webp", name: "Andrew Rosenthal", description: "CEO & Founder with 20+ years in AI analytics." },
+            { src: "/img/leadership2.webp", name: "Bo Shi", description: "CFO mastering financial strategy and growth." },
+            { src: "/img/leadership3.webp", name: "Tanuj Sharma", description: "CTO pioneering scalable tech innovations." },
           ].map(({ src, name, description }, index) => (
             <motion.div
               initial={{ opacity: 0, y: 50, rotate: -10 }}
@@ -177,6 +177,7 @@ export function About() {
                     alt={name}
                     width={400}
                     height={300}
+                    sizes="(max-width: 768px) 100vw, 33vw"
                     className="h-64 w-full object-cover rounded-t-xl transition-transform duration-500"
                   />
                 </motion.div>

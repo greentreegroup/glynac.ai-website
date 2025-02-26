@@ -34,6 +34,7 @@ const FeatureCard = React.memo(({ icon, title, desc }) => (
       alt={`${title} Icon`}
       width={64}
       height={64}
+      sizes="64px"
       className="mb-4 w-16 mx-auto"
     />
     <Typography variant="h5" className="mb-2 font-bold text-2xl text-[#1E90FF]">
@@ -132,6 +133,7 @@ export default function Home() {
               alt="Glynac.ai Team"
               width={600}
               height={400}
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="w-full h-full object-cover rounded-lg shadow-2xl transform transition duration-300 ease-in-out hover:scale-105"
             />
           </motion.div>
@@ -216,6 +218,7 @@ export default function Home() {
                   alt={logo.alt}
                   width={96}
                   height={96}
+                  sizes="96px"
                   className="w-24 h-24 object-contain cursor-pointer mb-4 filter drop-shadow-lg"
                   onClick={() => handleLogoClick(index)}
                 />
@@ -286,6 +289,7 @@ export default function Home() {
                   alt={`${item.title} Icon`}
                   width={48}
                   height={48}
+                  sizes="48px"
                   className="mr-4 w-12 h-12"
                 />
                 <div>
@@ -318,6 +322,7 @@ export default function Home() {
               alt="Related to workforce"
               width={500}
               height={400}
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="w-full h-[400px] object-contain rounded-lg shadow-2xl"
               loading="lazy"
             />
@@ -339,6 +344,7 @@ export default function Home() {
               alt="Empowerment"
               width={500}
               height={400}
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="w-full h-[400px] object-contain rounded-lg shadow-2xl"
               loading="lazy"
             />
@@ -404,6 +410,7 @@ export default function Home() {
                   alt={img.alt}
                   width={img.size === "w-2/5" ? 400 : img.size === "w-1/5" ? 200 : 100}
                   height={200}
+                  sizes={img.size === "w-2/5" ? "40vw" : img.size === "w-1/5" ? "20vw" : "10vw"}
                   className="w-full object-contain rounded-lg shadow-lg"
                   loading="lazy"
                 />
@@ -482,6 +489,7 @@ export default function Home() {
                   alt={method.title}
                   width={300}
                   height={200}
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   className="w-full object-contain rounded-lg shadow-2xl"
                   loading="lazy"
                 />
