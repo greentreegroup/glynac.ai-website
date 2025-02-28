@@ -26,9 +26,14 @@ interface MyTypographyProps {
   className?: string;
 }
 
-// Updated MyTypography component: Removed unnecessary props
 const MyTypography = ({ children, variant, className }: MyTypographyProps) => (
-  <Typography variant={variant} className={className}>
+  <Typography
+    variant={variant}
+    className={className}
+    placeholder={undefined}
+    onPointerEnterCapture={undefined}
+    onPointerLeaveCapture={undefined}
+  >
     {children}
   </Typography>
 );
@@ -106,7 +111,7 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero Section - Updated Button without unnecessary props */}
+      {/* Hero Section - Updated with MyTypography */}
       <div className="relative flex h-screen items-center justify-center bg-gradient-to-br from-[#87CEEB] to-[#1E90FF] px-8 overflow-hidden">
         <motion.div
           className="max-w-6xl container mx-auto flex justify-between w-full"
@@ -140,6 +145,9 @@ export default function Home() {
               variant="filled"
               size="lg"
               className="bg-gradient-to-r from-[#87CEEB] to-[#1E90FF] text-white px-10 py-4 rounded-full shadow-lg mt-8 hover:from-[#1E90FF] hover:to-[#87CEEB] transform transition-all duration-300 ease-in-out hover:scale-105"
+              placeholder={undefined}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
             >
               CONNECT NOW
             </Button>
