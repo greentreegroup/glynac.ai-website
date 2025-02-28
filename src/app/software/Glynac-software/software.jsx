@@ -2,12 +2,12 @@
 
 import React from "react";
 import { useParams } from "next/navigation";
-import { Typography } from "@material-tailwind/react";
 import { motion } from "framer-motion";
+import { Typography } from "@material-tailwind/react";
 import Image from "next/image";
 import Head from "next/head";
 
-// Color palette
+// Color palette (identical to CommunicationTools)
 const colors = {
   primary: "#1E3A8A",
   secondary: "#3B82F6",
@@ -16,141 +16,11 @@ const colors = {
   white: "#FFFFFF",
   lightGray: "#F7FAFC",
   softBlue: "#E0F2FE",
-  darkPrimary: "#0F1C4D", 
+  darkPrimary: "#0F1C4D",
 };
 
-// Software content
+// Sample software content object with multiple categories
 const softwareContent = {
-  "cloud-vs-on-premise": {
-    title: "Cloud vs. On-Premise Solutions",
-    description:
-      "Choosing between cloud-based and on-premise solutions depends on your business needs. Below is a comparison to help you decide:",
-    image: "/img/data-image.jpg",
-    details: [
-      {
-        heading: "What is Cloud Computing",
-        text: "Cloud computing delivers computing services—such as storage, databases, networking, and software—over the internet, allowing businesses to scale quickly without maintaining physical infrastructure.",
-      },
-      {
-        heading: "What is On-Premise Computing?",
-        text: "On-premise solutions require businesses to host software and infrastructure on their own servers, giving them full control over security, compliance, and performance.",
-      },
-    ],
-    prosAndCons: {
-      cloud: {
-        title: "Advantages of Cloud Solutions",
-        pros: [
-          "Lower upfront costs (subscription-based pricing).",
-          "Scalable resources that grow with your business.",
-          "Remote accessibility from any location.",
-          "Automatic updates and maintenance handled by providers.",
-        ],
-        cons: [
-          "Requires an internet connection to access services.",
-          "Data security is managed by a third party.",
-          "Subscription costs may add up over time.",
-        ],
-      },
-      onPremise: {
-        title: "Advantages of On-Premise Solutions",
-        pros: [
-          "Greater control over security and compliance.",
-          "One-time investment with no recurring subscription fees.",
-          "Better performance for high-demand local applications.",
-          "No reliance on internet connectivity for operation.",
-        ],
-        cons: [
-          "Higher upfront hardware and maintenance costs.",
-          "Requires in-house IT expertise.",
-          "Limited scalability compared to cloud solutions.",
-        ],
-      },
-    },
-    comparisonTable: {
-      headers: ["Feature", "Cloud-Based", "On-Premise"],
-      rows: [
-        ["Upfront Cost", "Low (Subscription)", "High (One-Time)"],
-        ["Scalability", "Highly Scalable", "Limited by Hardware"],
-        ["Maintenance", "Managed by Provider", "Managed by IT Team"],
-        ["Security", "Provider-Managed", "Fully Controlled by Business"],
-        ["Internet Dependency", "Required", "Not Required"],
-      ],
-    },
-    useCases: [
-      {
-        title: "When to Choose Cloud?",
-        points: [
-          "Startups and small businesses needing cost-effective solutions.",
-          "Companies with remote teams requiring access from anywhere.",
-          "Organizations that want automatic software updates.",
-        ],
-      },
-      {
-        title: "When to Choose On-Premise",
-        points: [
-          "Businesses with strict data security and compliance needs.",
-          "Companies requiring full control over IT infrastructure.",
-          "Organizations handling sensitive or confidential information.",
-        ],
-      },
-    ],
-  },
-  "integrated-tools": {
-    title: "Integrated Tools",
-    description: "Discover software that seamlessly integrates with your existing business systems.",
-    image: "/img/data-image.jpg",
-    details: [
-      {
-        heading: "What Are Integrated Tools?",
-        text: "Integrated tools are software solutions designed to work seamlessly with your existing business applications, ensuring smooth workflow automation and improved efficiency.",
-      },
-      {
-        heading: "Why Use Integrated Tools?",
-        text: "Using integrated tools reduces manual data entry, enhances communication between departments, and allows businesses to scale more effectively.",
-      },
-    ],
-    prosAndCons: {
-      pros: [
-        "Improves workflow efficiency by automating tasks.",
-        "Reduces errors caused by manual data entry.",
-        "Enhances collaboration between different software tools.",
-        "Allows businesses to scale without major system overhauls.",
-      ],
-      cons: [
-        "Some integrations require additional setup and maintenance.",
-        "Not all software supports seamless integration.",
-        "Security concerns when connecting third-party applications.",
-      ],
-    },
-    comparisonTable: {
-      headers: ["Feature", "Integrated Tools", "Standalone Software"],
-      rows: [
-        ["Workflow Automation", "Yes", "Limited"],
-        ["Data Sync Across Apps", "Yes", "No"],
-        ["Scalability", "High", "Moderate"],
-        ["Collaboration Features", "Yes", "Basic"],
-        ["Custom Integrations", "Available", "Rare"],
-      ],
-    },
-    useCases: [
-      {
-        title: "When to Use Integrated Tools?",
-        points: [
-          "When managing multiple applications that need to share data.",
-          "For businesses looking to improve automation and reduce manual tasks.",
-          "When teams need seamless communication between different software tools.",
-        ],
-      },
-      {
-        title: "When to Avoid Integrated Tools?",
-        points: [
-          "If your business operates independently with minimal software dependencies.",
-          "If security and data privacy concerns prevent third-party integration.",
-          "When cost of integration outweighs the benefits for small operations.",
-        ],
-      },
-    ],
-  },
   "communication-tools": {
     title: "Communication Tools",
     description: "Explore top communication tools designed to improve collaboration and productivity.",
@@ -205,60 +75,63 @@ const softwareContent = {
       },
     ],
   },
-  "email-tools": {
-    title: "Email Tools",
-    description: "Find email management tools to enhance business efficiency and organization.",
+  "cloud-vs-on-premise": {
+    title: "Cloud vs On-Premise Software",
+    description: "Compare cloud-based and on-premise software solutions to find the best fit for your business.",
     image: "/img/data-image.jpg",
     details: [
       {
-        heading: "What Are Email Tools?",
-        text: "Email tools help businesses and individuals manage their emails efficiently by organizing messages, automating tasks, and enhancing communication security.",
-      },
-      {
-        heading: "Why Are Email Tools Important?",
-        text: "With the overwhelming amount of emails professionals receive daily, email tools streamline inbox organization, improve response times, and reduce clutter.",
+        heading: "Understanding Deployment Options",
+        text: "Cloud software is hosted online, offering flexibility, while on-premise solutions are installed locally, providing control.",
       },
     ],
     prosAndCons: {
-      pros: [
-        "Automates email sorting and prioritization.",
-        "Enhances security with encryption and spam filtering.",
-        "Integrates with calendars and task management apps.",
-        "Improves productivity with scheduling and templates.",
-      ],
-      cons: [
-        "Some tools require a learning curve to set up effectively.",
-        "Premium features may come with additional costs.",
-        "Email automation may sometimes misclassify important messages.",
-      ],
+      cloud: {
+        title: "Cloud-Based Software",
+        pros: [
+          "Cost-effective with subscription models.",
+          "Accessible from anywhere with internet.",
+          "Automatic updates and maintenance.",
+        ],
+        cons: [
+          "Dependent on internet connectivity.",
+          "Potential data security risks.",
+        ],
+      },
+      onPremise: {
+        title: "On-Premise Software",
+        pros: [
+          "Full control over data and security.",
+          "No internet dependency for operation.",
+        ],
+        cons: [
+          "Higher upfront costs for hardware and setup.",
+          "Requires in-house IT maintenance.",
+        ],
+      },
     },
     comparisonTable: {
-      headers: ["Features", "Gmail", "Outlook", "ProtonMail"],
+      headers: ["Aspect", "Cloud", "On-Premise"],
       rows: [
-        ["AI-Powered Email Sorting", "Yes", "Yes", "No"],
-        ["End-to-End Encryption", "No", "No", "Yes"],
-        ["Integrated Calendar", "Yes", "Yes", "No"],
-        ["Custom Email Template", "Limited", "Yes", "No"],
-        ["Advanced Spam Filtering", "Yes", "Yes", "Yes"],
+        ["Cost", "Subscription-based", "High initial investment"],
+        ["Accessibility", "Anywhere with internet", "Local network only"],
+        ["Maintenance", "Vendor-managed", "In-house team"],
       ],
     },
     useCases: [
       {
-        title: "When to Use Email Tools?",
+        title: "When to Choose Cloud?",
         points: [
-          "For managing high volumes of daily emails efficiently.",
-          "To automate email marketing campaigns and follow-ups.",
-          "For businesses needing secure, encrypted email communication.",
-          "To reduce spam and improve inbox organization.",
+          "Startups needing cost-effective solutions.",
+          "Teams requiring remote access.",
         ],
       },
       {
-        title: "Best Practices for Using Email Tools",
+        title: "When to Choose On-Premise",
         points: [
-          "Use filters and labels to automatically categorize emails.",
-          "Enable two-factor authentication for email security.",
-          "Regularly clean up your inbox to maintain efficiency.",
-          "Schedule emails for better time management.",
+          "Businesses with strict data security and compliance needs.",
+          "Companies requiring full control over IT infrastructure.",
+          "Organizations handling sensitive or confidential information.",
         ],
       },
     ],
@@ -283,15 +156,16 @@ const IconComponent = React.memo(({ img, text }) => (
       height={96}
       className="mb-4 rounded-full shadow-xl border border-[colors.secondary]/50 bg-[colors.white] p-3"
     />
+
     <Typography className="text-lg font-bold text-[colors.primary]">{text}</Typography>
   </motion.div>
 ));
 
 export function Software() {
   const { category = "cloud-vs-on-premise" } = useParams();
-  const content = softwareContent[category];
+  const content = softwareContent[category] || softwareContent["cloud-vs-on-premise"];
 
-  // Animation variants
+  // Animation variants (identical to CommunicationTools)
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -324,7 +198,7 @@ export function Software() {
   return (
     <>
       <Head>
-        <title>{content.title} | Your Company Name</title>
+        <title>{content.title} | Glynac.AI</title>
         <meta name="description" content={content.description} />
       </Head>
       <div className="bg-gradient-to-br from-[colors.softBlue] via-[colors.white] to-[colors.softBlue] min-h-screen overflow-x-hidden">
