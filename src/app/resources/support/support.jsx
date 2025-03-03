@@ -1,161 +1,97 @@
-"use client";
+import { motion } from "framer-motion";
+import { FileText, BookOpen, Video } from "lucide-react";
 
-import React, { useState } from "react";
-import { Input, Textarea, Checkbox, Button, Typography } from "@material-tailwind/react";
-import { FingerPrintIcon } from "@heroicons/react/24/solid";
-
-const ContactForm = () => {
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [termsAccepted, setTermsAccepted] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    console.log({
-      fullName,
-      email,
-      message,
-      termsAccepted,
-    });
-  };
-
+export default function Manual() {
   return (
-    <form onSubmit={handleSubmit} className="w-full h-full flex flex-col">
-      <div className="mb-8 flex gap-8">
-        <Input
-          variant="outlined"
-          size="lg"
-          label="Full Name"
-          value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
-          className="flex-1"
-        />
-        <Input
-          variant="outlined"
-          size="lg"
-          label="Email Address"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="flex-1"
-        />
-      </div>
-      <Textarea
-        variant="outlined"
-        size="lg"
-        label="Message"
-        rows={8}
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        className="flex-1 mb-4"
-      />
-      <Checkbox
-        label={
-          <Typography variant="small" color="gray" className="flex items-center font-normal">
-            I agree to the
-            <a
-              href="#"
-              className="font-medium transition-colors hover:text-gray-900"
+    <div className="min-h-screen bg-gray-100 text-gray-800">
+      {/* Hero Section */}
+      <section className="relative h-[50vh] bg-gradient-to-r from-blue-900 via-blue-700 to-blue-500 flex items-center justify-center overflow-hidden">
+        {/* Floating Elements */}
+        <div className="absolute w-20 h-20 bg-blue-400 rounded-full opacity-20 animate-float top-10 left-10"></div>
+        <div className="absolute w-32 h-32 bg-blue-500 rounded-full opacity-20 animate-float bottom-5 right-20 delay-200"></div>
+        <div className="absolute w-16 h-16 bg-blue-300 rounded-full opacity-20 animate-float top-20 right-40 delay-400"></div>
+        
+        <motion.h1
+          className="text-4xl lg:text-6xl font-bold text-white drop-shadow-lg z-10"
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 100, damping: 10 }}
+        >
+          User Manual
+        </motion.h1>
+      </section>
+
+      {/* Welcome Message */}
+      <section className="py-12 px-4">
+        <div className="max-w-3xl mx-auto bg-white bg-opacity-30 backdrop-blur-md border border-white border-opacity-20 p-6 rounded-lg shadow-md text-center">
+          <h2 className="text-2xl font-semibold text-blue-700 mb-4">
+            Welcome to the User Manual
+          </h2>
+          <p className="text-gray-600">
+            Explore our comprehensive guides, tutorials, and resources designed to help you get the most out of our platform.
+          </p>
+        </div>
+      </section>
+
+      {/* PDF Guide and Glossary */}
+      <section className="py-12 px-4">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row gap-6">
+          {[
+            { title: "PDF Guide", icon: FileText, desc: "Download our detailed PDF guide.", button: "Download Now" },
+            { title: "Glossary", icon: BookOpen, desc: "Key terms and definitions.", button: "View Glossary" },
+          ].map((item, index) => (
+            <motion.div
+              key={index}
+              className="w-full sm:w-[48%] bg-white bg-opacity-30 backdrop-blur-md border border-white border-opacity-20 p-6 rounded-lg shadow-md hover:scale-105 hover:shadow-xl transition-all duration-300"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.2 }}
+              viewport={{ once: true }}
             >
-              &nbsp;Terms and Conditions
-            </a>
-          </Typography>
-        }
-        containerProps={{ className: "-ml-2.5" }}
-        checked={termsAccepted}
-        onChange={() => setTermsAccepted(!termsAccepted)}
-      />
-      <Button variant="gradient" size="lg" className="mt-8" fullWidth type="submit">
-        Send Message
-      </Button>
-    </form>
-  );
-};
+              <item.icon className="w-12 h-12 text-blue-600 mb-4" />
+              <h3 className="text-xl font-semibold text-blue-600 mb-2">{item.title}</h3>
+              <p className="text-gray-600 mb-4">{item.desc}</p>
+              <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50 transition-all">
+                {item.button}
+              </button>
+            </motion.div>
+          ))}
+        </div>
+      </section>
 
-export function Support() {
-  return (
-    <div
-      className="relative h-screen bg-cover bg-center"
-      style={{
-        backgroundImage: "url('/img/photo-Black background.avif')", 
-      }}
-    >
-      <div className="absolute inset-0 bg-black opacity-50"></div>
-      <div
-        className="absolute text-white text-4xl lg:text-6xl font-bold text-center"
-        style={{
-          top: "40%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        <h1>Need Help?</h1>
-      </div>
-
-     
-      <div
-        className="absolute top-[calc(40%+4cm)] left-0 right-0 bg-white"
-        style={{
-          minHeight: "130vh", 
-        }}
-      >
-        <div className="container px-6 py-12 flex justify-between">
-          
-          <div
-            className="flex flex-col justify-between"
-            style={{ width: 'auto', minWidth: '300px', maxWidth: '50%' }} 
-          >
-            <div className="ml-9 mb-6">
-              
-              <h2 className="text-3xl font-bold">We Are Always Here For You</h2>
-              
-              <p className="text-lg text-gray-700">
-                Complete this form and we will get back to you in 24 hours.
-              </p>
-            </div>
-            
-            <div className="h-full flex-grow">
-              <ContactForm />
-            </div>
-          </div>
-
-          
-          <div
-            className="flex flex-col justify-between"
-            style={{ width: 'auto', minWidth: '250px', maxWidth: '30%' }} 
-          >
-            
-            <h3 className="text-xl font-bold mb-4">FAQ</h3>
-            
-            <p className="text-sm text-gray-700 mb-2">
-              Have questions? Check out our comprehensive FAQ section where we have answered the most common questions related to our services, policies, and general inquiries. We encourage you to explore the answers to see if we have already addressed any of your concerns.
-            </p>
-            <p className="text-sm text-gray-700 mb-2">
-              If you cannot find the answer to your question, feel free to contact us directly by filling out the form on the left, and our team will respond to you as soon as possible.
-            </p>
-           
-            <div className="mb-4">
-              <img
-                src="/img/Think.jfif"  
-                alt="FAQ"
-                className="w-full h-auto"
-              />
-            </div>
-          
-            <Button
-              variant="filled"
-              color="gray"
-              className="mt-4 bg-gray-800 text white hover:bg-gray-700"
-              onClick={() => window.location.href = "/"}  
-            >
-              Go to FAQ
-            </Button>
+      {/* Training Documentation */}
+      <section className="py-12 px-4 bg-gray-200">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl font-semibold text-blue-700 text-center mb-8">
+            Training Documentation
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {[
+              { title: "Getting Started", icon: Video, desc: "Learn the basics of our platform." },
+              { title: "Advanced Features", icon: Video, desc: "Master advanced functionalities." },
+              { title: "Troubleshooting", icon: Video, desc: "Resolve common issues." },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                className="bg-white bg-opacity-30 backdrop-blur-md border border-white border-opacity-20 p-6 rounded-lg shadow-md hover:scale-105 hover:shadow-xl transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2 }}
+                viewport={{ once: true }}
+              >
+                <motion.div whileHover={{ rotate: 360, transition: { duration: 0.5 } }}>
+                  <item.icon className="w-10 h-10 text-blue-600 mb-4" />
+                </motion.div>
+                <h3 className="text-lg font-semibold text-blue-600 mb-2">{item.title}</h3>
+                <p className="text-gray-600 mb-4">{item.desc}</p>
+                <button className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-500 hover:shadow-lg hover:shadow-blue-500/50 transition-all">
+                  Watch Now
+                </button>
+              </motion.div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
-};
-
-export default Support;
+}
