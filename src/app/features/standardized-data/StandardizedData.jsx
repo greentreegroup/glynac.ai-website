@@ -143,14 +143,14 @@ export function StandardizedData() {
   return (
     <div className="font-sans">
       {/* Hero Section */}
-      <section className="relative flex h-72 items-center justify-center overflow-hidden bg-gray-900">
+      <section className="relative flex min-h-72 items-center justify-center overflow-hidden bg-gray-900">
         <StarryBackground particleColor="rgba(96, 165, 250, 0.8)" blurAmount={15} opacity={0.9} />
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/20 to-pink-500/10 backdrop-blur-xl"></div>
         <div className="container mx-auto text-center z-10 relative">
-          <Typography variant="h1" className="mb-4 font-black text-5xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 drop-shadow-lg">
+          <Typography variant="h1" className="mb-4 font-black text-4xl sm:text-5xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 drop-shadow-lg">
             Standardized Data Analysis
           </Typography>
-          <Typography variant="lead" className="text-xl text-white mb-8">
+          <Typography variant="lead" className="text-lg sm:text-xl text-white mb-8">
             Unlock meaningful insights with our AI-powered data standardization tools.
           </Typography>
         </div>
@@ -261,7 +261,9 @@ export function StandardizedData() {
           <Typography variant="h5" className="text-xl font-semibold text-gray-800 mb-4">
             Activity Volume Report
           </Typography>
-          <ActivityChart />
+          <div className="w-full">
+            <ActivityChart />
+          </div>
           <div className="text-gray-700 mb-4">
             <strong>Purpose</strong>: Show activity levels by time block and day.
           </div>
