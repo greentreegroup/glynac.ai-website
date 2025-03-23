@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
-import { Typography, Card, CardBody } from "@material-tailwind/react";
-import { FingerPrintIcon } from "@heroicons/react/24/solid";
+import React, { useRef, useState, useEffect } from "react";
+import { Typography, Card, CardBody, IconButton } from "@material-tailwind/react";
+import { FingerPrintIcon, SpeakerWaveIcon, SpeakerXMarkIcon, PlayIcon, PauseIcon } from "@heroicons/react/24/solid";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 
@@ -10,6 +10,76 @@ export function About() {
   const { scrollYProgress } = useScroll();
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+
+  // Video player state and refs
+  const videoRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  
+  // Handle Play/Pause toggle
+  const handlePlayPause = () => {
+    const video = videoRef.current;
+    if (video) {
+      if (isPlaying) {
+        video.pause();
+      } else {
+        video.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  // Handle Mute/Unmute toggle
+  const handleMuteUnmute = () => {
+    const video = videoRef.current;
+    if (video) {
+      video.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+
+  // Handle the video time update
+  const handleTimeUpdate = () => {
+    const video = videoRef.current;
+    if (video) {
+      setCurrentTime(video.currentTime);
+    }
+  };
+
+  // Handle range input change to seek video
+  const handleSeek = (e) => {
+    const video = videoRef.current;
+    if (video) {
+      video.currentTime = e.target.value;
+    }
+  };
+
+  // Set the video duration once the metadata is loaded
+  const handleLoadedMetadata = () => {
+    const video = videoRef.current;
+    if (video) {
+      setDuration(video.duration);
+    }
+  };
+
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (videoElement) {
+      videoElement.addEventListener("timeupdate", handleTimeUpdate);
+      videoElement.addEventListener("loadedmetadata", handleLoadedMetadata);
+    }
+
+    // Cleanup event listeners
+    return () => {
+      if (videoElement) {
+        videoElement.removeEventListener("timeupdate", handleTimeUpdate);
+        videoElement.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      }
+    };
+  }, []);
 
   return (
     <>
@@ -73,7 +143,7 @@ export function About() {
                   Our Mission
                 </Typography>
                 <Typography className="mt-4 font-medium text-[#64748B] text-lg leading-relaxed">
-                  Traditional methods fall short in today’s dynamic workplaces. We leverage AI to decode communication patterns, uniting remote and office teams with precision and insight.
+                  Traditional methods fall short in today's dynamic workplaces. We leverage AI to decode communication patterns, uniting remote and office teams with precision and insight.
                 </Typography>
               </CardBody>
             </Card>
@@ -91,7 +161,7 @@ export function About() {
                 Letters To Users
               </Typography>
               <Typography className="mt-4 font-normal text-[#64748B] text-lg leading-loose">
-                Today’s workplace thrives on digital conversations. Our AI platform harnesses Large Language Models to process vast communication data from Slack, Teams, and more—delivering real-time, actionable insights.
+                Today's workplace thrives on digital conversations. Our AI platform harnesses Large Language Models to process vast communication data from Slack, Teams, and more—delivering real-time, actionable insights.
               </Typography>
             </motion.div>
             <motion.div
@@ -147,6 +217,66 @@ export function About() {
                 </Typography>
               </CardBody>
             </Card>
+          </motion.div>
+
+          {/* Video Section - Added from the second code */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.9, ease: "easeOut" }}
+            viewport={{ once: true }}
+          >
+            <div className="max-w-4xl mx-auto glassmorphism-extreme bg-[#1E3A8A]/10 backdrop-blur-lg p-6 rounded-xl mt-12 relative flex items-center justify-center py-19 bg-black rounded-xl border border-[#3B82F6]/30 transition-all duration-700 hover:shadow-[0_0_50px_rgba(59,130,246,0.3)]">
+              <video
+                ref={videoRef}
+                className="rounded-xl w-full h-full object-cover"
+                src="/Video/Artificial Intelligence in 2 Minutes _ What is Artificial Intelligence_ _ Edureka(720P_HD).mp4"
+                type="video/mp4"
+                autoPlay
+                loop
+                muted={isMuted}
+              />
+      
+              {/* Video Controls */}
+              <div className="absolute bottom-3 left-6 h-20 flex gap-4">
+                <div className="flex items-center justify-center w-10 h-12 rounded-full bg-gray bg-opacity-50 p-2">
+                  <IconButton onClick={handlePlayPause} className="w-7 h-7 text-white glassmorphism-extreme bg-black bg-opacity-70">
+                    {isPlaying ? (
+                      <PauseIcon className="w-4 h-4" />
+                    ) : (
+                      <PlayIcon className="w-4 h-4" />
+                    )}
+                  </IconButton>
+                </div>
+                <div className="flex items-center justify-center w-10 h-12 rounded-full bg-gray bg-opacity-50 p-2">
+                  <IconButton onClick={handleMuteUnmute} className="w-7 h-7 text-white glassmorphism-extreme bg-black bg-opacity-70">
+                    {isMuted ? (
+                      <SpeakerXMarkIcon className="w-4 h-4" />
+                    ) : (
+                      <SpeakerWaveIcon className="w-4 h-4" />
+                    )}
+                  </IconButton>
+                </div>
+              </div>
+      
+              {/* Range Bar */}
+              <div
+                className={`absolute bottom-1 left-0 w-full px-6 transition-all duration-300 ${isHovered ? "opacity-100" : "opacity-0"}`}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                <input
+                  type="range"
+                  min="0"
+                  max={duration || 1}
+                  step="0.1"
+                  value={currentTime}
+                  onChange={handleSeek}
+                  className="w-full h-7 sm:h-10 md:h-12 bg-gray-400 rounded-lg transition-all duration-300"
+                  style={{ zIndex: 100 }}
+                />
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
