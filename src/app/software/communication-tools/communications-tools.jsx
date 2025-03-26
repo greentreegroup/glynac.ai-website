@@ -122,7 +122,7 @@ export function CommunicationTools() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2 }}
-          className="relative min-h-screen flex flex-col items-center justify-center text-center text-[colors.white] pt-32 pb-16 px-6 bg-[colors.primary]/95 backdrop-blur-2xl overflow-hidden"
+          className="relative min-h-[60vh] flex flex-col items-center justify-center text-center text-[colors.white] pt-16 pb-10 px-6 bg-[colors.primary]/95 backdrop-blur-2xl overflow-hidden"
         >
           <motion.div
             className="absolute inset-0 bg-gradient-to-r from-[colors.secondary]/30 to-[colors.accent]/30"
@@ -132,7 +132,7 @@ export function CommunicationTools() {
           />
           <Typography
             variant="h1"
-            className="relative z-10 mb-8 font-extrabold text-5xl sm:text-6xl md:text-8xl lg:text-9xl text-grey-900 bg-clip-text bg-gradient-to-r from-[colors.secondary] via-[colors.accent] to-[colors.white] tracking-widest uppercase drop-shadow-2xl"
+            className="relative z-10 mb-4 font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-grey-900 bg-clip-text bg-gradient-to-r from-[colors.secondary] via-[colors.accent] to-[colors.white] tracking-widest uppercase drop-shadow-2xl"
           >
             {content.title.split(" ").map((word, index) => (
               <motion.span
@@ -165,14 +165,14 @@ export function CommunicationTools() {
           className="container mx-auto -mt-28 px-6 py-20"
         >
           <div className="flex flex-col lg:flex-row items-center gap-16">
-            <motion.div variants={itemVariants} className="w-full lg:w-1/2 text-left">
+            <motion.div variants={itemVariants} className="w-full lg:w-1/2 text-left mt-10">
               <Typography
                 variant="h2"
-                className={`text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[${colors.darkPrimary}] tracking-tight leading-tight`}
+                className={`text-1xl md:text-4xl lg:text-5xl font-bold mb-4 text-[${colors.darkPrimary}] tracking-tight leading-tight`}
               >
                 {content.title}
               </Typography>
-              <Typography className="text-lg md:text-xl text-[colors.text] leading-relaxed">
+              <Typography className="text-base md:text-lg text-[colors.text] leading-relaxed">
                 {content.description}
               </Typography>
             </motion.div>

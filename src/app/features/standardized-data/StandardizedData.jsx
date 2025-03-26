@@ -1,5 +1,4 @@
 "use client";
-
 import { motion } from "framer-motion";
 import React, { useState, useEffect, useRef } from "react";
 import { Typography, Card, CardBody, Button } from "@material-tailwind/react";
@@ -143,7 +142,7 @@ export function StandardizedData() {
   return (
     <div className="font-sans">
       {/* Hero Section */}
-      <section className="relative flex h-72 items-center justify-center overflow-hidden bg-gray-900">
+      <section className="relative flex h-auto items-center justify-center overflow-hidden bg-gray-900 pt-32 pb-8"> {/* Increased padding-top */}
         <StarryBackground particleColor="rgba(96, 165, 250, 0.8)" blurAmount={15} opacity={0.9} />
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/20 to-pink-500/10 backdrop-blur-xl"></div>
         <div className="container mx-auto text-center z-10 relative">

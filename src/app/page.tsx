@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { Button, Typography } from "@material-tailwind/react";
 import { motion } from "framer-motion";
+import "./globals.css";
 
 // Define interfaces and variants
 interface LogoItem {
@@ -110,62 +111,58 @@ export default function Home() {
   };
 
   return (
-    <>
+    <div className="overflow-hidden">
+      <nav className="w-full max-w-full overflow-hidden">
+        {/* Navbar content */}
+      </nav>
       {/* Hero Section - Updated with MyTypography */}
-      <div className="relative flex h-screen items-center justify-center bg-gradient-to-br from-[#87CEEB] to-[#1E90FF] px-8 overflow-hidden">
-        <motion.div
-          className="max-w-6xl container mx-auto flex justify-between w-full"
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          <motion.div
-            className="flex flex-col items-start w-1/2 relative z-10"
-            variants={itemVariants}
-          >
+      <div className="relative flex min-h-[80vh] md:min-h-screen items-center justify-center bg-gradient-to-br from-[#87CEEB] to-[#1E90FF] px-4 pt-20 md:px-8 md:pt-28 overflow-hidden">
+        <div className="max-w-6xl container mx-auto flex flex-col md:flex-row justify-between w-full">
+          {/* Left Content */}
+          <div className="flex flex-col items-center md:items-start w-full md:w-1/2 relative z-10 text-center md:text-left">
             <MyTypography
               variant="h1"
-              className="mb-6 font-black text-6xl md:text-8xl text-white drop-shadow-lg"
+              className="mb-6 font-black text-3xl md:text-6xl lg:text-8xl text-white drop-shadow-lg"
             >
               Glynac.ai
             </MyTypography>
             <MyTypography
               variant="h2"
-              className="mb-2 font-black text-5xl md:text-7xl text-white drop-shadow-lg"
+              className="mb-2 font-black text-2xl md:text-5xl lg:text-7xl text-white drop-shadow-lg"
             >
               Connecting you to
             </MyTypography>
             <MyTypography
               variant="h2"
-              className="font-black text-5xl md:text-7xl text-white drop-shadow-lg"
+              className="font-black text-2xl md:text-5xl lg:text-7xl text-white drop-shadow-lg"
             >
               the future of work
             </MyTypography>
             <Button
               variant="filled"
               size="lg"
-              className="bg-gradient-to-r from-[#87CEEB] to-[#1E90FF] text-white px-10 py-4 rounded-full shadow-lg mt-8 hover:from-[#1E90FF] hover:to-[#87CEEB] transform transition-all duration-300 ease-in-out hover:scale-105"
-              placeholder={undefined}
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
+              className="bg-gradient-to-r from-[#87CEEB] to-[#1E90FF] text-white px-10 py-4 rounded-full shadow-lg mt-8 mb-4 md:mb-0 hover:from-[#1E90FF] hover:to-[#87CEEB] transform transition-all duration-300 ease-in-out hover:scale-105"
+              placeholder=""
+              onPointerEnterCapture={() => {}}
+              onPointerLeaveCapture={() => {}}
             >
               CONNECT NOW
             </Button>
-          </motion.div>
-          <motion.div
-            className="hidden md:block w-1/2 relative z-10"
-            variants={itemVariants}
-          >
-            <Image
-              src="/img/landing_image.PNG"
-              alt="Glynac.ai Team"
-              width={600}
-              height={400}
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="w-full h-full object-cover rounded-lg shadow-2xl transform transition duration-300 ease-in-out hover:scale-105"
-            />
-          </motion.div>
-        </motion.div>
+          </div>
+
+         {/* Right Image */}
+        <div className="w-full md:w-1/2 relative z-10 flex justify-center">
+         <Image
+          src="/img/landing_image.PNG"
+          alt="Hero Section Image"
+          width={500} // Ensure width is equal to height
+          height={500} // Ensure height is equal to width
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] object-cover rounded-full shadow-2xl"
+          />
+        </div>
+
+        </div>
         <div className="absolute inset-0 flex justify-center items-center z-0">
           <div className="w-72 h-72 bg-[#87CEEB] opacity-20 rounded-full absolute animate-pulse"></div>
         </div>
@@ -176,7 +173,7 @@ export default function Home() {
         <div className="max-w-6xl container mx-auto px-8 text-center">
           <MyTypography
             variant="h2"
-            className="text-5xl font-extrabold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#87CEEB] to-[#1E90FF]"
+            className="text-3xl md:text-5xl font-extrabold mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#87CEEB] to-[#1E90FF]"
           >
             Glynac – AI-Powered Employee Monitoring Software
           </MyTypography>
@@ -186,7 +183,7 @@ export default function Home() {
           >
             Overview
           </MyTypography>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 overflow-hidden">
             {[
               {
                 icon: "/img/insight-icon.png",
@@ -221,7 +218,7 @@ export default function Home() {
       </section>
 
       {/* Trusted by 10,000 Customers Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white overflow-hidden">
         <div className="max-w-6xl container mx-auto px-8 text-center">
           <MyTypography
             variant="h3"
@@ -244,10 +241,10 @@ export default function Home() {
                 <Image
                   src={logo.src}
                   alt={logo.alt}
-                  width={96}
-                  height={96}
-                  sizes="96px"
-                  className="w-24 h-24 object-contain cursor-pointer mb-4 filter drop-shadow-lg"
+                  width={112} // Increased width (28 * 4 = 112px)
+                  height={112} // Increased height (28 * 4 = 112px)
+                  sizes="112px"
+                  className="w-28 h-28 object-contain cursor-pointer mb-4 filter drop-shadow-lg"
                   onClick={() => handleLogoClick(index)}
                 />
                 {selectedLogo === index && (
@@ -270,17 +267,17 @@ export default function Home() {
       </section>
 
       {/* Workforce Potential Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-8 md:py-16 bg-gray-50">
         <MyTypography
           variant="h3"
-          className="text-center max-w-3xl mx-auto mb-12 text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#87CEEB] to-[#1E90FF]"
+          className="text-xl md:text-4xl text-center max-w-3xl mx-auto mb-8 md:mb-12 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#87CEEB] to-[#1E90FF]"
         >
-          Ready to unlock the full potential of your workforce? Glynac helps
-          you:
+          Ready to unlock the full potential of your workforce? Glynac helps you:
         </MyTypography>
-        <div className="max-w-6xl container mx-auto px-8 flex items-center">
+        <div className="max-w-6xl container mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center">
+          {/* Text Section */}
           <motion.div
-            className="w-1/2 space-y-12"
+            className="w-full md:w-1/2 space-y-6 md:space-y-12 text-center md:text-left mb-6 md:mb-0"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -323,24 +320,21 @@ export default function Home() {
                 <div>
                   <MyTypography
                     variant="h5"
-                    className="font-bold text-2xl text-[#1E90FF] group-hover:text-[#87CEEB] transition-colors duration-300"
+                    className="font-bold text-lg md:text-2xl text-[#1E90FF] group-hover:text-[#87CEEB] transition-colors duration-300"
                   >
                     {item.title}
                   </MyTypography>
-                  <MyTypography className="mt-2 text-gray-700">
+                  <MyTypography className="mt-2 text-sm md:text-base text-gray-700">
                     {item.desc}
                   </MyTypography>
-                  <motion.div
-                    className="h-1 w-0 bg-gradient-to-r from-[#87CEEB] to-[#1E90FF] mt-2"
-                    whileHover={{ width: "100%" }}
-                    transition={{ duration: 0.5 }}
-                  />
                 </div>
               </motion.div>
             ))}
           </motion.div>
+
+          {/* Image Section - Hidden on Phones */}
           <motion.div
-            className="w-1/2 pl-12"
+            className="hidden md:block w-full md:w-1/2 pl-0 md:pl-12"
             variants={itemVariants}
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
@@ -348,10 +342,10 @@ export default function Home() {
             <Image
               src="/img/large-image-right.png"
               alt="Related to workforce"
-              width={500}
-              height={400}
+              width={300} // Reduced width for laptops
+              height={300} // Adjusted height for proportional scaling
               sizes="(max-width: 768px) 100vw, 50vw"
-              className="w-full h-[400px] object-contain rounded-lg shadow-2xl"
+              className="w-full md:w-[300px] h-auto object-contain rounded-lg shadow-2xl"
               loading="lazy"
             />
           </motion.div>
@@ -359,10 +353,36 @@ export default function Home() {
       </section>
 
       {/* Empowerment Section */}
-      <section className="py-16 bg-gradient-to-b from-white to-gray-100">
-        <div className="max-w-6xl container mx-auto px-8 flex items-center">
+      <section className="py-8 md:py-16 bg-gradient-to-b from-white to-gray-100">
+        <div className="max-w-6xl container mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center">
+          {/* Text Section */}
           <motion.div
-            className="w-1/2 pr-12"
+            className="w-full md:w-1/2 text-center md:text-left mb-6 md:mb-0"
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <MyTypography
+              variant="h3"
+              className="font-extrabold text-2xl md:text-4xl mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#87CEEB] to-[#1E90FF] drop-shadow-lg"
+            >
+              From Monitoring to Empowerment: Glynac’s Feature Spotlight
+            </MyTypography>
+            <motion.p
+              className="text-base md:text-xl text-gray-700 leading-relaxed"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.5, delay: 0.5 }}
+            >
+              Glynac isn’t about tracking, it’s about understanding. Gain deep
+              insights to enhance employee well-being, optimize workflows, and foster
+              a data-driven, thriving workplace.
+            </motion.p>
+          </motion.div>
+
+          {/* Image Section */}
+          <motion.div
+            className="w-full md:w-1/2 flex justify-center items-center"
             variants={itemVariants}
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
@@ -370,30 +390,12 @@ export default function Home() {
             <Image
               src="/img/large-image-left.png"
               alt="Empowerment"
-              width={500}
-              height={400}
+              width={250} // Reduced width for phones
+              height={250} // Adjusted height for proportional scaling
               sizes="(max-width: 768px) 100vw, 50vw"
-              className="w-full h-[400px] object-contain rounded-lg shadow-2xl"
+              className="w-[250px] md:w-[500px] h-auto object-contain rounded-lg shadow-2xl"
               loading="lazy"
             />
-          </motion.div>
-          <motion.div className="w-1/2" variants={itemVariants}>
-            <MyTypography
-              variant="h3"
-              className="font-extrabold text-4xl mb-6 text-transparent bg-clip-text bg-gradient-to-r from-[#87CEEB] to-[#1E90FF] drop-shadow-lg"
-            >
-              From Monitoring to Empowerment: Glynac’s Feature Spotlight
-            </MyTypography>
-            <motion.p
-              className="text-xl text-gray-700 leading-relaxed"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1.5, delay: 0.5 }}
-            >
-              Glynac isn’t about tracking, it’s about understanding. Gain deep
-              insights to enhance employee well-being, optimize workflows, and
-              foster a data-driven, thriving workplace.
-            </motion.p>
           </motion.div>
         </div>
       </section>
@@ -449,8 +451,8 @@ export default function Home() {
       </section>
 
       {/* Methodology Section */}
-      <section className="py-16 bg-gradient-to-b from-gray-100 to-white">
-        <div className="max-w-6xl container mx-auto px-8 text-center">
+      <section className="py-16 bg-gradient-to-b from-gray-100 to-white overflow-hidden">
+        <div className="max-w-6xl container mx-auto px-4 md:px-8 text-center">
           <MyTypography
             className="text-4xl font-bold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-[#87CEEB] to-[#1E90FF]"
           >
@@ -490,35 +492,44 @@ export default function Home() {
           ].map((method, index) => (
             <motion.div
               key={index}
-              className="flex items-center justify-between mb-16"
+              className="flex flex-col md:flex-row items-center justify-between mb-16"
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <motion.div className="w-2/3 text-left" variants={itemVariants}>
+              {/* Text Section */}
+              <motion.div className="w-full md:w-2/3 text-left md:pr-8" variants={itemVariants}>
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-[#87CEEB] to-[#1E90FF] text-white rounded-full flex items-center justify-center mr-4 text-2xl font-bold">
+                  {/* Numbering Circle */}
+                  <div className="w-10 h-10 bg-gradient-to-r from-[#87CEEB] to-[#1E90FF] text-white rounded-full flex items-center justify-center text-lg font-bold mr-4">
                     {method.step}
                   </div>
-                  <MyTypography className="text-3xl font-bold text-[#1E90FF]">
+                  {/* Heading */}
+                  <MyTypography className="text-xl md:text-2xl font-bold text-[#1E90FF]">
                     {method.title}
                   </MyTypography>
                 </div>
-                <ul className="list-disc pl-8 space-y-2 text-gray-700">
+                {/* Description */}
+                <ul className="list-disc pl-6 space-y-2 text-gray-700 text-sm md:text-base">
                   {method.desc.map((item, idx) => (
                     <li key={idx}>{item}</li>
                   ))}
                 </ul>
               </motion.div>
-              <motion.div className="w-1/3" variants={itemVariants}>
+
+              {/* Image Section */}
+              <motion.div
+                className="w-full md:w-1/3 mt-6 md:mt-0 flex justify-center"
+                variants={itemVariants}
+              >
                 <Image
                   src={method.img}
                   alt={method.title}
-                  width={300}
-                  height={200}
+                  width={280} // Adjusted width
+                  height={200} // Adjusted height
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  className="w-full object-contain rounded-lg shadow-2xl"
+                  className="w-[280px] h-auto object-contain rounded-lg shadow-2xl"
                   loading="lazy"
                 />
               </motion.div>
@@ -526,8 +537,10 @@ export default function Home() {
           ))}
         </div>
       </section>
-    </>
+    </div>
   );
 }
+
+
 
 FeatureCard.displayName = "FeatureCard";

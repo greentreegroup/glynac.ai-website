@@ -2,6 +2,7 @@
 
 import { Typography, Button } from "@material-tailwind/react";
 import { useState, useEffect } from "react";
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/fa"; // Import icons from react-icons
 
 export function News() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -43,10 +44,10 @@ export function News() {
   ];
 
   const socialIcons = [
-    { src: "/img/Facebook.jfif", alt: "Facebook", href: "#" },
-    { src: "/img/Instagram.png", alt: "Instagram", href: "#" },
-    { src: "/img/Linkedin.png", alt: "LinkedIn", href: "#" },
-    { src: "/img/X.jfif", alt: "Twitter", href: "#" },
+    { icon: <FaFacebookF />, alt: "Facebook", href: "https://facebook.com" },
+    { icon: <FaInstagram />, alt: "Instagram", href: "https://instagram.com" },
+    { icon: <FaLinkedinIn />, alt: "LinkedIn", href: "https://linkedin.com" },
+    { icon: <FaTwitter />, alt: "Twitter", href: "https://twitter.com" },
   ];
 
   useEffect(() => {
@@ -58,20 +59,23 @@ export function News() {
 
   return (
     <section className="container mx-auto px-4 py-8">
-      {/* Header */}
-      <div className="relative mb-8 animate-fadeIn">
-        <Typography variant="h1" className="text-4xl font-bold text-gray-900">
+      {/* Header Section */}
+      <div className="relative mb-16 mt-16 animate-fadeIn">
+        <Typography
+          variant="h1"
+          className="text-6xl font-extrabold text-gray-900 text-center"
+        >
           <span className="text-red-500">N</span>ews
         </Typography>
-        <div className="w-full h-[2px] bg-gradient-to-r from-red-500 to-gray-900 mt-2"></div>
+        <div className="w-full h-[4px] bg-gradient-to-r from-red-500 to-gray-900 mt-6"></div>
       </div>
 
       {/* Intro Section */}
-      <div className="bg-white rounded-xl shadow-lg p-6 mb-8 animate-fadeInUp">
-        <Typography variant="h2" className="text-2xl font-bold text-gray-800 mb-4">
+      <div className="rounded-xl shadow-lg p-6 mb-8 animate-fadeInUp">
+        <Typography variant="h2" className="text-2xl font-bold text-gray-800 mb-4 text-center">
           Stay Up to Date with the Latest News
         </Typography>
-        <Typography variant="paragraph" className="text-lg text-gray-600">
+        <Typography variant="paragraph" className="text-lg text-gray-600 text-center">
           Stay informed with the latest business, technology, and innovation news. Discover in-depth analysis, expert commentary, and breaking news.
         </Typography>
       </div>
@@ -123,7 +127,7 @@ export function News() {
       </div>
 
       {/* Categories Section */}
-      <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+      <div className="rounded-xl shadow-lg p-6 mb-8">
         <Typography variant="h3" className="text-xl font-semibold text-gray-800 mb-4">
           Explore Categories
         </Typography>
@@ -132,7 +136,12 @@ export function News() {
         </Typography>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {categories.map((category, index) => (
-            <div key={index} className="flex flex-col items-center animate-fadeInUp" style={{ animationDelay: `${index * 0.2}s` }}>
+            <div
+              key={index}
+              className="flex flex-col items-center animate-fadeInUp"
+              style={{ animationDelay: `${index * 0.2}s` }}
+            >
+              {/* Image */}
               <div className="w-[220px] h-[220px] rounded-lg overflow-hidden mb-4 transform transition-transform duration-300 hover:scale-105">
                 <img
                   src={category.imageUrl}
@@ -140,12 +149,13 @@ export function News() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <Button
-                color="red"
-                className="px-6 py-3 text-lg transition-transform duration-300 hover:scale-105"
+              {/* Label */}
+              <Typography
+                variant="h5"
+                className="text-lg font-medium text-gray-800 text-center"
               >
                 {category.name}
-              </Button>
+              </Typography>
             </div>
           ))}
         </div>
@@ -175,17 +185,13 @@ export function News() {
       </div>
 
       {/* Newsletter Section */}
-      <div className="relative w-full h-[400px] bg-gray-900 rounded-xl overflow-hidden shadow-lg">
-        <img
-          src="/img/pattern.png"
-          alt="Background Pattern"
-          className="w-full h-full object-cover opacity-30"
-        />
-        <div className="absolute bottom-6 right-6 p-6 animate-fadeInUp">
-          <Typography variant="h4" className="text-xl font-semibold text-white mb-2">
+      <div className="relative w-full bg-gray-900 overflow-hidden py-8 px-4 sm:px-6">
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center text-center mb-8">
+          <Typography variant="h4" className="text-2xl font-semibold text-white mb-4">
             Stay Updated with Our Newsletter
           </Typography>
-          <Typography variant="paragraph" className="text-white mb-4">
+          <Typography variant="paragraph" className="text-lg text-white mb-6">
             Subscribe now to get the latest news, analysis, and insights delivered to your inbox.
           </Typography>
           <Button
@@ -195,27 +201,35 @@ export function News() {
             Subscribe Now
           </Button>
         </div>
-        <div className="absolute top-6 left-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-white text-lg">
-          {footerLinks.map((link, index) => (
-            <a
-              key={index}
-              href={link.href}
-              className="hover:text-red-400 transition-colors"
-            >
-              {link.text}
-            </a>
-          ))}
-        </div>
-        <div className="absolute top-6 right-6 flex gap-4">
-          {socialIcons.map((icon, index) => (
-            <a
-              key={index}
-              href={icon.href}
-              className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
-            >
-              <img src={icon.src} alt={icon.alt} className="w-6 h-6" />
-            </a>
-          ))}
+
+        {/* Footer Links and Social Icons */}
+        <div className="relative z-10 flex flex-col sm:flex-row justify-between items-center sm:items-start text-white text-sm gap-6">
+          {/* Page Links */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center sm:text-left">
+            {footerLinks.map((link, index) => (
+              <a
+                key={index}
+                href={link.href}
+                className="hover:text-red-400 transition-colors"
+              >
+                {link.text}
+              </a>
+            ))}
+          </div>
+
+          {/* Social Icons */}
+          <div className="flex gap-4 justify-center sm:justify-end">
+            {socialIcons.map((icon, index) => (
+              <a
+                key={index}
+                href={icon.href}
+                className="w-10 h-10 bg-white rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
+                aria-label={icon.alt}
+              >
+                <span className="text-gray-900 text-xl">{icon.icon}</span>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>
