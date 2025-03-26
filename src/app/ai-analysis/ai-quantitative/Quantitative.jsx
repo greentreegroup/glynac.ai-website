@@ -54,17 +54,22 @@ export function Quantitative() {
   return (
     <div>
       {/* Hero Section with Animated Shapes */}
-      <div className="h-[60vh] flex flex-col justify-center items-center text-center bg-gradient-to-r from-blue-600 to-blue-400 text-white p-10 shadow-lg rounded-lg relative overflow-hidden">
+      <div className="h-[95vh] flex flex-col justify-center items-center text-center bg-gradient-to-r from-blue-600 to-blue-400 text-white p-10 shadow-lg rounded-lg relative overflow-hidden pt-28 pb-24 md:pt-36 md:pb-28">
+        {/* Animated Shapes */}
         <div className="absolute top-10 left-10 w-20 h-20 bg-blue-300 rounded-full animate-float"></div>
         <div className="absolute bottom-10 right-10 w-32 h-32 bg-blue-200 rounded-full animate-float delay-1000"></div>
+
+        {/* Heading */}
         <motion.h1
-          className="text-6xl font-extrabold mb-4 z-10"
+          className="text-6xl font-extrabold mb-6 z-10"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
           AI Quantitative Analysis
         </motion.h1>
+
+        {/* Subheading */}
         <motion.p
           className="text-xl max-w-3xl z-10"
           initial={{ opacity: 0 }}

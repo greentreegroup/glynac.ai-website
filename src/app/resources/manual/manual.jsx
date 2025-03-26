@@ -215,9 +215,15 @@ const Manual = () => {
       {/* Global Styles */}
       <style jsx global>{`
         @keyframes float {
-          0% { transform: translate(0, 0); }
-          50% { transform: translate(20px, 20px); }
-          100% { transform: translate(0, 0); }
+          0% {
+            transform: translate(0, 0);
+          }
+          50% {
+            transform: translate(20px, 20px);
+          }
+          100% {
+            transform: translate(0, 0);
+          }
         }
         .animate-float {
           animation: float 8s infinite ease-in-out;
