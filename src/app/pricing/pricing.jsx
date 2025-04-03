@@ -1,8 +1,9 @@
 "use client";
-
+// import ThemeToggle from '../components/ThemeToggle';
 import { Typography, Button, Card } from "@material-tailwind/react";
 import { motion } from "framer-motion";
 import React, { useRef, useEffect } from "react";
+import CheckoutButton from "../components/CheckoutButton";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -140,13 +141,12 @@ export function Pricing() {
                     🔘 20 Devices
                   </li>
                 </ul>
-                <Button
-                  variant="gradient"
-                  size="md"
+                <CheckoutButton
+                  priceId="price_1R7ieJ032h14KKiZTDdPLclI" // Replace with your actual Stripe price ID for the Basic plan
                   className="w-3/4 bg-blue-600 hover:bg-blue-700 text-white rounded-full py-1.5 transition-all duration-300 mt-auto"
                 >
-                  Learn More
-                </Button>
+                  Get it now!
+                </CheckoutButton>
               </Card>
             </motion.div>
 
@@ -184,13 +184,12 @@ export function Pricing() {
                     🔘 25 Devices
                   </li>
                 </ul>
-                <Button
-                  variant="gradient"
-                  size="md"
+                <CheckoutButton
+                  priceId="price_1R7ipg032h14KKiZF8ozsUBW" // Replace with your actual Stripe price ID for the Starter plan
                   className="w-3/4 bg-blue-600 hover:bg-blue-700 text-white rounded-full py-1.5 transition-all duration-300 mt-auto"
                 >
-                  Learn More
-                </Button>
+                  Get it now!
+                </CheckoutButton>
               </Card>
             </motion.div>
 
@@ -228,13 +227,12 @@ export function Pricing() {
                     🔘 250 Devices
                   </li>
                 </ul>
-                <Button
-                  variant="gradient"
-                  size="md"
+                <CheckoutButton
+                  priceId="price_1R7irc032h14KKiZv1etY25s" // Replace with your actual Stripe price ID for the Advanced plan
                   className="w-3/4 bg-blue-600 hover:bg-blue-700 text-white rounded-full py-1.5 transition-all duration-300 mt-auto"
                 >
-                  Learn More
-                </Button>
+                  Get it now!
+                </CheckoutButton>
               </Card>
             </motion.div>
 
@@ -269,13 +267,12 @@ export function Pricing() {
                     🔘 350 Devices
                   </li>
                 </ul>
-                <Button
-                  variant="gradient"
-                  size="md"
+                <CheckoutButton
+                  priceId="price_1R7iuq032h14KKiZodahR8Y3" // Replace with your actual Stripe price ID for the Pro plan
                   className="w-3/4 bg-white text-blue-700 hover:text-white hover:bg-blue-600 border border-gray-300 rounded-full py-1.5 transition-all duration-300 mt-auto"
                 >
-                  Learn More
-                </Button>
+                  Get it now!
+                </CheckoutButton>
               </Card>
             </motion.div>
           </motion.div>
